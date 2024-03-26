@@ -1,0 +1,317 @@
+%% LaTeX Paper Template, Flip Tanedo (flip.tanedo@ucr.edu)
+%% GitHub: https://github.com/fliptanedo/paper-template-2022
+
+% \documentclass[11pt]{article} %% Not for Lecture Notes
+\documentclass[12pt, oneside]{report}    %% Has chapters
+
+\input{FlipLectureMacros}       %% Lecture note formatting, load first
+\input{FlipPreamble}			%% \usepackages, formatting
+\input{FlipMacros}              %% Flip's standard macros
+\input{FlipMacros_Comments}     %% Flip's macros for comments
+\input{FlipMacros_Teaching}     %% Flip's macros for course notes
+\input{Flip_listings}           %% Styling for code blocks
+\input{FlipAdditionalHeader}    %% Modify this for each project
+\input{FlipPreambleEnd}         %% packages that have to be at the end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% LECTURE NOTES SETTINGS %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \linenumbers                  %% print line numbers (lineno package)
+\graphicspath{{figures/}}       %% figure folder
+\addbibresource{FlipBib.bib}    %% Define BibLaTeX source(s)
+
+%% LEAVE THESE HERE 
+
+\geometry{                      %% large margin for side notes
+    paper=letterpaper, 
+    hmargin={1cm,7.25cm},       %% 6.25cm space on right
+    vmargin={2cm,2cm}, 
+    marginparsep=.5cm, 
+    marginparwidth=5.75cm
+}
+
+%% Def. full width; uses changepage package; 6.25cm to match hmargin difference;
+\newenvironment{wide}{\begin{adjustwidth}{0cm}{-6.25cm}}{\end{adjustwidth}}
+
+
+% Reset the sidenote number each section 
+\let\oldsection\section
+\def\section{%
+  \setcounter{sidenote}{1}%
+  \oldsection
+}
+
+
+\begin{document}
+
+\newgeometry{margin=2cm}                   % plain geometry for frontmatter
+\newcommand{\FlipTR}{UCR-TR-2024-FLIP-P165} % TR#, pdfsync may fail on 1st page
+\thispagestyle{firststyle} 	               % TR#; otherwise use \thispagestyle{empty}
+\pagenumbering{gobble}                     % no page number on first page 
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  FRONTMATTER    %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{center}
+    {\large \textsf{UC Riverside Physics 165, Spring 2024} \par}
+    {\huge \textbf{Introduction to Particle Physics} \par}\vspace{.5em}
+    {\large {Kinematics and Dynamics of the Standard Model} \par}
+    \vskip .5cm
+\end{center}
+
+\input{FlipAuthors}
+
+\vspace{2em}\noindent
+An introduction to elementary particle physics: the study of the fundamental constituents of matter and the forces that dictate their interactions. We focus on building a theoretical understanding of the Standard Model of particle physics based on Feynman diagrams. 
+
+\vspace{5em}
+\begin{center}
+\includegraphics[width=.3\textwidth]{figures/P5BW.pdf}  
+\end{center}  
+
+
+% \vspace{2em}
+\vspace*{\fill}
+
+\noindent
+\textsf{Last Compiled: \today}
+
+\noindent
+\textsf{Image: \acro{P5} Logo, Sandbox Studio}
+
+
+\noindent
+\textsf{CC BY-NC-SA 4.0}~\ccbyncsa 
+
+\noindent % Course notes URL
+% \url{https://github.com/fliptanedo/P231-2023-Math-Methods}
+
+%% Front page logos
+% \vspace*{\fill}
+\begin{center}
+\includegraphics[height=.1\textwidth]{figures/FlipAmbigram.png}
+\hspace{5em}
+\includegraphics[height=.1\textwidth]{figures/UCRPnA_banner.png}
+\end{center}
+
+\newpage
+
+\small
+\setcounter{tocdepth}{2}
+\tableofcontents
+\normalsize
+\clearpage
+\restoregeometry        %% Return to lecture note geometry 
+\pagenumbering{arabic}  %% Turn on regular page numbers
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%  THE CONTENT  %%%
+%%%%%%%%%%%%%%%%%%%%%
+
+% % \chapter{Things I'm working on}
+
+% % \url{https://github.com/fmarotta/kaobook/issues/15}
+% % % Because sidecite dosn't work
+% % %\sidecite{Feng:2016ijc}
+
+% % \input{examples_lecture}
+
+% % % \chapter{Paper examples}
+
+% % % Here are the standard examples I use for my \texttt{paper} template. I include them here to check that nothing has broken. These do not make use of the margin at all. You can see what happens when some text spills into the margin unintentionally.
+
+% \input{examples}
+% \input{examples_teaching}
+% % % \input{examples_listings}
+% \input{examples_bestpractices}
+% \input{examples_refs}
+% \input{examples_lecture}
+
+% % %% CHAPTER SUBAPPENDIX %% if using report class
+% % \begin{subappendices}
+% % \section{Subappendix}\label{sec:subappendix:eg}
+% % This chapter has its own special appendix.
+% % \end{subappendices}
+
+\chapter{The Course}
+
+\section{Our Goal}
+
+The goal of this course is to teach the \emph{theoretical framework} of particle physics. The underlying structure of this discipline is called \textbf{quantum field theory} and is the union of special relativity and quantum mechanics. Over one-quarter course we tell the story of leptons, quarks, and various gauge bosons---but what I \emph{really} want to convey to you is how quantum field theory works. 
+
+Ordinarily, quantum field theory is a graduate-level course that you take after taking not only upper division quantum mechanics, but graduate-level quantum mechanics, electrodynamics, statistical mechanics/field theory, with smatterings of courses that hammer home special relativity (perhaps in general relativity course) and bits of complex analysis. Even then, the course has a reputation for being challenging because it demands a level of physical sophistication to appreciate.\sidenote[][-5em]{Usually we tell our graduate students to expect to take quantum field theory a few times in order to prepare to spend the rest of their research careers continuing to chip away at the frontier of human knowledge in this field. I am reminded of the [lightly paraprhased] quote by theorist Nima Arkani-Hamed: ``You can learn quantum mechanics in a few weeks. But you need to dedicate a lifetime of research to hope to understand quantum field theory.''} 
+
+This course is an attempt to give a working knowledge of the big picture. You will see how Feynman diagrams are both a perturbative expansion of a transition amplitude \emph{and} a useful mnemonic for the story of particle scattering. You will see how indices are a physicist's crutch to mathematically implement symmetries. Along the way, you may come to appreciate corners of quantum mechanics and relativity that otherwise may slip the usual undergrad curriculum. 
+
+Most of call, \emph{this course is a bridge}. For those who are interested in theoretical physics of any type\sidenote{In some sense, all theoretical physicists are quantum field theorists. Yes, even condensed matter theorists.} or those interested in particle physics of any type\sidenote{Including experimental particle physics and astro-particle physics.}: I want you to leave this course knowing how one \emph{uses} quantum field theory in particle physics so that if you go to graduate school, you will already have the bird's-eye-view of how different technical ideas come together. Alternatively, for those who know that their passions are not in this discipline: I want you to appreciate what the scaffolding of quantum field theory buys us as physicists, so that when you go off to become your future self, you are an informed ambassador of physics.
+
+\section{What we miss}
+
+This is \emph{not} a `modern physics course---what I mean by that are courses that are glorified ``physics for poets'' courses that offer ideas without mathematical rigor. Instead, this course is \emph{all about} understanding the mathematical rigor, even though we will not derive every step (leaning instead on analogies as appropriate) and even though the purpose of the course is not to see who can calculate the most tedious cross section.
+
+A course like this can span multiple terms and focus on many different aspects of particle physics. Given that we have \emph{one} term and that we want to start by assuming the bare minimum, we have to make deliberate cuts to what we investigate. Rather than trying to do a little bit of everything, we will dive deeply into the theory and sacrifice the following:
+\begin{itemize}
+    \item The experimental foundation of particle physics. This is the biggest sacrifice because physics is ultimately an \emph{empirical} science and practitioners need to be grounded in experiment.\sidenote{Even theorists.} We excise this aspect in part because I would struggle to do it justice, but also because we are in a moment where the types of experiments that particle physicists do has evolved rapidly over the last decade.\sidenote{\tacro{UCR} students are encouraged to reach out to members of our experimental particle cosmology group to learn more about this.}
+    \item The history of particle physics. I did not appreciate this as a student, but good physicists understand how those who came before them had their key \emph{aha!} moments: what what puzzles where they thinking about, how did they make progress?\sidenote{This is different from a hagiography of physics heroes. Most of our physics heroes are flawed human beings and most of the heroism is rooted in a broader collective of people than our stories usually tell.}
+    \item Computational tools. Particle physicists were the original `big data' scientists with a huge throughput of data in particle colliders. Experience with some of the computational tools are a great way to get into undergraduate research in this field. I regret that this is something that we cannot fit into this course, but I encourage those interested in this field to be prepared to do computational work.
+\end{itemize}
+
+\section{Prerequisites}
+
+I have done my best to minimize the prerequisite knowledge for this course. At the bare minimum, we require the following:
+\begin{enumerate}
+    \item This means you have had first-year physics and did well.\sidenote{At the very least, if you took first-year physics now you would ace it.}
+    \item Analytical mechanics at the level of having some familiarity with Lagrangian mechanics and variational principles.
+    \item At least two quarters of quantum mechanics so that you are familiar with bras, kets, operators, superposition, and amplitudes. You should be comfortable with angular momentum and spin.
+    \item Some introduction to special relativity so that you are familiar with the principles of length contraction and time dilation.
+    \item Linear algebra at the level of Physics 17 at \acro{UCR}.\sidenote{The course notes for Physics 17 may be a useful reference.\footnotemark}\footnotetext{\url{https://sites.google.com/ucr.edu/physics017/}}
+\end{enumerate}
+
+In a perfect world, you would also have the following background:
+\begin{itemize}
+    \item A solid background in linear algebra and some familiarity with how this relates to the representation of groups. It would help if you do not cringe at the word \emph{tensor}. It would be even better if you knew what makes a tensor a tensor as opposed to a multi-dimensional array of numbers.
+    \item Some familiarity with the notion of a generator of a transformation and its exponentiation, for example from a quantum mechanics course.
+    \item An idea of what a Green's function is.\sidenote{The course notes for Physics 231 may be a useful reference.\footnotemark}\footnotetext{\url{https://sites.google.com/ucr.edu/p231/}} We will not use this word too often, but understanding what it means usually correlates to a mathematics and physics background that will be helpful.
+    \item Some introduction to relativistic quantum mechanics; for example, knowing the Dirac and the Klein-Gordon equations.
+    \item Know what a cross section is from a mechanics course or, even better, Fermi's Golden Rule from a quantum mechanics course.
+\end{itemize}
+We do not live in a perfect world and it is much better to take the pioneering spirit of jumping in. As one of my undergraduate mentors told me, \emph{enthusiasm makes up for a lot of things.}\sidenote{Enthusiasm can be measured by how much time do you set aside to learn the \emph{extra} stuff that you need to best appreciate this course.}
+
+\section{What it takes to succeed in this course}
+
+\paragraph{Do your homework} I tell the Physics 39 classes that the best advice I can give is to \emph{do your homework}.\sidenote{Whenever I do this, I think about the Mary Schmich essay and Baz Luhrmann song, ``Wear Sunscreen.'' The song plays in the back of my head every time I talk about homework.\footnotemark}\footnotetext{\url{https://en.wikipedia.org/wiki/Wear_Sunscreen}} Trust me, I get no particular joy assigning or reviewing your homework---unlike many other topics I may teach, I actually know this shit. The value of homework is \emph{practice}.\footnote{\url{https://www.youtube.com/watch?v=p-BR1mXwtB0}} This is my commitment to you to cobble together an opportunity for \emph{you} check your understanding, to learn more (and more meaningfully), and to develop your own style of \emph{doing physics}. Part of my commitment to you is to create a space---our class---where we can work together on these meaningful exercises. I encourage you to do the homework, this is where you \emph{become a physicist}.
+
+\paragraph{Ask questions} This course can be technical, it draws on different branches of physics, and even then it is just scratching the surface of some of the biggest open questions in science. If you engage with the material deeply enough, I \emph{expect you to be confused}. I am often confused. Do everyone a favor and ask during class. If you are embarrassed, I suggest phrasing your question as follows:
+\begin{quote}
+Is it obvious that...?
+\end{quote}
+When you ask it this way, the question is no longer about you being confused, it is about what is the most insightful way to think about a topic.
+
+\paragraph{How to answer questions} The best part of a class is the community that we build together. I may be the person in the class who is most familiar with this material, but you and your classmates are the ones who are familiar with the journey that you're on---and there is a lot that I learn from your journey. As such, expect me to \emph{ask you questions}. This can be scary, but know that when I ask a question, I am not testing \emph{you} and what you have learned, I am testing \emph{me} and what I need to teach. If you find yourself on the business end of a question during class, consider the following options:
+\begin{itemize}
+    \item If you know the answer, give the answer and a justification.
+    \item If you are not sure but think you know the answer, give the answer and a justification. You can even say that you are not sure and give reasons to be skeptical.\sidenote{This is part of the scientific method.} This is useful for me as well.
+    \item If you have no idea what the answer is, then say so and explain what is confusing about the question. If you do not understand the question, then say that you do not understand the question and then ask a specific question for clarification. 
+\end{itemize}% be ready to answer questions
+% be critical: why are we doing this
+% do your homework \url{https://www.youtube.com/watch?v=sTJ7AzBIJoI}
+
+\section{References}
+Unfortunately there is not a perfect book on particle physics at this level.\sidenote{Jeff Richman at \acro{UCSB} is working on one that may be close. At the time of this writing that book is not yet complete.} Here are a few that you may consider. 
+
+\subsection{Particle Physics}
+\begin{itemize}
+    \item \cite{Griffiths:2008zz}
+    \item \cite{Larkoski:2019jnv}
+    \item \cite{Peskin:2019iig}
+    \item \cite{Cahn:1989by}
+    \item \cite{Goldberg:2017dlc}
+    \item \cite{Bettini:2008zz}
+\end{itemize}
+
+\subsection{Introductions to Quantum Field Theory}
+Recently there has been an explosion in the number of ``quantum field theory for undergraduates'' textbooks. Here are a few that I think are particularly effective for further study. The books all start at the level assumed for this course, but each goes much deeper into the subject and wold be well suited for anyone interested in pursuing theoretical research in graduate school.
+\begin{itemize}
+    \item \cite{Schwichtenberg:2018dri}
+    \item \cite{schwichtenberg2020no}
+    \item \cite{Lancaster:2014pza}
+    \item \cite{donoghue2022prelude}
+    \item \cite{Zee:2010qce}
+    % \item \cite{Perkins:2003pp}
+    \item \cite{Feynman:1986er}
+    \item \cite{Veltman:1994wz}
+\end{itemize}
+
+\chapter{Introduction}
+
+This is a course on the theory of the Standard Model of particle physics. It is a theory so successful that it is called the \emph{Standard Model} with capital letters. Among its crowning achievements is the discovery of the Higgs boson~\autocite{CMS:2012zhx, ATLAS:2012ae} and the verification of the electron's anomalous magnetic moment~\autocite{Fan:2022eto}---the most precisely predicted and measured number in nature.\sidenote{The error is less than a part per trillion.}
+
+\section{What is Particle Physics}
+
+Particle physics has had a few different names. It used to be called \emph{subatomic physics} because it is the study of things that are smaller than the atom. But then nuclear physics split off as a discipline\sidenote{By the end of this course, you may come to appreciate why this is the case.\footnotemark}\footnotetext{Nuclear physics works with \emph{effective theory} of hadrons at the \GeV{} scale. This theory is distinct from the Standard Model because it is precisely the regime where the theory of quarks is non-perturbative and alternative descriptions are necessary.} and what does it mean for a particle to be `smaller' anyway?
+
+\begin{exercise}
+If someone who is not a physicist asked you what the size of the electron is, what would you say? Go ahead and look up the radius of an electron. What does this number mean? What about a photon? What is the `size' of a quantum of light?\sidenotemark
+\end{exercise}\sidenotetext[][-3em]{Confused? Good. You're thinking.}
+
+Another historical name for particle physics is \emph{high-energy physics}. This is because our experimental apparatuses are traditionally colliders where we smash together particles at high energies. 
+\begin{exercise}
+What does it mean for a particle to have a ``high energy''? What is this energy being compared to? The kinetic energy of a mosquito flapping its wings is negligible for most human-scale activities, but it is quite substantial when smashing together two electrons.
+\end{exercise}
+This is because high energy colliders are actually microscopes. Go ahead and review Rutherford scattering in your favorite quantum mechanics book. Rutherford scattering is the famous experiment that lead to the discovery of nuclei by shining an electron beam onto a gold foil target. 
+\begin{exercise}
+How is the energy of the electron beam related to the spatial resolution of the experiment?
+\end{exercise}
+In this way, one may be forgiven for conflating particle physics with \emph{collider} physics. Indeed, particle physics is still a field that looks to the Large Hadron Collider as one of its Meccas. However, unlike the case even twenty years ago, modern particle physics is far more diverse than `just' high-energy [collider] physics.\sidenote[][-5em]{Theorist Hitoshi Murayama once said that this field stretches ``\emph{from the smallest scales to the largest, from the heavens to the hell}.'' By this he was referring to the most fundamental particles, the cosmological evolution of the entire universe, space-based telescopes, and underground detectors.} As of the time of this writing, a pretty good summary of the field is the 2023 Particle Physics Project Prioritization Panel (\acro{P5}) report.\footnote{\url{https://www.usparticlephysics.org/2023-p5-report/}} The report is the guiding document for the Department of Energy and National Science Foundation---the primary funding agencies for particle physics in the \acro{US}---for the key questions that particle physics seeks to answer over the coming decade.
+
+So I am calling this field \textbf{particle physics}. Even this name is debatable: while the objects that we \emph{observe} are \emph{particles}---usually energy and momentum eigenstates, perhaps described by some sort of creation operator $a^\dag$---the underlying mathematical objects in our theory are \emph{quantum fields}. Even then, some phenomena in particle physics seem to probe the decidedly `wavey' limit of a quantum field.\footnote{See, for example, wave dark matter, \arXiv{2101.11735}.} You could call this ``applied quantum field theory,'' but applications of quantum field theory are much broader than particle physics. So for our purposes, let's call it particle physics and not get too hung up on minutiae.
+
+So what is particle physics? \begin{quote}In this course, particle physics is the branch of science that seeks to build a model quantum field theory that describes the elementary constituents of nature and their fundamental interactions.\end{quote} We should parse a few key words  here:
+\begin{itemize}
+    \item Quantum field theory is a theory-of-theories. The Standard Model of particle physics is \emph{a} quantum field theory in the same way that the hydrogen atom is a model quantum mechanical system. 
+    \item We are building \emph{models}. A model is a mathematical description of an actual system. The mathematical description is usually idealized and hence simplified. The model is a way to learn about how underlying principles (usually symmetries) can lead to particular phenomena. See Fig.~\ref{fig:MilleniumFalcon}.
+    \item We talk about the \emph{elementary constituents} of nature. In our model, these are quantum fields. Excitations of these fields are what we call elementary particles. The name is meant to evoke some sense of indivisibility, but this is not at all necessarily the case.\sidenote[][-3em]{I once read a story about a woman on a plane who was bragging about how brilliant her son is. When she saw her seatmate reading a book, \emph{Elementary Particle Physics}, she said ``hmph! Well, my son studies \emph{advanced} particle physics.''} For example, it can be convenient to write models where protons and neutrons are elementary, even though we know that they are not. 
+    \item Finally, the \emph{fundamental interactions} between particles is conventionally what are called forces. We shall see in this class in particle physics, there is no strict distinction between particle and force---they are all described by quantum fields whose excitations are particles.\sidenote{In particle physics, everything is a particle. In contrast, to astronomers, subatomic scientists are either particle physicists or a metallurgists.\footnotemark}\footnotetext{\url{https://en.wikipedia.org/wiki/Metallicity}} 
+\end{itemize}
+\begin{figure}%[th]
+    % \centering
+    \sidecaption[][-2\baselineskip]{%
+        What is the difference between these two? One is a screenshot of the Millennium Falcon from \emph{Wookiepedia}, the other is a picture of a \emph{model} of the Millenium Falcon from Lego. Physicists build models of nature. We hope that the model may illuminate principles of how nature works, but we do not confuse the model as a prescription for how nature must behave.
+        \label{fig:MilleniumFalcon}
+    }
+    \includegraphics[width=\textwidth]{figures/MillenniumFalcon.png}
+\end{figure}
+
+
+
+% HW: muon shot. 
+% Idea: every homework is a story
+
+
+
+\section{Kinematics and Dynamics}
+
+\section{Diagrammar}
+
+\section{Units and Dimensional Analysis}
+
+\section*{Acknowledgments}
+
+\acro{PT}\ thanks 
+all the people who taught him quantum field theory and particle physics over the years. In particular, courses from Scott Thomas, Pat Burchat, Savas Dimopoulos, Aaron Roodman, Michael Peskin, Shamit Kachru, David Tong, Maciej Dunajski, Ben Allanach, Hugh Osborn, Fernando Quevedo, Silvia Pascoli, Csaba Cs\'aki, Maxim Perelstein, and Yuval Grossman. I am further indebted to those who were (and are still) on this journey to figure this all out.
+%
+% \acro{PT} thanks 
+%     the Aspen Center for Physics (\acro{NSF} grant \acro{\#1066293})
+%     % and the Kavli Institute for Theoretical Physics (\acro{NSF} grant \acro{PHY-1748958})`'
+%     for 
+%     its 
+%     % their
+%     hospitality during a period where part of this work was completed. 
+% %
+% \acro{PT} is supported by the \acro{DOE} grant \acro{DE-SC}/0008541.
+\acro{PT} is supported by a \acro{NSF CAREER} award (\#2045333).
+
+%% Appendices
+\appendix
+% \chapter{Proper appendix}
+% index that follows this chapter.
+
+% \section{Things to work on}
+
+% It may be nice to incorporate something like \texttt{classicthesis}\footnote{\url{https://www.ctan.org/tex-archive/macros/latex/contrib/classicthesis/}}
+
+
+\printindex
+
+%% Bibliography
+%% USING BIBLATEX, SKIP BIBTEX
+%% Use inspireHEP bibtex entries when possible
+% \bibliographystyle{utcaps} 	% arXiv hyperlinks, preserves caps in title
+% \bibliography{bib title without .bib}
+
+
+\end{document}
