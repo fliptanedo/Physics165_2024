@@ -1,0 +1,166 @@
+%% LaTeX Paper Template, Flip Tanedo (flip.tanedo@ucr.edu)
+%% GitHub: https://github.com/fliptanedo/paper-template-2022
+
+% \documentclass[11pt]{article} %% Not for Lecture Notes
+\documentclass[12pt, oneside]{report}    %% Has chapters
+
+\input{FlipLectureMacros}       %% Lecture note formatting, load first
+\input{FlipPreamble}			%% \usepackages, formatting
+\input{FlipMacros}              %% Flip's standard macros
+\input{FlipMacros_Comments}     %% Flip's macros for comments
+\input{FlipMacros_Teaching}     %% Flip's macros for course notes
+\input{Flip_listings}           %% Styling for code blocks
+\input{FlipAdditionalHeader}    %% Modify this for each project
+\input{FlipPreambleEnd}         %% packages that have to be at the end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% LECTURE NOTES SETTINGS %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \linenumbers                  %% print line numbers (lineno package)
+\graphicspath{{figures/}}       %% figure folder
+\addbibresource{FlipBib.bib}    %% Define BibLaTeX source(s)
+
+%% LEAVE THESE HERE 
+
+\geometry{                      %% large margin for side notes
+    paper=letterpaper, 
+    hmargin={1cm,7.25cm},       %% 6.25cm space on right
+    vmargin={2cm,2cm}, 
+    marginparsep=.5cm, 
+    marginparwidth=5.75cm
+}
+
+%% Def. full width; uses changepage package; 6.25cm to match hmargin difference;
+\newenvironment{wide}{\begin{adjustwidth}{0cm}{-6.25cm}}{\end{adjustwidth}}
+
+
+% Reset the sidenote number each section 
+\let\oldsection\section
+\def\section{%
+  \setcounter{sidenote}{1}%
+  \oldsection
+}
+
+
+\begin{document}
+
+\newgeometry{margin=2cm}                   % plain geometry for frontmatter
+\newcommand{\FlipTR}{UCR-TR-2024-FLIP-00X} % TR#, pdfsync may fail on 1st page
+\thispagestyle{firststyle} 	               % TR#; otherwise use \thispagestyle{empty}
+\pagenumbering{gobble}                     % no page number on first page 
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  FRONTMATTER    %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{center}
+    {\large \textsf{UC Riverside Physics XXX, Fall 20YY} \par}
+    {\huge \textbf{Course Title} \par}\vspace{.5em}
+    {\large {Descriptive subtitle} \par}
+    \vskip .5cm
+\end{center}
+
+\input{FlipAuthors}
+
+\vspace{2em}\noindent
+This is a good place to put the course description and any commentary about the nature of these notes. 
+
+
+\vspace{2em}
+\noindent
+\textsf{Last Compiled: \today}
+
+\noindent
+\textsf{CC BY-NC-SA 4.0}~\ccbyncsa 
+
+\noindent % Course notes URL
+% \url{https://github.com/fliptanedo/P231-2023-Math-Methods}
+
+%% Front page logos
+\vspace*{\fill}
+\begin{center}
+\includegraphics[height=.1\textwidth]{figures/FlipAmbigram.png}
+\hspace{5em}
+\includegraphics[height=.1\textwidth]{figures/UCRPnA_banner.png}
+\end{center}
+
+\newpage
+
+\small
+\setcounter{tocdepth}{2}
+\tableofcontents
+\normalsize
+\clearpage
+\restoregeometry        %% Return to lecture note geometry 
+\pagenumbering{arabic}  %% Turn on regular page numbers
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%  THE CONTENT  %%%
+%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Things I'm working on}
+
+\url{https://github.com/fmarotta/kaobook/issues/15}
+% Because sidecite dosn't work
+%\sidecite{Feng:2016ijc}
+
+\input{examples_lecture}
+
+% \chapter{Paper examples}
+
+% Here are the standard examples I use for my \texttt{paper} template. I include them here to check that nothing has broken. These do not make use of the margin at all. You can see what happens when some text spills into the margin unintentionally.
+
+% \input{examples}
+% \input{examples_teaching}
+% \input{examples_listings}
+% \input{examples_bestpractices}
+% \input{examples_refs}
+
+%% CHAPTER SUBAPPENDIX %% if using report class
+\begin{subappendices}
+\section{Subappendix}\label{sec:subappendix:eg}
+This chapter has its own special appendix.
+\end{subappendices}
+
+
+
+\section*{Acknowledgments}
+
+\acro{PT}\ thanks 
+\emph{your name here}
+for useful comments and discussions. 
+%
+\acro{PT} thanks 
+    the Aspen Center for Physics (\acro{NSF} grant \acro{\#1066293})
+    % and the Kavli Institute for Theoretical Physics (\acro{NSF} grant \acro{PHY-1748958})`'
+    for 
+    its 
+    % their
+    hospitality during a period where part of this work was completed. 
+%
+% \acro{PT} is supported by the \acro{DOE} grant \acro{DE-SC}/0008541.
+\acro{PT} is supported by a \acro{NSF CAREER} award (\#2045333).
+
+%% Appendices
+\appendix
+\chapter{Proper appendix}
+Unlike Chapter~\ref{sec:subappendix:eg}, this is an appendix at the end of the document rather than a sub-appendix within a chapter. Check out the index that follows this chapter.
+
+\section{Things to work on}
+
+It may be nice to incorporate something like \texttt{classicthesis}\footnote{\url{https://www.ctan.org/tex-archive/macros/latex/contrib/classicthesis/}}
+
+
+\printindex
+
+%% Bibliography
+%% USING BIBLATEX, SKIP BIBTEX
+%% Use inspireHEP bibtex entries when possible
+% \bibliographystyle{utcaps} 	% arXiv hyperlinks, preserves caps in title
+% \bibliography{bib title without .bib}
+
+
+\end{document}

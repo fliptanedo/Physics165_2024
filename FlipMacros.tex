@@ -1,0 +1,108 @@
+%!TEX root = paper.tex
+%% FLIP’S MACROS 
+%% USES: FlipPreamble.tex
+
+%% FOR `NOT SHOUTING' CAPS (e.g. acronyms)
+%% ---------------------------------------
+% \usepackage{scalefnt} 
+% \newcommand\acro[1]{{\footnotesize #1}} 
+\newcommand\acro[1]{{\small{#1}}} 
+\newcommand\tacro[1]{\textsc{\lowercase{#1}}}  % for inside headers
+
+
+%% COMMON PHYSICS MACROS
+%% ---------------------
+\renewcommand{\tilde}{\widetilde}         % tilde over characters
+\renewcommand{\text}{\textnormal}	        % text in equations 
+\renewcommand{\vec}[1]{\mathbf{#1}}       % vectors: boldface
+\newcommand{\bas}[1]{\hat{\mathbf{#1}}}   % basis vectors: hat
+\newcommand{\RR}{\mathbbm{R}}
+\newcommand{\CC}{\mathbbm{C}}
+
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+
+%% Particle Physics
+%% -----------------
+\newcommand\GeV{\acro{GeV}} 
+
+%% LINEAR ALGEBRA
+%% ---------------
+\newcommand{\row}[1]{\tilde{\mathbf{#1}}} % row vectors have tilde
+\newcommand{\rbas}[1]{\row{#1}}           % row basis
+
+%% Have to compile ``latex undertilde.ins'' for this: 
+% \usepackage{undertilde} 
+%   % have to compile from CTAN ("latex undertilde.ins")
+%   \renewcommand{\row}[1]{\utilde{\mathbf{#1}}}   
+%   \renewcommand{\rbas}[1]{\hat{\row{#1}}}
+
+\newcommand{\ket}[1]{\left|#1\right\rangle}       % <#1|
+\newcommand{\bra}[1]{\left\langle#1\right|}       % |#1>
+
+\newcommand{\aij}[2]{^{#1}_{\phantom{#1}#2}}
+\newcommand{\mat}[3]{#1\aij{#2}{#3}}
+\newcommand{\inv}{^{-1}}
+
+\newcommand{\one}{\mathbbm{1}}
+\newcommand{\Tr}{\text{Tr}\,}
+\newcommand*{\trans}{{\mkern-1.5mu\mathsf{T}}}     % transpose
+
+
+
+%% DIFFERENTIALS
+%% -------------
+%% Differential and differential/2pi
+% \newcommand{\dbar}{d\mkern-6mu\mathchar'26}     % for d/2pi
+\newcommand{\dbar}{d\mkern-6mu\mathchar'26\hspace{-.1em}}    
+
+%% Best practice: Roman differential
+\newcommand{\D}[1]{\ensuremath{\operatorname{d}\!{#1}}}
+\newcommand{\DD}[2]{\ensuremath{\operatorname{d}^{#1}\!{#2}}}
+\newcommand{\Dbar}[1]{\operatorname{d}\mkern-10mu\mathchar'26\mkern-2mu{#1}} 
+
+
+%% TYPOGRAPHY: Best Practices
+%% --------------------------
+%% base of natural log is Roman
+\newcommand{\e}{\operatorname{e}}  
+
+%% imaginary number is Roman too!?
+\newcommand{\I}{\operatorname{i}\mkern-2mu}  
+
+%% phantom + for spacing (aligning in math environment)
+\newcommand{\pp}{\phantom{+}}                     
+
+%% Subscript parallel is same size as subscript perp
+\usepackage{scalerel} % https://tex.stackexchange.com/a/523873/8094
+\newcommand*{\paral}{{\stretchrel*{\parallel}{\perp}}}
+
+%% For := with the dots and lines aligned, same size
+%%% h/t tex.stackexchange.com/a/4881/8094
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}%
+                     =}
+
+
+
+
+%% Make my life easer
+%% ------------------
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand*{\smallslot}{\,\underline{\makebox[0.80em]{\ensuremath{}}}\,}
+%   e.g. writing dual vector as <_,v> 
+
+
+
+%% MISCELLANEOUS
+%% -------------
+\usepackage{pifont}
+  \newcommand{\cmark}{\ding{51}}%
+  \newcommand{\xmark}{\ding{55}}%
+
+
+%% FIGURES INLINE WITH EQUATIONS (e.g. Feynman diagrams)
+%% -----------------------------
+\newcommand{\eqfig}[2]{%
+  \vcenter{\hbox{\includegraphics[#2]{{#1}}}}}
+%% USAGE: \eqfig{example-image-a}{width=.1\textwidth}
