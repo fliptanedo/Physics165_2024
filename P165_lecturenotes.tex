@@ -200,6 +200,12 @@ When you ask it this way, the question is no longer about you being confused, it
 % be critical: why are we doing this
 % do your homework \url{https://www.youtube.com/watch?v=sTJ7AzBIJoI}
 
+\section{These notes}
+
+This is a first draft of these lecture notes. You can expect both outright errors and explanations that may not be fully satisfying. Please bring up any questions to me at your soonest convenience. 
+
+I also have a tendency towards marginalia---sidenotes and footnotes. It is a habit I pick up from my favorite textbook authors (Tony Zee in particular); I feel like it brings a bit of the flavor of the course into the text. They also reflect my occasionally scatter-brained enthusiasm for this subject. If you are in a particular hurry, you can safely skip the side notes. I have tried to include references on the page that we use them rather than in a comprehensive bibliography in the back. Students who are especially dedicated to this subject are encouraged to pursue as many of these references as they are able to. 
+
 \section{References}
 Unfortunately there is not a perfect book on particle physics at this level.\sidenote{Jeff Richman at \acro{UCSB} is working on one that may be close. At the time of this writing that book is not yet complete.} Here are a few that you may consider. 
 
@@ -250,7 +256,7 @@ In this way, one may be forgiven for conflating particle physics with \emph{coll
 
 So I am calling this field \textbf{particle physics}. Even this name is debatable: while the objects that we \emph{observe} are \emph{particles}---usually energy and momentum eigenstates, perhaps described by some sort of creation operator $a^\dag$---the underlying mathematical objects in our theory are \emph{quantum fields}. Even then, some phenomena in particle physics seem to probe the decidedly `wavey' limit of a quantum field.\footnote{See, for example, wave dark matter, \arXiv{2101.11735}.} You could call this ``applied quantum field theory,'' but applications of quantum field theory are much broader than particle physics. So for our purposes, let's call it particle physics and not get too hung up on minutiae.
 
-So what is particle physics? \begin{quote}In this course, particle physics is the branch of science that seeks to build a model quantum field theory that describes the elementary constituents of nature and their fundamental interactions.\end{quote} We should parse a few key words  here:
+So what is particle physics? \begin{quote}In this course, particle physics is the branch of science that seeks to build a model quantum field theory that describes the elementary constituents of nature and their fundamental interactions.\end{quote} We should parse a few key words here:
 \begin{itemize}
     \item Quantum field theory is a theory-of-theories. The Standard Model of particle physics is \emph{a} quantum field theory in the same way that the hydrogen atom is a model quantum mechanical system. 
     \item We are building \emph{models}. A model is a mathematical description of an actual system. The mathematical description is usually idealized and hence simplified. The model is a way to learn about how underlying principles (usually symmetries) can lead to particular phenomena. See Fig.~\ref{fig:MilleniumFalcon}.
@@ -265,6 +271,60 @@ So what is particle physics? \begin{quote}In this course, particle physics is th
     }
     \includegraphics[width=\textwidth]{figures/MillenniumFalcon.png}
 \end{figure}
+These ingredients come together through a tool called a Feynman diagram.
+
+\section{Diagrammar}
+
+Fig.~\ref{fig:ee:gamma:gamma:example} is an example of a Feynman diagram.
+\begin{marginfigure}%[th]
+    \includegraphics[width=.8\textwidth]{figures/feyn_eegaga.pdf}
+    \captionsetup{font={scriptsize,sf}}
+    \caption{Example of a Feynman diagram. Here an electron and a positron annihilate into a pair of photons.}
+    \label{fig:ee:gamma:gamma:example}
+\end{marginfigure}
+Feynman diagrams are a perturbative expansion of the quantum mechanical amplitude for a something to happen. You may recall that the quantum amplitude is a ``square root of the probability\footnote{This notion comes from quantum mechanics where the probability of observing a state $\ket{\Psi}$ is $\langle \Psi | \Psi\rangle = |\Psi|^2$. In quantum field theory we typically talk about \emph{cross sections}, $\sigma$. The relation between the amplitude $\mathcal M$ and cross section is $\sigma \sim |\mathcal M|^2$ and contains kinematic factors. We determine these kinematic factors in subsequent chapters.}.'' The statement that diagrams are a \emph{perturbative expansion} means that there is some small parameter for which we are performing a Taylor expansion\sidenote{Formally the amplitudes are complex and may contain singularities. It is thus more appropriate to say that this is a \emph{Laurent expansion}. One of the `deep' ideas in quantum field theory is the intimate relationship of \emph{analyticity} (complex differentiability) to physical properties. To dig deeper, see my Physics 231 notes.\footnotemark}\footnotetext{\url{https://sites.google.com/ucr.edu/p231/}}. In the standard case, this perturbative expansion is usually an expansion in couplings.
+
+By \textbf{coupling} I mean a parameter of the theory that determines how much some particles interact with each other. When the coupling is large, the interaction is very strong. When the coupling is small, the interaction is very weak. One coupling that you may be familiar with is the electrodynamic coupling, $e$. You are probably most familiar seeing $e$ as an ingredient in the fine structure constant, 
+\begin{align}
+    \alpha = \frac{1}{\hbar c \varepsilon_0} \frac{e^2}{4\pi} \approx \frac{1}{137} \ .
+\end{align}
+The first factor of $(\hbar c \varepsilon_0)^{-1}$ are relics of using silly units. When we use natural units---see Sec.~\ref{sec:units:dimensions}---these are set to one. You can see that $1/137$ is a small number, so it at least makes sense that if we had some amplitude $\mathcal M(\alpha)$ that is a function of the electrodynamic couplings through $\alpha$ that we could imagine doing the perturbative expansion
+\begin{align}
+    \mathcal M = \mathcal M_0 + \alpha \mathcal M_1  + \alpha^2 \mathcal M_2 + \cdots \ ,
+    \label{eq:amplitude:perturbative:expansion}
+\end{align}
+and then dropping any subleading terms since we expect them to be percent-level corrections. If the couplings are large, then this expansion breaks down because subsequent terms are not small. In fact, this is what happens with the strong interactions (quantum chromodynamics), the force that holds nuclei together. Thus there are regimes where the usual Feynman expansion fails: it seems like we should not use these diagrams to describe the interactions of the quarks and gluons that are `inside' a proton.
+\begin{example}
+I seem to have implied that Feynman diagrams do not work for the strong interaction. Despite this, collider physicists working on the Large Hadron Collider `speak' the language of Feynman diagrams. They'll even draw diagrams that involve the strong force. What gives? Apparently I haven't told you the whole story...
+\end{example}
+Note that I wrote \emph{couplings} not the common phrase \emph{coupling constants}. That is because---brace yourselves---these couplings are generally \emph{not} constant. In fact, they depend on the energy scale at which you probe them. If I smash together color-charged particles\sidenote[][]{In this class and in this field, we write \emph{colored} to mean color-charged, or charged with respect to the strong force. See Chapter~5 of \emph{The Disordered Cosmos} for an anthropological discussion.\footnotemark}\footnotetext{\cite{prescod2021disordered}} at high energies, the analogous fine structure parameter for the strong force, $\alpha_\textnormal{s} = g_\textnormal{s}^2/4\pi$ depends on the characteristic energy scale\footnote{We write $\sqrt{Q^2}$ rather than $E$ because $Q^2$ is a Lorentz-invariant quantity, as we explain below in our review of special relativity.} $\sqrt{Q^2}$ at which one probes the interaction, see Fig.~\ref{fig:aS:running:from:1604.08082}. 
+\begin{marginfigure}%[th]
+    \includegraphics[width=.8\textwidth]{figures/aSrun_1604.08082.png}
+    \captionsetup{font={scriptsize,sf}}
+    \caption{Approximate value of the strong force fine structure parameter, $\alpha_\textnormal{s}$. Lines correspond to slightly different calculations. The horizontal axis is the square of the characteristic energy scale at which $\alpha_\textnormal{s}$ is being measured. From Fig.~3.2 of \arXiv{1604.08082}.}
+    \label{fig:aS:running:from:1604.08082}
+\end{marginfigure}
+This idea should be shocking the first time that you see it. The `coupling constants' are not constant at all. The meaning of this oddity is an idea called \emph{renormalization} and is rooted in making sense of what the \emph{actual} small parameter is in perturbation theory: it turns out not to be the fine structure constant, but the fine structure constant times a function of the kinematics of a process. This means that at sufficiently high energies, we can meaningfully talk about Feynman diagrams of quarks exchanging gluons. However, at low energies, these diagrams lose their meaning. If you were paying attention in the previous sub-section, this is the regime where particle physics becomes nuclear physics.
+\begin{example}
+This reminds me of the difference between a \emph{physicist} and a \emph{physics fan}. A physics fan is someone who thinks that $1/137$ is a fundamental constant of the universe and so should be tattooed on their body. A physicist stops to think: \emph{Where does this number come from?} and proceeds to learn about the scale-dependence of the electric coupling. In fact, in this course you will find that the electric coupling is not even a fundamental parameter but a combination of more fundamental parameters. I do not care whether or not you are a physics fan, but my goal is to train you as a physicist.
+\end{example}
+
+Feynman diagrams are graphs that represent a mathematical expression for a complex number. The graphs are trajectories in spacetime that we read from left to right. Each line in a diagram represents a particle. The lines may have decorations or labels that indicate their identity. In Fig.~\ref{fig:ee:gamma:gamma:example} the two lines on the left are an electron and a positron. The two wiggly lines on the right are each photons. Each vertex (intersection of lines) represents a factor of the coupling. In Fig.~\ref{fig:ee:gamma:gamma:example} the two vertices mean that this diagram contains two powers of the electric coupling, $e$. Thus this diagram contributes to the $\mathcal O(e^2) = \mathcal O(\alpha)$ term in the expansion of the amplitude $\mathcal M(e^+e^-\to \gamma\gamma)$ in \eqref{eq:amplitude:perturbative:expansion}. The notation $\mathcal M(e^+e^-\to \gamma\gamma)$ simply means the amplitude for an electron $e^-$ and a positron $e^+$ to turn into two photons, $\gamma\gamma$.
+
+Something else that may be familiar from quantum mechanics: amplitudes sum together. This is the origin of quantum interference and all of the fun parts of quantum physics. Our perturbative expansion \eqref{eq:amplitude:perturbative:expansion} is one example of such a sum. However there are usually multiple diagrams that contribute at a given order in perturbation theory. One of the brilliant things about these diagrams is that they have a complementary interpretation: as a \emph{sum over histories}. This is an idea that we emphasize in our review of quantum mechanics, but the idea is this: 
+\begin{quote}
+The amplitude to go from some initial state to some final state is represented by the sum of all Feynman diagrams that connect the initial state to the final state. Each individual Feynman diagram in the sum represents a possible history that the initial state could have taken to reach the final state.
+\end{quote}
+This sum over histories interpretation is outrageous the first time you see it but is ultimately an extension of the principle of least time that underlies Snell's law in optics. The generalization to a principle of least action is the core of Lagrangian mechanics and was in fact Feynman's Ph.D thesis\autocite{feynman2005feynman}. 
+
+The diagrams are simply a tool. Feynman's long time physics rival and co-Nobel prize winner, Julian Schwinger, was a master of calculating amplitudes in quantum field theory \emph{without} any diagrams. In one interpretation of history, Feynman's main contribution at this stage of physics history was bringing that calculational technology to the masses by giving each term an intuitive meaning.\sidenote{It is no surprise that he is also (mis-)attributed as the spokesperson of the ``shut up and calculate'' school of quantum physics.\footnotemark}\footnotetext{\cite{10.1063/1.1768652}} Veltman has a nice physics-oriented history of the spread of Feynman diagrams in his book \emph{Diagrammatica}\autocite{Veltman:1994wz}. This book should not be confused with a set of lecture notes he co-wrote with 
+'t~Hooft called ``Diagrammar\autocite{tHooft:1973wag},'' which inspired the name of this section.
+% Not for this class, but also interesting: https://arxiv.org/abs/2109.06889
+% Diagrammar of physical and fake particles and spectral optical theorem
+%  Anselmi
+
+
+As a final note: there is far more to quantum field theory than Feynman diagrams. As a perturbative expansion, Feynman diagrams represent the \emph{easiest} part of quantum field theory. But just as there are functions that cannot be meaningfully Taylor expanded\sidenote{Try expanding $\exp(-x^{-2})$ around the point $x_0 = 0$. Every term at every order vanishes, even though the function is well defined and non-zero away from the origin. The quantum field theory analog is something called an instanton and is beyond the scope of this course.}, there are vast swaths of field theory that are intrinsically \emph{non-perturbative}. Quantum chromodynamics at low energies---where we must turn to methods in nuclear physics---is one example. We make this caveat to emphasize that although we lean heavily on the diagrammatic interpretation of particle physics, we are still just scratching the surface.
 
 
 
@@ -275,9 +335,10 @@ So what is particle physics? \begin{quote}In this course, particle physics is th
 
 \section{Kinematics and Dynamics}
 
-\section{Diagrammar}
+
 
 \section{Units and Dimensional Analysis}
+\label{sec:units:dimensions}
 
 \section*{Acknowledgments}
 
