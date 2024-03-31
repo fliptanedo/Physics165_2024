@@ -706,8 +706,65 @@ Suppose you have a process where two particles come in, and two particles come o
 This section is a very brief review of the main points. For a more systematic derivation, please see my Physics 17 lecture notes. 
 \end{flipcomment}
 
-...
-\autocite{bais2007very}
+My favorite refernece to appreciate the geometric structure of special relativity is the book \emph{Very Special Relativity}\autocite{bais2007very}.
+\begin{marginfigure}%[th]
+    \includegraphics[width=.8\textwidth]{figures/vsr_cover.png}
+    \captionsetup{font={scriptsize,sf}}
+    \caption{How to learn special relativity.}
+    \label{fig:VSR:cover}
+\end{marginfigure}
+It looks like a miniature coffee table book, but it is a perfect book for physics students who have completed their lower-level coursework.\sidenote{If you can derive every result in the book then you are ready to take general relativity. You should be able to do this over a winter break.}\sidenote{Do not confuse the title of this book with the Cohen--Glashow hypothesis, \arXiv{hep-ph/0601236}, which is a rather different thing.} Once you have mastered this, you can pick up your favorite general relativity textbook for a bit more of the mathematical formalism. Some suggestions: Hartle\autocite{Hartle:2003yu}, Schutz\autocite{schutz2009first}, and Carroll\autocite{Carroll:2004st}. I would be remiss not to also mention the beautiful and elegant tome known lovingly as \acro{MSW}\autocite{misner2017gravitation}; a book so beloved that it had its own 50$^\textnormal{th}$ anniversary celebration.\footnote{\url{https://www.youtube.com/watch?v=a-4-IPBNV60}}
+\begin{marginfigure}%[th]
+    \includegraphics[width=.8\textwidth]{figures/MSW_cover.png}
+    \captionsetup{font={scriptsize,sf}}
+    \caption{Published 50 years ago---right around when the Standard Model was established---\tacro{MSW} is still one of the most insightful places to learn and re-learn relativity. }
+    \label{fig:VSR:cover}
+\end{marginfigure}
+
+The key tenet of special relativity is that the speed of light is constant. You already know from \eqref{sec:units:dimensions} that this constant means that there is a natural conversion between space and time. Indeed, you should already be familiar with the two primary manifestations of this in mechanics:
+\begin{itemize}
+    \item Time dilation: We measure time to pass more slowly for objects moving relative to our reference frame.
+    \item Length contraction: We measure the distance along the direction of motion to be shorter for objects moving relative to our reference frame. 
+\end{itemize}
+This is formalized with respect to the relative velocity\sidenote{In \tacro{SI} units we would say $\beta = v/c$.} $\beta = v$ and the factor
+\begin{align}
+    \gamma = \frac{1}{\sqrt{1-\beta^2}} \ .
+\end{align}
+\begin{exercise}
+What is the range of allowed values of $\beta$? What is the range of allowed values for $\gamma$? What is the allowed range of the product $\gamma\beta$?
+\end{exercise}
+We, as observers, define a stationary reference frame with coordinates $t$ and $x$. For our purposes, let us assume a (1+1)-dimensional spacetime.\sidenote{This notation means one dimension of time and one dimension of space.} Suppose that there is another references frame that is moving at constant velocity relative to ours. Then an observer in that reference frame has a coordinate system $t'$ and $x'$. Fig.~\ref{fig:relativity:axes} plots the axes of this coordinate system on our coordinate system. 
+\begin{marginfigure}%[th]
+    \includegraphics[width=\textwidth]{figures/rel_axes.pdf}
+    \captionsetup{font={scriptsize,sf}}
+    \caption{Coordinates of a boosted observer relative to our coordinates.}
+    \label{fig:relativity:axes}
+\end{marginfigure}
+\begin{exercise}
+Compare Fig.~\ref{fig:relativity:axes} to the spatial $x$--$y$ plane and the $x'$--$y'$ plane where the primed coordinates are those of an observer rotated by angle $\theta$ relative to the unprimed observer.
+\end{exercise}
+the coordinates are related by
+\begin{align}
+    t' &= \gamma t - \gamma\beta x &
+    x' &= \gamma x - \gamma\beta t \\
+    t &= \gamma t' + \gamma\beta x' &
+    x &= \gamma x' + \gamma\beta t' \ .
+    \ .
+\end{align}
+\begin{example}
+Suppose the boosted observer has a stick that they measure to be length $\ell'$. That means in a time slice $\Delta t' = 0$ it observes a distance interval $\Delta x' = \ell'$. In our frame, we measure
+\begin{align}
+    \Delta t &= \gamma \beta \,\Delta \ell'
+    &
+    \Delta x &= \gamma \,\Delta\ell' \ .
+\end{align}
+We see that the length that \emph{we} measure $\ell = \Delta x = \gamma\,\Delta\ell'$ is larger than the length that the boosted observer measures, $\ell'$. In other words, the \flip{fix this... I have clearly made a mistake}
+\end{example}
+
+
+
+
+
 
 \section*{Acknowledgments}
 
