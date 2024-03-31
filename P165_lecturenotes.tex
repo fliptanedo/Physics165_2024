@@ -200,6 +200,25 @@ When you ask it this way, the question is no longer about you being confused, it
 % be critical: why are we doing this
 % do your homework \url{https://www.youtube.com/watch?v=sTJ7AzBIJoI}
 
+
+\section{Significant figures}
+
+Most of the big ideas in this course do not require precise numbers. Usually we can get by with one significant figures---the mass of the proton is 1~\GeV{}. Sometimes we can get by with \emph{zero} significant figures---the Planck scale is on the order\sidenote{The `big-O' notation $\mathcal O$ means `order of magnitude. Because our study of particle physics spans the very small to the very large, you would be wise to be comfortable with this notation.} of $\mathcal O(10^{19}\,\text{\GeV{}})$. In fact, you should start every problem by thinking about the order of magnitude before you think about any significant figures. 
+
+The only time where we will have to get into the weeds and sort one more than one significant figure is when we need to take the difference of two numbers and it matters whether the difference is positive or negative.\sidenote{Of course, this is simply saying that we care about the difference to one significant figure.}
+\begin{example}
+A good example of this is the mass of the proton versus the mass of the neutron. These, in turn, are due to small differences in the mass of the up versus the down quarks. The masses are:
+\begin{align}
+    m_\text{p} &= 938.3~\text{MeV}
+    &
+    m_\text{n} &= 939.6~\text{MeV}
+\end{align}
+and their mass difference is on the order of a percent of the masses. If proton were heavier than the neutron---a change in the at the \emph{third} significant figure---then the universe as you know it would be radically different. How different? For starters, instead of hydrogen atoms we would have neutrons---and we can say goodbye to chemistry.\sidenotemark
+\end{example}\sidenotetext[][-7.5em]{This and related observations are described beautifully in Robert Cahn's article ``The eighteen arbitrary parameters of the standard model in your everyday life\footnotemark,'' which I strongly recommend that everyone read. Cahn is also the author of a great book on representation theory for those learning the subject on their own\footnotemark.}
+\footnotetext{\cite{Cahn:1996ag}}
+\footnotetext{\cite{cahn2006semi}}
+
+
 \section{These notes}
 
 This is a first draft of these lecture notes. You can expect both outright errors and explanations that may not be fully satisfying. Please bring up any questions to me at your soonest convenience. 
@@ -232,9 +251,20 @@ Recently there has been an explosion in the number of ``quantum field theory for
     \item \cite{Veltman:1994wz}
 \end{itemize}
 
+\subsection{Bird's eye view of particle physics}
+
+\begin{itemize}
+    \item The ``Pathways to Innovation and Discovery in Particle Physics'' Report of the 2023 Particle Physics Project Prioritization Panel is a great reference for the present state of the discipline.\footnote{\url{https://www.usparticlephysics.org/2023-p5-report/}}\sidenote{For those pursuing graduate study in particle physics: this document outlines scientific priorities of \acro{US} particle physics funding agencies. These priorities tend to align with the topics where research groups are looking for new graduate students. You may want to read the relevant parts carefully.}
+    \item Fermilab and \acro{SLAC}, two of our flagship national laboratories in particle physics, have a for-the-public online magazine, \emph{Symmetry: Dimensions of Particle Physics}. This is a great starting point to dig a bit deeper into what is going in in particle physics.\footnote{\url{https://www.symmetrymagazine.org}} You may also find a discussion of more mathematical topics in some of the articles in \emph{Quanta Magazine}\footnote{\url{https://www.quantamagazine.org/physics/}}.
+    \item There are a few well-known histories of particle physics ostensibly written for the general public. These include \emph{The Rise of the Standard Model}\autocite{hoddeson1997rise} and \emph{Inward Bound}\autocite{pais1988inward}. 
+    \item In many ways, this field still exists in the shadow of the Superconducting Supercollider. The definitive history of this unfortunate saga is the book \emph{Tunnel Visions}\autocite{riordan2015tunnel}. YouTube documentarian BobbyBroccoli has an excellent movie-length three-part synopsis.\footnote{\url{https://www.youtube.com/watch?v=3xSUwgg1L4g}}
+\end{itemize}
+
 \chapter{Introduction}
 
 This is a course on the theory of the Standard Model of particle physics. It is a theory so successful that it is called the \emph{Standard Model} with capital letters. Among its crowning achievements is the discovery of the Higgs boson~\autocite{CMS:2012zhx, ATLAS:2012ae} and the verification of the electron's anomalous magnetic moment~\autocite{Fan:2022eto}---the most precisely predicted and measured number in nature.\sidenote{The error is less than a part per trillion.}
+
+This chapter is an \emph{amouse bouche} for the course. We review some of the key themes and big ideas to prepare you for a systematic study in subsequent chapters. This chapter may dip into some jargon and hint at some of the deeper undercurrents of quantum field theory. I include them here not to discourage you, but to whet your appetite for the journey ahead.
 
 \section{What is Particle Physics}
 
@@ -309,6 +339,10 @@ This idea should be shocking the first time that you see it. The `coupling const
 This reminds me of the difference between a \emph{physicist} and a \emph{physics fan}. A physics fan is someone who thinks that $1/137$ is a fundamental constant of the universe and so should be tattooed on their body. A physicist stops to think: \emph{Where does this number come from?} and proceeds to learn about the scale-dependence of the electric coupling. In fact, in this course you will find that the electric coupling is not even a fundamental parameter but a combination of more fundamental parameters. I do not care whether or not you are a physics fan, but my goal is to train you as a physicist.
 \end{example}
 
+\begin{exercise}
+On the subject of couplings: is the gravitational coupling \emph{large} or \emph{small} relative to the electromagnetic coupling? You may recall from popular physics that one of these is [surprisingly?] much stronger than the other. Try to make this quantitative by comparing two numbers. \textsc{Hint}: this is a bit of a trick question. Try writing out the gravitational fine structure constant and argue why it appears that you cannot meaningfully compare it to the electromagnetic coupling.
+\end{exercise}
+
 Feynman diagrams are graphs that represent a mathematical expression for a complex number. The graphs are trajectories in spacetime that we read from left to right. Each line in a diagram represents a particle. The lines may have decorations or labels that indicate their identity. In Fig.~\ref{fig:ee:gamma:gamma:example} the two lines on the left are an electron and a positron. The two wiggly lines on the right are each photons. Each vertex (intersection of lines) represents a factor of the coupling. In Fig.~\ref{fig:ee:gamma:gamma:example} the two vertices mean that this diagram contains two powers of the electric coupling, $e$. Thus this diagram contributes to the $\mathcal O(e^2) = \mathcal O(\alpha)$ term in the expansion of the amplitude $\mathcal M(e^+e^-\to \gamma\gamma)$ in \eqref{eq:amplitude:perturbative:expansion}. The notation $\mathcal M(e^+e^-\to \gamma\gamma)$ simply means the amplitude for an electron $e^-$ and a positron $e^+$ to turn into two photons, $\gamma\gamma$.
 
 Something else that may be familiar from quantum mechanics: amplitudes sum together. This is the origin of quantum interference and all of the fun parts of quantum physics. Our perturbative expansion \eqref{eq:amplitude:perturbative:expansion} is one example of such a sum. However there are usually multiple diagrams that contribute at a given order in perturbation theory. One of the brilliant things about these diagrams is that they have a complementary interpretation: as a \emph{sum over histories}. This is an idea that we emphasize in our review of quantum mechanics, but the idea is this: 
@@ -335,10 +369,341 @@ As a final note: there is far more to quantum field theory than Feynman diagrams
 
 \section{Kinematics and Dynamics}
 
+I may be the only person who makes a big deal about this, but we can separate our study of particle physics into two parallel tracks: {kinematics} and {dynamics}. You probably know that these words ``have to do with physics,'' but the distinction between them is rarely delineated. In fact, I suspect I may be making it up---in which case, here are the working definitions for this class. 
+
+\textbf{Kinematics}\index{kinematics} has to do with the motion of particles through space and time. The kinematics of a scattering process relates to the momentum and energy of those particles. The conservation of energy and momentum are also kinematical facts\sidenote{Though their derivation through Noether's theorem is arguably a statement about dynamics.}. The thread of physics that is most relevant to this study is \emph{relativity}, and in particular the flat-spacetime version known as \emph{special relativity}.\sidenote{In contrast, general relativity is the study non-flat spacetimes. One can argue that it is the \emph{dynamics} of spacetime itself.}
+
+\textbf{Dynamics}\index{dynamics}, on the other hand, has to do with the rules for how particles interact. When we talk about a theory or a model of particle physics, we usually mean a description of the dynamics. These are encoded in the action or Lagrangian of a theory. The dynamics of a theory draws primarily from the rules of \emph{quantum mechanics}.
+
+Feynman diagrams are an output of the dynamics of a theory. However, a Feynman diagram is only physically meaningful if it obeys the rules of the kinematics of a theory. Kinematics are an additional consideration when we convert the squared amplitude into something physically measurable.
+\begin{example}
+You can draw a Feynman diagram for a process like $\gamma \to e^+e^-$ by which a photon decays into an electron--positron pair. You could even calculate the amplitude for this process to happen. However, this process is kinematically forbidden because it cannot simultaneously conserve energy and momentum. The amplitude is nonzero, but the decay rate is forced to be zero by kinematics.
+\end{example}
+\begin{exercise}
+Show that both energy and momentum cannot be conserved in $\gamma \to e^+e^-$. There are many ways to do this, including some that are more slick than others. If you are stuck, come back to this exercise after our review of special relativity.
+\end{exercise}
+
+In this course, you can think of dynamics as the set of rules\sidenote{Called \emph{Feynman rules}.} that tell us how we may construct Feynman diagrams. These rules are an encoding of the Lagrangian of the theory.  You can think of kinematics as conditions on the energies and momenta of the initial and final states of an amplitude---these are the external lines of a diagram. Notably, kinematic constraints do not apply to the particles on the \emph{inside} of a Feynman diagram. Lines that obey the kinematic constraints are called \textbf{on shell}, while those that do not are called \textbf{off shell}.\sidenote{What is the \emph{shell}? It is the hypersurface the four-dimensional space of energy and momentum that satisfies the Einstein relation, $E^2 = m^2c^4 + p^2 c^2$ for a particle of mass $m$, energy $E$, and three-momentum $p$.} With this jargon, we say that external lines on a Feynman diagram represent parts of the initial or final states of a process and must be on shell. Internal lines are, in general, off shell.
+
+\subsection{Symmetry}
+
+The notion of \emph{symmetry} plays a central role for both the kinematics and the dynamics. The mathematical description of symmetry is called group theory and the way in which symmetries act on objects is called representation theory.\sidenote{I am name-dropping subjects because I am often asked what subjects should an aspiring theoretical physicist master.} The tables of Clebsch--Gordan coefficients that you may have invoked in your study of addition of angular momentum in quantum mechanics is an output of the representation theory of the group of three-dimensional rotations. In this course we are specifically interested in the representation theory of continuous groups---symmetries like rotations where you can transform by an arbitrary amount---called \emph{Lie groups}.\sidenote{Pronounced `lee.'} As humble physicists\sidenote{Oppenheimer: Well, if that’s how you treat a lieutenant colonel than I hate to see how you treat a humble physicist.\\Leslie Groves: If I ever meet one I'll let you know. (From \emph{Oppenheimer}, 2023)} the way we work with symmetries is to introduce indices. Objects that carry these indices are called \textbf{tensors}.
+
+In special relativity (kinematics) the simplest tensors are four-vectors. They are called four-vectors because they are vectors that have four components. For example, the four-momentum of a particle may be written $p^\mu$. The index is $\mu$. There is a related object called $p_\mu$ with a lower index. These are related by a tensor called the metric tensor, which for our purposes we write $\eta_{\mu\nu}$. The metric gives us a way to define an inner product. This should all sound familiar from linear algebra because this \emph{is} linear algebra. In representation theory, the objects that get rotated\sidenote{By `rotate' I mean a general symmetry transformation. For the case of special relativity, one can have boosts in addition to rotations.} are vectors in a vector space. If you ever wonder why I teach Physics 17 the way that I do, it is because I want students to be primed to understand representation theory as it appears in physics.
+
+Maybe the phrase `inner product' caught your ear. This is the same idea that comes up in quantum mechanics. In fact, now you may recall that quantum mechanics really boils down to complex linear algebra. In fact, many ideas in quantum mechanics are ultimately group theoretical. For example, the commutator is the natural multiplication operation between elements of a group.\sidenote{Check that while this may be surprising, it is sensible. The commutator of two operators is another operator in the same way that the multiplication of two things of a given type should be another thing of the same type.} Furthermore, finite transformations are the exponentiation of infinitesimal transformations. For example, the Hamiltonian $\hat H$ is the generator of translations in time. A finite translation in time is
+\begin{align}
+    \hat U(t) = e^{-i \hbar t\hat H} \ .
+    \label{eq:Ut:time:H}
+\end{align}
+\flip{check the $\hbar$}
+In particle physics we will meet several \textbf{internal symmetries} that mathematically describe the rotation of an object in different vector spaces. These do \emph{not} correspond to spacetime rotations or boosts. Instead, they may represent a rotation between quarks of different color charges.\sidenote{We define these carefully below where we discuss quantum chromodynamics. For this introduction just humor me and go with the flow to appreciate the big idea.} The infinitesimal generators of these transformations take the form\footnote{I am using `physicist' shorthand here and referring to a tensor by its components. Supercilious mathematicians sneer at us for this. Formally, $A\aij{i}{j}$ is not a matrix, it is the $i$--$j$ \emph{component} of a matrix A. Physicists justify our sloppiness because anyone who is paying attention should understand what we mean and, more importantly, by keeping the indices explicit we can see how the tensor transforms.}
+\begin{align}
+(T^A)\aij{i}{j}\ ,    
+\end{align}
+where we recognize three indices. The index $A$ is called an adjoint index and tells you which direction you are rotating. For the rotation group, $A$ takes values from 1 to 3 corresponding to rotations about the $x$, $y$, and $z$ axes. All other rotations are combinations of these. The other two indices, $i$ and $j$ depend on the \emph{representation} of the object that we are rotating. 
+\begin{example}
+In quantum chromodynamics we there are eight generators of so-called color symmetry. This means $A$ takes values from 1 through 8. This group is called \acro{SU(3)}, which stands for the set of $3\times 3$ special unitary matrices.\sidenotemark A quark has indices that I conventionally write with lowercase letters from the middle of the Roman alphabet that take values $m$ from 1 to 3 corresponding to red, blue, and green. The matrix $(T^4)\aij{m}{n}$ represents a particular rotation around the $A=4$ axis. A finite transformation by angle $\theta$ takes the form 
+\begin{align}
+    q^m \to \sum_n e^{i \theta (T^4)\aij{m}{n} } q^n \equiv \sum_n U(\theta)\aij{m}{n}q^n \ ,
+\end{align}
+where the sum over $n$ is what we expect from matrix multiplication.
+\end{example}\sidenotetext[][-5em]{Special means unit determinant. Unitary, as you may recall from quantum mechanics, means that the hermitian conjugate is its inverse.}
+
+This is all to say that indices feature front-and-center in this course. They are a crutch for us to talk about the underlying symmetries that govern both the kinematics and dynamics of particle physics. We will spend a good chunk of this course building familiarity with how to interpret and manipulate indices. This is a mathematical skill that is far more general than particle physics itself.
 
 
-\section{Units and Dimensional Analysis}
+
+
+
+\section{Natural Units}
 \label{sec:units:dimensions}
+
+By this stage of your physics career you are an expert at converting units. The trick is to multiply be one in different forms. Suppose you have some unit $x$ that is related to unit $y$ by some prefactor,
+\begin{align}
+    x = a y \ . \label{eq:unit:conversion}
+\end{align}
+Then you can derive that
+\begin{align}
+    1 = \frac{ay}{x} = {x}{ay} \ .
+    \label{eq:multiply:by:one:unit:conversion}
+\end{align}
+Then if some quantity is, say, $3.4\,x$, you know that you can write it out in terms of $y$ simply by multiplying by one, cleverly written:
+\begin{align}
+    3.4\,x = 3.4\times 1 \times x = 3.1 \times \frac{ay}{\cancel{x}} \times \cancel{x}
+    = (3.4a)\, y \ .
+\end{align}
+\eqref{eq:multiply:by:one:unit:conversion} tells us that there is a universal, unambiguous constant ratio that relates unit $x$ to unit $y$. 
+
+
+\begin{example}
+Suppose someone tells you the number of feet in a mile,
+\begin{align}
+    1~\text{mile} = 5280~\text{feet} \ .
+\end{align}
+This number just so happens to be the mass of the $B$ meson in \acro{MeV}.
+You can derive that
+\begin{align}
+    1 = 5280~\frac{\text{feet}}{\text{mile}}
+    = \frac{1}{5280}~\frac{\text{mile}}{\text{feet}} \ .
+\end{align}
+From this you can deduce that a distance of $1.5$ miles is
+\begin{align}
+    1.5\,\text{mile} = 
+    1.5\,\cancel{\text{mile}} \times \left(5280~\frac{\text{feet}}{\cancel{\text{mile}}}\right) = 
+    7920~\text{feet} 
+    \approx 8000~\text{feet} 
+    \ .
+\end{align}
+\end{example}
+
+If this all looks completely simple then \emph{good}, it is supposed to. There is nothing deep or mysterious about changing units. Let us really put it to work. \textbf{Natural units}\index{natural units} are a convenient choice that boils down to the following identifications:
+\begin{align}
+    c &=1  &
+    \hbar &= 1
+    \ .
+\end{align}
+That's right. The speed of light $c$ and reduced Planck's constant $\hbar$ are set to one. This may bother you. After all, you know from past coursework that these are \emph{not} dimensionless quantities:
+\begin{align}
+    c &= 3\times 10^{8}\,\frac{\textnormal{m}}{\textnormal{s}}
+    &
+    \hbar &= 1\times 10^{-34}\,\frac{\textnormal{m}^2 \textnormal{kg}}{\textnormal{s}} \ .
+    \label{eq:c:hbar:SI}
+\end{align}
+Setting $c = 1$ would then mean that there is an unambiguous way conversion between length and time, as if these were measuring the ``same thing.'' But length is measured by rulers and time is measured by clocks: how are these the same? They are the same \emph{precisely} because nature\sidenote{All our observations since the Michelson--Morley experiment are consistent with a constant speed of light and this is built into our theory of special relativity. Theoretically this is an aesthetic unification of space and time that laid the foundation of general relativity, which in turn has passed every experimental prediction.} gives us a universal, unambiguous constant ratio that relates units of length into units of time. This constant is the speed of light.
+\begin{example}
+A lightyear is a unit of distance. It is defined to be the distance traversed by a particle traveling at the speed of light,
+\begin{align}
+    \text{lightyear} = c\, \text{year} \ ,
+\end{align}
+where we see that the speed of light in natural units $c=1$ plays the role of a conversion factor in \eqref{eq:unit:conversion}. 
+\end{example}
+% Naive dimensional analysis
+% \autocite{Manohar:1983md,Georgi:1986kr,Georgi:1992dw}
+Identifying the speed of light as a conversion factor ends up relating another set of dimensionful quantities. All velocities in natural units are dimensionless. This is because we can simply write any velocity in units of the speed of light.
+\begin{example}
+The tangential speed of the Earth around the solar system is around $v = 200$\,km/s. In natural units this is a dimensionless number:
+\begin{align}
+v = 200\,\frac{ \textnormal{km} }{ \textnormal{s} }
+=
+2\times 10^{5} \, \frac{\textnormal{m}}{\textnormal{s}} 
+\times 
+\left(\frac{1}{3\times 10^8}\frac{\textnormal{s}}{\textnormal{m}}\right)
+= 7 \times 10^{-3} \ .
+\end{align}
+In natural units, any sensible velocity has magnitude less than one. Otherwise something is traveling faster than the speed of light. 
+\end{example}
+\begin{exercise}
+What goes wrong in physics if a particle can travel faster than the speed of light? \textsc{Hint}: review the relativity of simultaneity. 
+\end{exercise}
+Velocities are dimensionless in natural units. 
+Recall that energy has the units of mass times velocity squared. You may recall this from from 
+\begin{align}
+    E_\textnormal{kinetic} = \frac{1}{2} mv^2 \ .
+\end{align}
+You may argue that this formula is only true for kinetic energy. That is true, energy---no matter what the form---is carries the same type of dimension. Because velocities are dimensionless, then the dimensions of energy and the dimensions of mass must be the same. In other words, mass and energy are ``the same thing.'' Given a particle of some mass---say the mass of a proton, $m_\textnormal{p}$---there is an associated energy that is $m_\textnormal{p} \times 1  = m_\textnormal{p} c^2$. This looks remarkably like the non-relativistic limit of the Einstein relation,
+\begin{align}
+    E = mc^2 \ .
+\end{align}
+Indeed, in that limit, the Einstein relation just tells us that mass and energy are the same thing. The square of the speed of light plays the role of a conversion factor between them. It is conventional for particle physicists using natural units to measure everything in units of energy. A particularly useful energy scale is 
+\begin{align}
+    m_\textnormal{p} = 1\,\text{\GeV{}} \ .
+\end{align}
+To one significant figure, the mass of the proton happens to be about one billion times an electron volt.  
+\begin{exercise}
+How much do you weigh in \GeV{}? 
+\end{exercise}
+Sometimes we lapse into other powers of electron volt. Some useful values are the mass of the electron and the mass of the Higgs boson\sidenote{We write $m_h$ to three significant figures because the Higgs is a big deal.}, and the center-of-mass energy of proton-proton collisions at the Large Hadron Collider:
+\begin{align}
+    m_e &= 0.5\,\text{MeV}
+    &
+    m_h &= 125\,\text{GeV}
+    &
+    E_\text{cm} &= 14\,\text{TeV} \ .
+\end{align}
+
+
+
+What about $\hbar = 1$? Planck's constant carries units of angular momentum\sidenote{These are also the units of action, $S=\int dt\,L$.}, or energy times time. Using the just-established equivalence of mass and energy in natural units, this tells us that
+\begin{align}
+    \hbar &= 7 \times 10^{-22}\,\textnormal{MeV}\,\textnormal{s}  \equiv 1 \ . 
+\end{align}
+% \begin{align}
+%     \hbar = 10^{-34}\,\frac{\textnormal{m}^2 \textnormal{kg}}{\textnormal{s}}
+%     \times 
+%     \left(3\times 10^{8}\,\frac{\textnormal{m}}{\textnormal{s}}\right)^{-2}
+%     = 
+%     10^{-51}\,\textnormal{kg}\,\textnormal{s} \ .
+% \end{align}
+This means that the fundamental unit of ``quantum-ness'' tells us that time and inverse energy are ``the same thing.'' At this point, you can multiply and divide by $c$ and $\hbar$ as needed to write all dimensionful parameters in units of \GeV{} to some power. 
+\begin{example}
+An additional conversion is to set the Boltzmann factor, $k_\textnormal{B} =1$. This is the observation that thermal energy is energy and can be measured in \GeV{}.
+\end{example}
+We provide a useful table for conversions to one significant figure.
+\begin{table}[ht]
+    \renewcommand{\arraystretch}{1.3} % spacing between rows
+    \centering
+    \sidecaption[Useful conversions to natural units. Adapted from Palash Pal's website.][-2\baselineskip]{%
+        Conversion of units using $\hbar = c = k_\textnormal{B} = 1$. The row heading is equal to the table entry times the column heading so that a \GeV{} is a small number of Planck masses, $M_\textnormal{Pl}$.  Adapted from Palash Pal's website.\footnotemark 
+  %       \label{table:app:natural:unit:conversion}
+    }
+    \begin{tabular}{ @{} lllllll @{} } \toprule % @{} removes space
+        & \GeV{} & g & K & cm$^{-1}$ & sec$^{-1}$ & M$_\textnormal{Pl}$
+        \\ \midrule
+        \GeV{} % col
+        & % GeV
+        & 1$\times 10^{-24}$ % g
+        & 1$\times 10^{13}$% K
+        & 5$\times 10^{13}$% cm-1
+        & 2$\times 10^{24}$% s-1
+        & 8$\times 10^{-20}$% Mpl
+        \\
+        g % col
+        & 6$\times 10^{23}$% GeV
+        & %$\times 10^{}$% g
+        & 7$\times 10^{36}$% K
+        & 3$\times 10^{37}$% cm-1
+        & 9$\times 10^{47}$% s-1
+        & 5$\times 10^{4}$% Mpl
+        \\
+        K% col
+        & 9$\times 10^{-14}$% GeV
+        & 2$\times 10^{-37}$% g
+        & %$\times 10^{}$% K
+        & 4%$\times 10^{}$% cm-1
+        & 1$\times 10^{11}$% s-1
+        & 7$\times 10^{-33}$% Mpl
+        \\
+        cm$^{-1}$ % col
+        & 2$\times 10^{-14}$% GeV
+        & 4$\times 10^{-38}$% g
+        & 2$\times 10^{-1}$% K
+        & %$\times 10^{}$% cm-1
+        & 3$\times 10^{10}$% s-1
+        & 2$\times 10^{-33}$% Mpl
+        \\
+        sec$^{-1}$ % col
+        & 7$\times 10^{-25}$% GeV
+        & 1$\times 10^{-48}$% g
+        & 8$\times 10^{-12}$% K
+        & 3$\times 10^{-11}$% cm-1
+        & %\times 10^{}$% s-1
+        & 5$\times 10^{-44}$% Mpl
+        \\
+        M$_\textnormal{Pl}$% col
+        & 1$\times 10^{19}$% GeV
+        & 2$\times 10^{-5}$% g
+        & 1$\times 10^{32}$% K
+        & 6$\times 10^{32}$% cm-1
+        & 2$\times 10^{43}$% s-1
+        & %$\times 10^{}$% Mpl
+        \\ \bottomrule
+    \end{tabular}
+  %   \caption[Useful conversions to natural units. Adapted from Palash Pal's website.]
+  %   {
+  %       Conversion of units using $\hbar = c = k_\textnormal{B} = 1$. The row heading is equal to the table entry times the column heading so that a \GeV{} is a small number of Planck masses, $M_\textnormal{Pl}$.  Adapted from Palash Pal's website.\footnotemark 
+        \label{table:app:natural:unit:conversion}
+  % }
+\end{table}\footnotetext{\url{https://www.saha.ac.in/theory/palashbaran.pal/conv.html}}
+
+\begin{example}[Mnemonics]
+You can use your favorite equations in physics as mnemonics for natural units. We already saw how $E=mc^2$ reminds us that energy and mass both carry the same units. You can also invoke Heiseinberg's uncertainty relations
+\begin{align}
+    \Delta x\,\Delta p &\sim \hbar 
+    &
+    \Delta E \Delta t &\sim \hbar
+\end{align}
+to remind us that momentum and distance carry reciprocal units, as do energy and time. Because $c=1$ tells us that distance and time are the same, we find
+\begin{align}
+    \text{length} \sim \text{time} \sim \frac{1}{\text{mass}} 
+    \sim \frac{1}{\text{energy}} \ .
+\end{align}
+\end{example}
+
+The great thing about natural units is that we just have to keep track of one unit, say \GeV{}. Dimensional analysis is very simple and we introduce the bracket notation:
+\begin{align}
+    [x] \defeq ``\text{dimensions of }x \ .''
+\end{align}
+$[x]$ means: what power of energy is the unit of quantity $x$?
+\begin{example}
+For a distance $\ell$, time $t$, mass $m$, and energy $E$:
+\begin{align}
+    [\ell] &= -1
+    &
+    [t] &= -1
+    &
+    [m] &= 1
+    &
+    [E] &= 1
+    \ .
+\end{align}
+\end{example}
+\begin{exercise}
+What are the dimensions of the gravitational constant, $[G_\textnormal{N}]$? \textsc{Hint}: you can use the force law for gravity to figure out the \acro{SI} units of $G_\textnormal{N}$.
+\end{exercise}
+
+\begin{exercise}
+Show that the units of action are the same as the units of angular momentum. \textsc{Hint}: use the expression for the action with your favorite choice of Lagrangian.
+\end{exercise}
+
+\begin{example}[Collider physics as microscopy]
+The Large Hadron Collider is a microscope. The center of mass energy of t
+\end{example}
+
+\chapter{Relativity, Quantum Mechanics}
+
+We begin our study of particle physics with a lightning review of selected topics in special relativity and quantum mechanics.
+
+\section{Kinematics}
+
+The popular Einstein relation, $E = mc^2$, is actually the low [kinetic] energy limit of the `full' relation:
+\begin{align}
+    E^2 = m^2 c^4 + \vec{p}^2 c^2 \ .
+    \label{eq:Einstein:relation:plus}
+\end{align}
+Equations that relate energy to momentum show up all over physics and have a special name: \textbf{dispersion relations}.\sidenote{As a student I always found this name intimidating because it would keep showing up in very different and increasingly advanced corners of physics. I felt like I must be missing something deep, especially since the word \emph{dispersion} did not seem to obviously fit. Historically, these relate wavelength to frequency. Recall that wave velocity is the product of wavelength and frequency---but wave velocity is purely a property in medium. Wavelength (or wave number) is directly related to momentum---think 
+$\sin(kx)$---while frequency is directly related to energy---think $E=\hbar\omega$. These of these parameters are related to absorption (or decay) through complex analysis; these are the celebrated Kramers--Kr\"onig relations. We mention all of this to encourage you to look these ideas up and see how they connect; they are one of the deep threads in physics.} 
+\begin{exercise}
+It is obvious that \eqref{eq:Einstein:relation:plus} reproduces $E=mc^2$ when $\vec{p}=0$. Show that the leading order correction in the small-$\vec{p}$ limit is simply the non-relativistic kinetic energy of the particle. \textsc{Hint:} start by identifying the \emph{dimensionless} small parameter and Taylor expand.
+\end{exercise}
+In natural units we set $c=1$. In this relation, $m$ is the mass of a particle while $E$ and $\vec{p}$ are the energy and three-momentum respectively. Let us write this with the kinematic quantities on the same side of the equation:
+\begin{align}
+    m^2 = E^2 - \vec{p}^2 \ .
+\end{align}
+A particle that satisfies this relation is said to be \textbf{on shell}\index{on shell} or \emph{physical}. Anticipating quantum mechanics, another way of saying this is that on shell particles are \emph{observable states}. Personally, I think of `on shell' states as being \emph{nice} states that are relatable to my ordinary human experiences. This is in contrast to \textbf{off shell} particles, which states that are \emph{not} on shell and are intrinsically quantum. Off shell states are not observable and do not make sense classically. 
+
+A scattering process is one where some number of \emph{observed} initial state particles interact quantum mechanically and produce and \emph{observed} number of final state particles. These initial and final states must each be on shell and conserve energy and momentum. 
+\begin{newrule}[Kinematics]
+A \textbf{physical scattering process} is one with an on shell initial state and an on shell final state. This just means that each particle in the initial and final state are on shell. Furthermore, the total energy $E$ and total three-momentum $\vec{p}$ are conserved through the process. In equations:
+\begin{align}
+    E_\textnormal{in} &= E_\textnormal{out}
+    &
+    \vec{p}_\textnormal{in} &= \vec{p}_\textnormal{out}
+    &
+    m_i^2 = E_i^2 - \vec{p_i}^2 \ ,
+\end{align}
+where $i$ labels each of the external (initial or final) particles. Technically, we should also specify that $E_i>0$, but for us we can take this as an ``obvious'' fact.\sidenotemark Note that in this notation, $E_\textnormal{in}$ is the sum of the energies of all the initial state particles, and similarly for the other in/out quantities.
+\end{newrule}\sidenotetext{From a group theory perspective, positive energy means that we are restricting to the \emph{orthochronus}\index{orthochronus} Lorentz group. This means that particles always move forward in time, no matter what reference frame we are in. The relation between energy positivity and direction in time should be clear from the time evolution operator, \eqref{eq:Ut:time:H} with $\hat H\to E$.}
+
+Suppose you have a particle detector that measures the energy of a particle passing through it---this is called a \emph{calorimeter}. If you also know the mass of the particle, then you can also unambiguously determine the magnitude of the momentum, $|\vec{p}|$.  Alternatively, if you could separately measure the energy and the momentum of a particle, then you can unambiguously infer its mass. This is all obvious because you are using one Einstein relation to relate three variables---mass, energy, and momentum. 
+
+\begin{exercise}
+Suppose you have a process where one particle decays into two other particles; these particles do not necessarily have the same masses, but suppose you know all of the masses. You know the energy and momentum of the initial particle, $E_\textnormal{in}$ and $\vec{p}_\textnormal{in}$. You do not know, \emph{a priori}, the energies or momenta of the final state particles. How many unknown scalar quantities are there? How many constraint equations are there? \textsc{Hint}: recall that $\vec{p}$ is a vector with three separate quantities. Argue that there is generically \emph{no} solution to this system unless some parameters (e.g.\ the masses) are just right.
+\end{exercise}
+
+\begin{exercise}
+Suppose you have a process where two particles come in, and two particles come out. The particles do not necessarily have the same mass, but you know all of the masses. If you know the energies of the initial particles, how many unknowns are there and how many constraint equations are there? Do you expect this system to have a solution? \textsc{Note}: for the purposes of this problem, assume that all energies are positive. This corresponds to satisfying the orthochronus constraint. If you are nervous about this, check that by increasing the energies of the initial particles you can make sure that the final state particles have positive energy. 
+\end{exercise}
+
+
+\section{Special Relativity}
+
+\begin{flipcomment}
+This section is a very brief review of the main points. For a more systematic derivation, please see my Physics 17 lecture notes. 
+\end{flipcomment}
+
+...
+\autocite{bais2007very}
 
 \section*{Acknowledgments}
 

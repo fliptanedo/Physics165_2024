@@ -31,6 +31,16 @@
 \def\BibLaTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     \LaTeX}{}}
 
+\newtheorem{newrule}{Rule}[section]
+\AtBeginEnvironment{newrule}{\footnotesize}
+\tcolorboxenvironment{newrule}{
+    enhanced, % Skin Family `enhanced'
+    frame hidden,  % no frame
+    interior hidden, % no interior color
+    breakable, % allows box to flow across pages
+    borderline west={2pt}{0pt}{black}
+    }
+
 %% More spacing between table columns
 % \setlength{\tabcolsep}{12pt}
 
