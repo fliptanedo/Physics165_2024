@@ -1,6 +1,6 @@
 # FLIP:
 !.gitignore
-*.pdf
+# *.pdf
 !/figures/*
 OLD/
 References/
