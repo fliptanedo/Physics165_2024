@@ -664,9 +664,31 @@ This gives us
 The length scale associated with $10~\textnormal{TeV}$ is tiny: $10^{-20}~\textnormal{m}$. Compare this to the typical atomic length, $\text{\AA} = 0.1~\textnormal{nm} = 10^{-10}~\textnormal{m}$. The inverse relation $\ell \sim E^{-1}$ makes it clear that increasing the energy decreases the length scale. 
 \end{example}
 
-We can understand the $E \sim \ell^{-1}$ relation from ordinary optical microscopy. As we increase the energy of a photon, we increase its frequency and therefore decrease its wavelength, $\lambda$. We need the wavelength of the probe to be \emph{smaller} that the characteristic size features that we are studying, $\lambda \ll \Delta x$. \flip{Insert water waves/rock analogy.}
+We can understand the $E \sim \ell^{-1}$ relation from ordinary optical microscopy. As we increase the energy of a photon, we increase its frequency and therefore decrease its wavelength, $\lambda$. We need the wavelength of the probe to be \emph{smaller} that the characteristic size features that we are studying, $\lambda \ll \Delta x$. Figure~\ref{fig:subfig:waves} demonstrates this idea by showing rocks of different sizes in a stream with water waves of uniform scale $\lambda$.
 
-
+\begin{figure}%[th]
+    \centering
+    \begin{subfigure}{0.3\textwidth}
+    \centering
+        \includegraphics[width=\linewidth]{figures/waves_small.pdf}
+        \caption{$\Delta x \ll \lambda$}
+        \label{fig:subfig:waves:small}
+    \end{subfigure}\;%
+    \begin{subfigure}{0.3\textwidth}
+    \centering
+        \includegraphics[width=\linewidth]{figures/waves_med.pdf}
+        \caption{$\Delta x \sim \lambda$}
+        \label{fig:subfig:waves:med}
+    \end{subfigure}\;%
+    \begin{subfigure}{0.3\textwidth}
+    \centering
+        \includegraphics[width=\linewidth]{figures/waves_big.pdf}
+        \caption{$\Delta x \gg \lambda$}
+        \label{fig:subfig:waves:big}
+    \end{subfigure}%
+    \caption{The ability to probe features (like a rock) of typical scale $\Delta x$ depends on having a probe whose wavelength $\lambda$ is roughly on the order of $\Delta x$. If the scales are mismatched, then the waves are unable to resolve the $\mathcal O(\Delta x)$ features.}
+    \label{fig:subfig:waves}
+\end{figure}
 
 
 
@@ -765,23 +787,64 @@ the coordinates are related by
     t' &= \gamma t - \gamma\beta x &
     x' &= \gamma x - \gamma\beta t \\
     t &= \gamma t' + \gamma\beta x' &
-    x &= \gamma x' + \gamma\beta t' \ .
+    x &= \gamma x' + \gamma\beta t' 
     \ .
+    \label{eq:Lorentz:2D:in:equations}
 \end{align}
-\begin{example}
-Suppose the boosted observer has a stick that they measure to be length $\ell'$. That means in a time slice $\Delta t' = 0$ it observes a distance interval $\Delta x' = \ell'$. In our frame, we measure
+We realize that this is a linear system of equations,\sidenote{Recall that system of equations is linear if a \emph{linear combination} of solutions is also a solutions.} so we can write this as a matrix multiplication:
 \begin{align}
-    \Delta t &= \gamma \beta \,\Delta \ell'
-    &
-    \Delta x &= \gamma \,\Delta\ell' \ .
+    \begin{pmatrix}
+        t\\
+        x
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \gamma & \gamma \beta \\
+        \gamma \beta & \gamma
+    \end{pmatrix}
+    \begin{pmatrix}
+        t'\\
+        x'
+    \end{pmatrix} \ .
+    \label{eq:Lorentz:2D:prime:to:unprimed}
 \end{align}
-We see that the length that \emph{we} measure $\ell = \Delta x = \gamma\,\Delta\ell'$ is larger than the length that the boosted observer measures, $\ell'$. In other words, the \flip{fix this... I have clearly made a mistake}
-\end{example}
+\begin{exercise}
+Show that 
+\begin{align}
+    \begin{pmatrix}
+        t'\\
+        x'
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \gamma & -\gamma \beta \\
+        -\gamma \beta & \gamma
+    \end{pmatrix}
+    \begin{pmatrix}
+        t\\
+        x
+    \end{pmatrix} \ .
+\end{align}
+You can do this either ``read it off' \eqref{eq:Lorentz:2D:in:equations} or apply the matrix inverse to both sides of \eqref{eq:Lorentz:2D:prime:to:unprimed}. Show that the two matrices are, indeed, inverses of each other.
+\end{exercise}
+\begin{exercise}
+Confirm that \eqref{eq:Lorentz:2D:prime:to:unprimed} maps $x'$ and $t'$ axes are to the $x$ and $t$ plane as shown in Fig.~\ref{fig:relativity:axes}.
+\end{exercise}
+
+% \begin{example}
+% Suppose the boosted observer has a stick that they measure to be length $\ell'$. Because the observer and the stick are at rest relative to each other, we say that $\ell'$ is the \textbf{proper length} of the stick. That means in a time slice $\Delta t' = 0$ it observes a distance interval $\Delta x' = \ell'$. In our frame, we measure
+% \begin{align}
+%     \Delta t &= \gamma \beta \,\Delta \ell'
+%     &
+%     \Delta x &= \gamma \,\Delta\ell' \ .
+% \end{align}
+% It is helpful to define an origin where the origins of both reference frames coincide: $t_1 = t_1' = 0$ and $x_1 = x_1=0$
+% \end{example}
 
 
 \section{Indexology of Special Relativity}
 
-\subsection{Upper Index}
+\subsection{Upper Index}\label{sec:index:upper}
 
 The unification of space and time is manifest in the formalism of \textbf{four vectors}\index{four vector}. At one level, this is a simple generalization of three-component vectors to four-component vectors. For example, an \emph{event} is a position $\vec{x}$ and a time $t$ and we can write it as a four-vector with an upper index:
 \begin{align}
@@ -802,6 +865,211 @@ $p^\mu$ is the Fourier transform of $x^\mu$. It should not surprise you that we 
 \subsection{Lorentz Transformations}
 
 A \textbf{Lorentz transformation} 
+
+
+\begin{subappendices}
+
+\section{Relativity by Thought Experiment}\label{sec:subappendix:relativity}
+You can derive special relativity from the assumption that the speed of light is constant in any reference frame and then doing so called \emph{gedankenexperiments}.\sidenote{`Thought experiments' in German.} We continue our convention of using natural units where $c=1$, though it should be obvious that using any other units just throws in factors of $c$ all over the place.
+\begin{exercise}
+Rewrite all the equations in this appendix with the appropriate factors of $c$. Stop when it becomes obvious how to do this. 
+\end{exercise}
+I first saw this done in Chapter 15 of \emph{The Feynman Lectures on Physics}\footnote{\url{https://www.feynmanlectures.caltech.edu/I_15.html}}\sidenote{\emph{The Feynman Lectures on Physics} are beloved gems of freshman-level physics insight---but the consensus is largely that they are a bit too non-sequitur in style for physics students. In fact, you come to deeply enjoy the lectures only \emph{after} you already understand most of the material---then you can appreciate the little brilliant twists that Feynman makes compared to the usual pedagogy.} I refer you to that resource for a systematic derivation from the \emph{gedanken} approach. In this appendix, follow the the general idea and focus on a few subtle points that are not often explained carefully in the standard literature.\sidenote{I thank Matthew Lugatiman and Adam Green for talking through some of these subtleties with me.}
+
+Just as the word \emph{gedankenexperiment} tells you where special relativity was developed, so too does the standard setting of the \emph{gedankenexperiment}: start by imagining a train moving with some velocity $v=\beta$ in the $x$ direction relative to our coordinate system. We are \emph{outside} the train. We are observers, $\mathcal O$ and our coordinate system is $(t,x)$. You can also imagine another observer, Oppie,\sidenote{This is \emph{not} a reference to Oppenheimer's nickname or a misspelling of Opie, Ron Howard's most famous character. Instead, it's a name that is reasonably close to $\mathcal O'$, ``oh-prime.''} who is \emph{in} the train and whose coordinate system carries primes: $(t',x')$. We say that Oppie is a \emph{comoving} observer with the train. We align our coordinate systems so that the origins coincide: 
+\begin{align}
+    (t=0,x=0) = (t'=0,x'=0) \ .
+\end{align}
+The above equation should be treated to mean \emph{the point that we call $(0,0)$ coincides with the point that Oppie calls $(0,0)$.} In this way, a generic point $(t,x)$ is really a \emph{separation} between that point and the origin.\sidenote{Recall our caveat in Chapter~\ref{sec:index:upper}: positions are not vectors, but differences in positions are vectors.}
+
+
+\subsection{Time dilation}
+
+First imagine that Oppie has a little gizmo that first emits a photon towards a mirror, then detects the reflected photon. See Fig.~\ref{fig:Feynman:photo:thing}
+\begin{marginfigure}%[th]
+    \includegraphics[width=.8\textwidth]{figures/FeynmanLec15_photodet.png}
+    \captionsetup{font={scriptsize,sf}}
+    \caption{From \emph{The Feynman Lectures on Physics}, Chapter 15.}
+    \label{fig:Feynman:photo:thing}
+\end{marginfigure}
+The height of the gizmo is $D = \ell$, the height of the train. It is critical that the gizmo is aligned so that the photon moves \emph{perpendicular} to the direction of motion. We write $\ell$ for \emph{length} and to avoid ambiguities with [covariant] derivatives, $D$ mesons, and so forth. 
+
+Like us, Oppie understands that the speed of light is $c=1$ and that this is true in any reference frame. At the origin ($t'=0$), Oppie turns ont he gizmo and measures the time $t'$ that it takes for the photon to traverse the distance $\ell$ and come back. 
+\begin{align}
+     t' = 2\ell/c = 2\ell \ .
+     \label{eq:Feynman:train:updown}
+\end{align}
+
+What do we see? Like Oppie, we see the device turn on at the origin ($t=0$) and we see that the photon hits the roof of the train car and bounces back down. However, unlike Oppie, we also see the entire system move in direction of the train's motion. The trajectory is shown in Fig.~\ref{fig:Feynman:photo:thing:unprimed}.
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{FeynmanLec15_photodetside.png}
+    \captionsetup{font={scriptsize,sf}}
+    % \caption
+    \sidecaption[][-7em]{Same as Fig.~\ref{fig:Feynman:photo:thing}, but as seen from observers who are not on the train. From \emph{The Feynman Lectures on Physics}, Chapter 15.
+    \label{fig:Feynman:photo:thing:unprimed}
+    }
+\end{figure}
+Because the motion of the train is perpendicular to the up-and-down direction, we assume that the height of the train is unchanged by relativistic effects: we measure this height to be $\ell$ just as Oppie does. We then measure that the photon takes times $t$ to hit the top of the train and return. This time is evenly split\sidenote{By symmetry.} between the upward-going time and downward-going time. During this time, the train has moved along the $x$ direction by an amount $\beta t$. From trigonometry, we thus have:
+\begin{align}
+    \left(\frac{t}{2}\right)^2
+    &= 
+    \left(\frac{\beta t}{2}\right)^2 + \ell^2
+\end{align}
+Plugging in Oppie's observation that that relates the height of the train to the time Oppie measures, \eqref{eq:Feynman:train:updown}, we have
+\begin{align}
+    (t')^2 = (1-\beta^2) t^2 =  \frac{t}{\gamma} \ .
+\end{align}
+That is to say, the time that we measure is related to the time that Oppie measures by
+\begin{align}
+    t = \gamma t' \ .
+    \label{eq:time:dilation:derived}
+\end{align}
+Because $\gamma > 1$, we the time that we see is \emph{dilated} relative to what Oppie experiences. Because the gizmo is essentially an idealized clock, we say that observers see the events on the moving train moving  slower than they would expect by a factor $\gamma$. 
+
+
+
+
+\subsection{Length contraction}
+
+Having learned something about the passage of time, we can now figure out what motion does to the relative perception of space. To do this, let us do a second experiment where we turn the gizmo in Fig.~\ref{fig:Feynman:photo:thing} onto its side. Place the gizmo at the back of a train car and arrange it so that the photon first moves \emph{along the direction of the train's motion}, then reflects off of the mirror to go \emph{against the direction of the train for its return motion}. Let us now set the length of the gizmo to be the length of the train car: Ollie observes\sidenote{We write $\ell_0$ rather than $\ell'$ because Ollie is in the rest frame of the train. $\ell_0$ is called a \emph{proper length}, it is the length of an object to an observer for whom the object is not moving.} this to be $\ell_0$ while we observe it to be $\ell$. 
+
+In pre-special relativity Galilean physics we would expect $\ell_0 = \ell$. However, the fact that $c=1$ is constant means that we cannot make this assumption. 
+\begin{marginfigure}%[th]
+    \includegraphics[width=\textwidth]{figures/spacetime_lengthcontraction.pdf}
+    \captionsetup{font={scriptsize,sf}}
+    \caption{The trajectory of the photon (dark blue) from the back of the train at $t=t'=0$ to the event $A$ then the event $B$ where it returns to the back of the train. Oppie's coordinate system is in red. \label{fig:spacetime:length:diagram}}
+\end{marginfigure}
+Points on a spacetime diagram are called \emph{events} because they are a place and a time. Figure~\ref{fig:spacetime:length:diagram} shows the experiment. Let the origin be the back of the train at time zero---where both we and Oppie synchronize our clocks. A photon is shot towards the end of the train. The two edge of the train correspond to the $t'$ axis and its parallel translation---this is because in Oppie's frame the train is not moving and so it stays at $x'=0$; similarly, the front of the strain stays at $x'=\ell_0$. 
+
+The photon travels at the speed of light $c=1$, which is a 45$^\circ$ diagonal line on the way out, then a 135$^\circ$ line on the way back. The thought experiment is again simpler in Oppie's frame. Oppie measures that the total time for the back-and-forth journey is $t_2' = 2\ell'$. It is clear both from the thought experiment and the diagram that each leg of the journey takes the same amount of time $t_2' = 2t_1'$.
+
+We see something a bit different. On the outbound journey the photon has to \emph{catch up} to the front train. If we could observe it, we would measure that it takes time $t_1$ for the photon to reach the mirror. After it reflects off the mirror at the front of the train, the photon and the back of the train are moving \emph{toward each other}. We observe that this total journey takes a time $t_2$. We also define $\Delta t_2 = t_2 - t_1$ to be just the time of the journey from the front of the train to the back again. Observe that $\Delta t_2 \neq t_1$; both logically and from Figure~\ref{fig:spacetime:length:diagram}. This means we have the relations:
+\begin{align}
+t_1 &= \ell + \beta t_1
+&
+\Delta t_2 &= \ell - \beta \Delta t_2 \ .
+\end{align}
+Here we recall that $\beta$ is the speed of the train and the different signs correspond to whether the train is moving with or against the photon. Since $t_1$ is already measured against the origin, there is no need to write $\Delta t_1 \equiv t_1 - 0 = t_1$. These give us the relations:
+\begin{align}
+    (1-\beta)t_1 &= \ell & (1+\beta)\Delta t_2 &= \ell
+    \ .
+\end{align}
+The total time is then
+\begin{align}
+    t_2 = t_1 + \Delta t_2 = \frac{\left[(1 + \beta) + (1-\beta)\right]\ell}{1-\beta^2}
+    = 2\gamma^2 \ell \ .
+    \label{eq:gedanken:length:intermediate1}
+\end{align}
+\begin{exercise}
+Prove \eqref{eq:gedanken:length:intermediate1}. It is worth doing.
+\end{exercise}
+Now we have to invoke time dilation in \eqref{eq:time:dilation:derived}. The total time for the round trip journey that we measure $t_2$ is related to the total time that Oppie measures $t_2'$ by
+\begin{align}
+    t_2 &= \gamma t_2'
+    \\
+    2\gamma^2 \ell &= 2\ell' 
+    \\
+    \ell = \frac{\ell'}{\gamma}
+    \label{eq:length:contraction:derived}
+    \ .
+\end{align}
+Because $\gamma > 1$, we find that what \emph{we} measure to be the length of the train is \emph{contracted} (smaller) relative to what Oppie measures in the comoving frame of the train.
+
+
+\subsection{Confusion}
+
+The lessons of this \emph{gedanken} appendix are simple. If the frame $\mathcal O'$ is moving relative to our frame, $\mathcal O$, then
+\begin{itemize}
+    \item From \eqref{eq:time:dilation:derived}: The time that we measure is \emph{dilated} (slower) compared to the time that is measured in $\mathcal O'$. 
+    \item From \eqref{eq:length:contraction:derived}: Length along the direction of motion are \emph{contracted} (smaller) compared to the length along the direction of motion measured in $\mathcal O'$. 
+\end{itemize}
+Having established these, I leave it to you to explore some of the apparent paradoxes in special relativity such as the pole-in-barn paradox and the twin paradox. The spacetime diagrams that we draw are useful guides. As a hint, often the resolution to paradoxes is the observation that simultaneity is a frame-dependent notion.\sidenote{This has a manifestation for us: the locality of the fundamental interactions is a logical consequence of requiring causality in our theory. Interactions must happen at a single \emph{event} rather than over a finite separation in order for there to be a clear \emph{cause} that precedes an \emph{effect} in any valid reference frame.}
+
+Thus far, everything we have discussed in this appendix is standard fare in a decent treatment of first-year modern physics. Let us focus on some of the conceptual hiccups that are not always explained carefully.
+
+\paragraph{Could we derive length contraction without using time dilation?} You should feel unsatisfied. In relativity, space and time have equal footing. However, \emph{every} thought-experiment based derivation of special relativity starts by deriving time dilation and \emph{then} uses that result to derive length contraction. The reason for this asymmetry is that the time dilation thought experiment did not depend on the directions perpendicular to the train's motion: both the $\mathcal O$ and $\mathcal O'$ frame measured the height of the train to be $\ell$. On the other hand, the length contraction thought experiment had both spatial displacement $\ell$ \emph{and} a time displacement $t_2$ that needed to be measured in each reference frame. To say it differently: the time dilation experiment allowed us to ignore part of the spatial configuration. However, in the length contraction experiment you \emph{cannot} ignore the time separation because all experiments evolve in time.\sidenote{Philosophically: we perceive the universe as a sequence in time. We can imagine experiences where we are stationary in space, but we have no experiment---\emph{gedanken} or otherwise---where we are stationary in time.} Rest assured, the geometry \emph{does} respect the symmetry between space and time.
+
+\paragraph{If they are so useful, why did we not draw a spacetime diagram for the time dilation experiment?} The time dilation experiment made use of a third dimension of spacetime, the height of the train. It is a bit of a pain to draw, and you still end up drawing the same right triangles in Fig.~\ref{fig:Feynman:photo:thing:unprimed}
+
+
+\paragraph{Was it necessary for the photon to complete a full loop?} In these thought experiments, the the photon is emitted and detected by the same device: the trajectory is an `out and back' in runners parlance. For the time dilation experiment, it is obviously sufficient to consider only the trajectory from the origin to the ceiling. What about for the length contraction experiment? This is also possible. 
+\begin{exercise}
+Derive time dilation using the same thought experiment, but without the `return journey' to the back of the train. 
+\end{exercise}
+That this is possible is obvious for those with experience with relativity. However, it is useful pedagogically to have the photon perform a round trip journey because this way all observations are performed by the same observer. I can say that \emph{Oppie} emits a photon and \emph{Oppie} observes its return. Then we can identify the event where we observe Oppie emitting a photon and the event where we observe Oppie observing the photon.\sidenote{Given the subtleties of spacetime separated events with regard to simultaneity, I can appreciate this pedagogical choice.}
+
+\paragraph{I tried calculating this using Lorentz transformations and I got stuck.} Here is a common error. Suppose we know that Oppie measures the train car to have length $\ell_0$ and that Oppie measures this at some time slice $t'=0$. Then we can perform a Lorentz transformation:
+\begin{align}
+    \begin{pmatrix}
+        t\\
+        \ell
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \gamma &\gamma\beta\\
+        \gamma \beta & \gamma
+    \end{pmatrix}
+    \begin{pmatrix}
+        0\\
+        \ell_0
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+        \gamma\beta\ell_0
+        \gamma \ell_0
+    \end{pmatrix} \ .
+\end{align}
+From this we believe that $\ell = \gamma \ell_0$, i.e.\ length is \emph{also} dilated---which is \emph{incorrect}! What went wrong here? Recall that the \emph{event} that we are using to measure the length of the train is a photon hitting the back of the train. That is labeled event $A$ in Fig.~\ref{fig:spacetime:length:diagram}. This occurs on the light cone where $t=x$ (and also $t'=x'$). That means that we need to Lorentz transform the separation between the \emph{event} $(t_1'=\ell_0, x'=\ell_0)$. This gives
+\begin{align}
+    \begin{pmatrix}
+        t_1\\
+        \ell
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \gamma &\gamma\beta\\
+        \gamma \beta & \gamma
+    \end{pmatrix}
+    \begin{pmatrix}
+        \ell_0\\
+        \ell_0
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+        \gamma(1+\beta)\ell_0\\
+        \gamma(1+\beta)\ell_0
+    \end{pmatrix} 
+    \ .
+\end{align}
+We can use the first component and our time dilation result to find:
+\begin{align}
+    t_1 \equiv \ell &= \gamma (1+\beta)(1-\beta) \ell' 
+    \\ &= \frac{\ell'}{\gamma}
+    \ .
+\end{align}
+We have used the definition that $\gamma = (1-\beta^2)^{-1}$. 
+From this we indeed confirm $\ell = \ell'/\gamma$ and that length is \emph{contracted}. 
+
+
+
+\end{subappendices}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Closing Thoughts}
+
+
+
 
 \section*{Acknowledgments}
 
