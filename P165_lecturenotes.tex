@@ -539,7 +539,11 @@ What about $\hbar = 1$? Planck's constant carries units of angular momentum\side
 %     = 
 %     10^{-51}\,\textnormal{kg}\,\textnormal{s} \ .
 % \end{align}
-This means that the fundamental unit of ``quantum-ness'' tells us that time and inverse energy are ``the same thing.'' At this point, you can multiply and divide by $c$ and $\hbar$ as needed to write all dimensionful parameters in units of \GeV{} to some power. 
+This means that the fundamental unit of ``quantum-ness'' tells us that time and inverse energy are ``the same thing.''
+\begin{example}
+How would you measure $\hbar$ to determine that it is a universal constant? Like measuring $c$, there are many options. You could look at the deflection of particles in a Stern--Gerlach experiment, measure distributions of position uncertainties given multiple measurements of a momentum eigenstate, the spectrum of hydrogen (and corrections thereof), etc. 
+\end{example}
+At this point, you can multiply and divide by $c$ and $\hbar$ as needed to write all dimensionful parameters in units of \GeV{} to some power. 
 \begin{example}
 An additional conversion is to set the Boltzmann factor, $k_\textnormal{B} =1$. This is the observation that thermal energy is energy and can be measured in \GeV{}.
 \end{example}
@@ -828,7 +832,7 @@ Show that
 You can do this either ``read it off' \eqref{eq:Lorentz:2D:in:equations} or apply the matrix inverse to both sides of \eqref{eq:Lorentz:2D:prime:to:unprimed}. Show that the two matrices are, indeed, inverses of each other.
 \end{exercise}
 \begin{exercise}
-Confirm that \eqref{eq:Lorentz:2D:prime:to:unprimed} maps $x'$ and $t'$ axes are to the $x$ and $t$ plane as shown in Fig.~\ref{fig:relativity:axes}.
+Confirm that \eqref{eq:Lorentz:2D:prime:to:unprimed} maps $x'$ and $t'$ axes to the $x$ and $t$ plane as shown in Fig.~\ref{fig:relativity:axes}.
 \end{exercise}
 
 % \begin{example}
@@ -858,13 +862,298 @@ There are several caveats that we should make at this point since they are not o
 \end{itemize}
 In particle physics we do not often deal with (relative) position four vectors because our states are typically momentum eigenstates. Just as time and space are unified by $c=1$, so too are energy and momentum. These are combined into a four-momentum,
 \begin{align}
-    p^\mu \equiv (p^0, p^1, p^2, p^3) = (E, p_x, p_y, p_z) \ .
+    p^\mu \equiv (p^0, p^1, p^2, p^3) = (E, p^x, p^y, p^z) \ .
+    \label{eq:fourmomentum:upper}
 \end{align}
 $p^\mu$ is the Fourier transform of $x^\mu$. It should not surprise you that we work with momentum eigenstates: these are the states that are eigenstates of the Hamiltonian by virtue of having a well defined energy. The on shell condition \eqref{eq:on:shell} then gives a well defined three-momentum magnitude.
 
+Like any other vector space, linear combinations of vectors are also vectors. Recall that a linear combination of vectors is a sum of vectors that each may have some rescaling by a real number. For two vectors, this is:
+\begin{align}
+   (\alpha\vec{v}+\beta\vec{w})^i = \alpha v^i + \beta w^i \ .
+\end{align}
+We read this relation as: the $i^\textnormal{th}$ component of the vector $(\alpha\vec{v}+\beta\vec{w})$ is equivalent to the number given by the sum of two rescaled vector components: $\alpha$ times $v^i$ and $\beta$ times $w^i$. The coefficients $\alpha$ and $\beta$ are any real numbers. In this example we used the index $i$ to show that this is true for \emph{any} vector space, not just the space for four-vectors. We call the $\mu$ index\sidenote{In our convention, lowercase letters from the middle of the Greek alphabet are Lorentz indices.} a \textbf{Lorentz index} because it indexes the four directions of spacetime.
+
+\begin{example}
+For example, this means that conservation of energy and momentum in an interaction
+\begin{align}
+    \sum_{i = \textnormal{incoming}} p_{(i)}^\mu -
+    \sum_{i = \textnormal{outgoing}} p_{(i)}^\mu = 0
+    % \sum_{i = \textnormal{external}} p_{(i)}^\mu = 0
+    \label{eq:conservation:four:momentum}
+\end{align}
+where $p_{(i)}^\mu$ is the $\mu$ component of the four-momentum of the $i^\textnormal{th}$ particle in an interaction. By convention, incoming particles have positive signs and outgoing particles have negative signs.  Setting $\mu=0$ in \eqref{eq:conservation:four:momentum} tells us that the sum of all energies going into an interaction must match the sum of all energies coming out of the interaction. Similarly, setting $\mu=1$ tells us that momentum in the $x$-direction is conserved. 
+\end{example}
+
+
+Vectors with upper indices have equivalent names: column vectors, contravariant vectors, kets. To be very precise mathematically: the vector is the object $\vec{v}$, while $v^\mu$ is the $\mu^\textnormal{th}$ component of the vector. Physicists like to blur the line here and will write a \emph{generic component} of a vector $v^\mu$ to interchangeably mean the vector as a whole or the specific component.\footnote{Roger Penrose proposes formalizing this shorthand in what is called \emph{abstract index notation}. A good online discussion is this one: \url{https://math.stackexchange.com/questions/455478/}}\sidenote{What is implicit here is an understood set of basis vectors $\vec{e}_\mu$ such that $\vec{v} = v^\mu \vec{e}_{\mu}$. These basis vectors carry the abstract vector-ness of $\vec{v}$ while $v^\mu$ can be thought of as a set of numbers. Refer to my Physics 17 notes to see this exhaustively.}
+
+\subsection{Lower Index}\label{sec:index:lower}
+
+Upper index vectors also have lower-index counterparts. These also have many equivalent names: row vectors, covariant vectors, bras, one-forms. There is a mathematical machine called a \textbf{metric}\index{metric} that can raise or lower indices. For now let us assume that lower indexed objects exist. In fact, often momentum is written with a lower index:
+\begin{align}
+    p_\mu = (E, p_x, p_y, p_z) \ . 
+    \label{eq:fourmomentum:lower}
+\end{align}
+As introduced, this as a separate object than the upper index four-momentum \eqref{eq:fourmomentum:upper}. However, the metric gives a concrete relation between the two:
+\begin{align}
+    p_\mu &\equiv (E, -p^x, -p^y, -p^z)
+    &
+    p^\mu &\equiv (E, -p_x, -p_y, -p_z) \ .
+\end{align}
+To go from upper to lower Lorentz index, evidently there is simply a minus sign on the spatial ($\mu=1,2,3$) components. 
+
+
+
+
+
+
+\subsection{Summation Convention}
+
+We adopt \textbf{summation convention}\index{summation convention} where:
+\begin{newrule}[Summation convention]
+In an expression where an upper and a lower index are written with the same character, it is \emph{understood} (left unwritten) that one should sum over these indices. We say that these indices are \textbf{contracted}\index{contract}.
+\end{newrule}
+The key example for us is the contraction of an upper-index four momentum and its lower-index counterpart:
+\begin{align}
+    p^\mu p_\mu = p_\mu p^\mu = E^2 - p_x^2 - p_y^2 - p_z^2 = E^2 - \vec{p}^2 \ .
+\end{align}
+Using this convention, the on shell condition \eqref{eq:on:shell} is\sidenote{Note that $p^2 = p_\mu p^\mu$ while $\vec{p}^2 = p_x^2 + p_y^2 + p_z^2$. }
+\begin{align}
+    p^2 \equiv p^\mu p_\mu = m^2 \ .
+\end{align}
+Contracted indices are effectively not indices: $p^2 = p^\mu p_\mu$ is a \emph{number} and not a four-vector or other type of tensorial object. 
+
+Evidently the way we are writing our theory tells us that the unification of space and time (energy and momentum) is also a statement about the on shell condition for particles. 
+
+
+The following examples are completely general for any type of linear transformation from a vector space to itself. 
+\begin{example}
+A linear transformation (``matrix'') $M\aij{i}{j}$ is a \emph{linear map} that takes vectors into vectors. For example, the transformation $M=M\aij{i}{j}$ acts on a vector $\vec{v} = v^i$ as $M\vec{v}$ with components given by
+\begin{align}
+    (M\vec{v})^i = \sum_k M\aij{i}{k}v^k = M\aij{i}{1}v^1 + M\aij{i}{2}v^2 + \cdots \ .
+    \label{eq:matrix:on:vector:eg}
+\end{align}
+Observe that the matrix must have an upper index and a lower index. Summation convention tells us that the lower index allows the matrix to contract with the  index of the vector it acts on. The upper index of the matrix corresponds is `leftover' and is the free index of the resulting vector, $M\vec{v}$.
+\end{example}
+
+
+\begin{example}
+In \eqref{eq:matrix:on:vector:eg} the index $k$ is contracted. We may rewrite this equation using summation convention as
+\begin{align}
+    (M\vec{v})^i = M\aij{i}{k}v^k \ .
+\end{align}
+\end{example}
+
+
+
+
 \subsection{Lorentz Transformations}
 
-A \textbf{Lorentz transformation} 
+How do you relate vector quantities between different reference frames? A particle may have some four momentum\sidenote{We write $p$ to mean the abstract four-vector without specifying its components. We skip the `physics notation' of writing $p^\mu$ for clarity.} $p$. The \emph{components} of $p$ depend on the reference frame of the observer. We measure the components to be $p^\mu = (p^0, p^1, p^2, p^3)$. Another observer in another reference frame measures components $p'^\mu=(p'^0, p'^1, p'^2, p'^3)$. These components are related by a \textbf{Lorentz transformation}\index{Lorentz transformation} \eqref{eq:Lorentz:2D:prime:to:unprimed}:
+\begin{align}
+    p^\mu = \Lambda\aij{\mu}{\nu}p'^\nu \ .
+\end{align}
+If we align the spatial parts of each observer's coordinate system so that their relative motion is in the $z$ direction, then the components of the Lorentz transformation are
+\begin{align}
+    \Lambda\aij{\mu}{\nu} =
+    \begin{pmatrix}
+        \gamma & & & \beta\gamma\\
+        & 1 & &  \\
+        & & 1 &  \\
+        \beta\gamma &  &  & \gamma
+    \end{pmatrix}
+    \ . 
+    \label{eq:Lorentz:in:z}
+\end{align}
+This is simply what we showed in \eqref{eq:Lorentz:2D:in:equations}, extended to the $4\times 4$ case. You should think about this as an analog of the rotation matrix in Euclidean space.\sidenote{The relation is as follows. Rotations are the isometries of Euclidean space: they are the transformations that preserve the dot product. Lorentz transformations are the isometries of Minkowski space: they are the transformations that preserve the metric. In both cases, the isometries are the allowed transformations that preserve the spacetime structure as encoded by the metric.} Here $\beta$ is the relative velocity between the two frames. 
+\begin{exercise}
+Check that \eqref{eq:Lorentz:in:z} is a transformation from frame $\mathcal O'$
+ to frame $\mathcal O$, where $\mathcal O'$ is moving in the $+\hat{z}$ direction relative to the $\mathcal O$. Show that the inverse of $\Lambda$ simply swaps the sign of $\beta$. 
+\end{exercise}
+\begin{example}
+A nice way to see the relation between Lorentz transformations and boosts is to note that we may write the boost parameter as \textbf{rapidity}\index{rapidity} $\eta$ defined through the identification:
+\begin{align}
+    \Lambda[\eta] = 
+    \begin{pmatrix}
+        \cosh \eta & \sinh \eta \\
+        \sinh \eta & \cosh \eta
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \gamma & \beta\gamma \\
+        \beta \gamma & \gamma
+    \end{pmatrix} \ .
+\end{align}
+Compare this to a rotation matrix,
+\begin{align}
+    R(\theta) &=
+    \begin{pmatrix}
+        \cos \theta & \sin\theta \\
+        -\sin \theta & \cos\theta
+    \end{pmatrix} \ .
+\end{align}
+Observe the key relations:
+\begin{align}
+    \cosh^2 \eta - \sinh^2 \eta &= 1\\
+    \cos^2 \theta + \sin^2 \theta &=1 \ .
+\end{align}
+Here we appreciate the critical minus sign that is the difference between space and time.
+\end{example}
+
+\subsection{Example: Muon Decay}
+
+Cosmic rays can produce muons when they hit the upper atmosphere about 10 kilometers above the surface of the Earth.\sidenote{This sub-section is copied from my Physics 17 (2023) notes and is adapted from an example in Griffiths.} These muons are highly relativistic, with a velocity of $\beta = 0.9999$. See Fig.~\ref{fig:muons}. We know from laboratory experiments that the lifetime of a muon \emph{at rest} is 2 microseconds. Based on the simple estimate $d=c\tau \approx 600$~meters, we would not expect any muons to reach the surface of the Earth. However, not only do large cosmic ray telescopes have dedicated muon detectors, but you can make your own citizen science muon detector\sidenote{\url{https://muonpi.org}}. What gives?
+\begin{marginfigure}%[tb]
+    \includegraphics[width=\textwidth]{figures/muon.pdf}
+    \captionsetup{font={scriptsize,sf}}
+    \caption{Very technical sketch of a muon produced in the upper atmosphere heading towards earth. \label{fig:muons}} 
+\end{marginfigure}
+Here are the facts:
+\begin{itemize}
+    \item Both the observer on Earth and the muon agree that their relative velocity is $|\beta| = 0.9999$. 
+    \item The muon's lifetime is known in the muon's rest frame. 
+    \item The distance from the surface of the Earth to the upper atmosphere is known in the Earth's rest frame. 
+\end{itemize}
+The Lorentz transformation between the muon frame and the observe frame mix up space and time separations. We can only express the distance or time that the muon travels by calculating in the same reference frame. 
+
+% \begin{figure}[tb]
+%     \centering
+%     \includegraphics[width=.48\textwidth]{figures/rel_time_dil.pdf}
+%     \quad
+%     \includegraphics[width=.48\textwidth]{figures/rel_len_contractino.pdf}
+%     \caption{Left: the muon's lifetime is time-dilated in the Earth's frame. Right: the distance from the surface of the Earth to the upper atmosphere is length contracted in the muon's frame. }
+%     \label{fig:re:dilation}
+% \end{figure}
+
+First let us consider calculating everything in the Earth's reference frame. This is shown on the left of Fig.~\ref{fig:re:dilation}. This means we have to take the muon's lifetime in the muon's rest frame and convert it into a lifetime in the Earth's frame. In the muon's frame the lifetime is simply 
+\begin{align}
+    \Delta x'^\mu &= 
+    \begin{pmatrix}
+    \tau \\ 0     
+    \end{pmatrix} \ 
+    &
+    \Delta x^\mu &=
+    \begin{pmatrix}
+    \gamma \tau \\ \gamma\beta \tau    
+    \end{pmatrix} \ ,
+\end{align}
+where we have noticed that the muon lifetime is a displacement along the $t'$ axis used our results in \eqref{eq:Lorentz:2D:prime:to:unprimed}. We find that the lifetime in the Earth's frame is actually larger than the lifetime in the muon rest frame: $t = \gamma \tau$. There is also a spatial component, but this is no surprise: in the Earth frame the muon is moving, so when the muon decays it is in a different position. 
+
+How much is the muon's lifetime \emph{time dilated}? We plug $\beta$ into the expression for $\gamma = (1-\beta^2)^{-1/2}$. We find\footnote{There's a cute trick here: $\beta^2 = (1-\epsilon)^2 \approx 1- 2\epsilon$ by Taylor expanding in the small number $\epsilon = 10^{-4}$.} that to one significant figure, $\gamma = 100$. This means that the time for the muon decay in the Earth's frame is $2\times 10^-4$~seconds, which means that it travels approximately $d=60~$km, which is larger than the distance from the upper atmosphere to the surface. As a sanity check: this is exactly the value in the spatial component of $\Delta x^\mu$.
+
+Great: so one story is that relativistic muons have lifetimes that are much larger than their at-rest lifetime. This means that to the observer on earth, the muon simply lives longer than we would expect from measurements of muons at rest. There are, however, (at least) two sides to every good story. What does the muon see?
+
+In the muon's rest frame, the muon \emph{knows} that it goes \emph{kaput} in 2~microseconds. It sees the surface of the Earth approaching it with velocity $\beta = 0.9999$. By now you can guess that must change: the measurement in the Earth's frame---that the height of the upper atmosphere is 10~km---must be different in the muon's frame. And in fact, the muon must measure the distance of the rapidly approaching Earth to be much smaller than 10~km. How does this \emph{length contraction} work? 
+
+We show this on the right side of Fig.~\ref{fig:re:dilation}.
+\begin{marginfigure}
+\includegraphics[width=\textwidth]{figures/rel_len_contractino.pdf}
+\captionsetup{font={scriptsize,sf}}
+\caption{The distance from the surface of the Earth to the upper atmosphere is length contracted in the muon's frame.
+    \label{fig:re:dilation}
+}
+\end{marginfigure}
+Note that now we have a measurement in the Earth frame (a vertical line denoting a fixed distance) that we want to project onto the muon frame (red axes). In the Earth frame, we denote the distance by two unit ticks in the spatial direction. In the muon frame, this line intersects the $x'$ axis with \emph{less} than two ticks.
+
+\begin{exercise}
+Using the Lorentz transformation laws, show that the distance from the muon to the surface of the Earth at the moment of the muon's creation is $L'=L/\gamma$ where $L=10$~km is the distance in the Earth frame. 
+\end{exercise}
+
+\subsection{The metric tensor}
+
+The \textbf{inner product} (or dot product) is a machine that takes two vectors and outputs a number. It is manifested by a tensor called the metric,\sidenote{Technically the metric is a tensor \emph{density}, which means it transforms with additional powers of the Jacobian. I refer you to your favorite general relativity textbook.} which has two lower indices:
+\begin{align}
+    \langle p,q\rangle = p\cdot q = g_{\mu\nu}p^\mu q^\mu \ .
+\end{align}
+In special relativity the metric is conventionally written as $\eta_{\mu\nu}$ and has a simple form in Cartesian coordinates:
+\begin{align}
+    \eta_{\mu\nu} = 
+    \begin{pmatrix}
+        1 & & & \\
+        & -1 & & \\
+        & & -1 & \\
+        & & & -1
+    \end{pmatrix}
+    = \textnormal{diag}(1,-1,-1,-1) \ .
+\end{align}
+Some physics tribes\sidenote{Particle physicists use the `West coast' or `mostly minus' notation. It is usually relativists and formal theorists who use the East coast/mostly plus convention.} use a different convention, $\eta_{\mu\nu} = \text{diag}(-1,1,1,1)$. The choice of whether the spatial or temporal pieces pick up the minus sign is a convention---while the intermediate steps of any calculation differ by these annoying signs, any physical result is independent of the convention.\sidenote{I am hopelessly entrenched in the mostly minus tribe. If I were being honest, I think the mostly-plus metric is probably easier to start learn if you were starting from scratch. But I intend to run with team mostly-minus until I die.}
+
+
+The metric has an inverse, $g^{\mu\nu}$ or $\eta^{\mu\nu}$ in special relativity. It has two upper indices and satisfies
+\begin{align}
+    g_{\mu\nu}g^{\mu\nu} = g^{\mu\nu}g_{\mu\nu} = \delta^\mu_\nu \ .
+\end{align}
+We do not bother writing $(g^{-1})^{\mu\nu}$ because the height of the indices indicates precisely whether you are using the metric or inverse metric. In special relativity, the components of $\eta_{\mu\nu}$ and $\eta^{\mu\nu}$ are identical. Also observe that the Kronecker-$\delta$ has no distinction between first and second indices:
+\begin{align}
+    \delta^\mu_\nu =
+    \begin{cases}
+    1 & \text{if } \mu = \nu \\
+    0 & \text{otherwise} 
+    \end{cases}
+    \ .
+\end{align}
+The Kronecker-$\delta$ represents the components of the unit matrix, $\mathbbm{1}\aij{\mu}{\nu} = \delta^\mu_\nu$.
+
+
+\subsection{Example: What does someone else measure?}
+\label{sec:relativity:alien}
+% using inner products
+% contrast to boosting
+
+% Momentum is also a four-vector in relativity The components of the momentum four vector are in \eqref{eq:momentum:4vec}, which we write succinctly as
+% \begin{align}
+%     p^\mu = 
+%     \begin{pmatrix}
+%         E \\ \vec{p}
+%     \end{pmatrix} \ .
+% \end{align}
+% If we measure the four-momentum of a particle in our laboratory, then we know that the energy of the particle is $p^0 = E$. That's by definition of what the first component of the four-momentum is---we did not actually do any work to do that. 
+
+In special relativity there is an object called the four-velocity.\sidenote{This subsection borrows from my Physics 17 (2023) notes.} In our rest frame, our four velocity is
+\begin{align}
+    v^\mu = \begin{pmatrix}
+        1\\ 0
+    \end{pmatrix} \ .
+    \label{eq:4:velocity:in:rest:Frame}
+\end{align}
+This literally means that when we are at rest, we are moving one second per second in the time direction. Objects moving relative to us have four velocities that are Lorentz transformations of the $v^\mu$ above. 
+
+We notice that we can write the energy of a particle in a way that uses the inner product:
+\begin{align}
+    \langle v, p\rangle = p\cdot v = g_{\mu\nu} p^\mu v^\nu \ .
+\end{align}
+Of course, all this does is pick out the $p^0$ component, as we knew it had to. However, unlike writing $p^0$, the inner product $p\cdot v$ has no indices. It is a pure number and so it does not transform under Lorentz transformations. 
+
+At this point you wonder if we are simply reciting random facts that we have developed. Consider the following scenario illustrated in Fig.~\ref{fig:alien}.
+% 
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.5\textwidth]{figures/alien.pdf}
+    \caption{You measure the four-momentum of a particle. One of the components is the energy of the particle. What is the energy that an alien moving at some velocity $\beta$ relative to you measures?}
+    \label{fig:alien}
+\end{figure}
+% 
+While you have measured the energy $E$ of a particle, you notice an alien traveling relativistically with velocity $\beta$ relative to you. The alien has sophisticated equipment to measure the particle energy, and you know that the alien measures a different energy $E'$ relative to what you measure. How can you determine what that energy is?
+
+One way to do this is to calculate the full Lorentz transformation between your frame and the alien frame. It turns out, however, that we can use the four-velocity as a useful trick. All objects with mass have a four-velocity equal to \eqref{eq:4:velocity:in:rest:Frame} in their rest frame. This means that the alien measures the particle to have energy $v_\text{alien}\cdot p_\text{alien}$, where the subscript `alien' means that these are all calculated in the alien's frame.
+
+We now remember that $v_\text{alien}\cdot p_\text{alien}$ is a number. It does not matter what frame we calculate it in. Thus it is equivalent to the same dot product measured in our frame:
+\begin{align}
+E'=
+    v_\text{alien}\cdot p_\text{alien} = v\cdot p \ ,
+\end{align}
+where the right-hand side is the alien four-velocity and the particle four-momentum as measured in our frame. The alien four-velocity is simply a Lorentz transformation of \eqref{eq:4:velocity:in:rest:Frame}. More practically, it is something that you can measure in your own frame. 
+
+
+\begin{exercise}
+Rephrase everything in this example in terms of the inner product in Minkowski space. Bonus if you use the word `projection.'
+\end{exercise}
+
+\subsection{The meaning of indices}
+
+
+\subsection{Tensors}
+
 
 
 \begin{subappendices}
@@ -901,7 +1190,7 @@ Like us, Oppie understands that the speed of light is $c=1$ and that this is tru
 \end{align}
 
 What do we see? Like Oppie, we see the device turn on at the origin ($t=0$) and we see that the photon hits the roof of the train car and bounces back down. However, unlike Oppie, we also see the entire system move in direction of the train's motion. The trajectory is shown in Fig.~\ref{fig:Feynman:photo:thing:unprimed}.
-\begin{figure}[h]
+\begin{figure}[ht]
 \includegraphics[width=\textwidth]{FeynmanLec15_photodetside.png}
     \captionsetup{font={scriptsize,sf}}
     % \caption
