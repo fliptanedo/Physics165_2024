@@ -1076,7 +1076,7 @@ In special relativity the metric is conventionally written as $\eta_{\mu\nu}$ an
     \end{pmatrix}
     = \textnormal{diag}(1,-1,-1,-1) \ .
 \end{align}
-Some physics tribes\sidenote{Particle physicists use the `West coast' or `mostly minus' notation. It is usually relativists and formal theorists who use the East coast/mostly plus convention.} use a different convention, $\eta_{\mu\nu} = \text{diag}(-1,1,1,1)$. The choice of whether the spatial or temporal pieces pick up the minus sign is a convention---while the intermediate steps of any calculation differ by these annoying signs, any physical result is independent of the convention.\sidenote{I am hopelessly entrenched in the mostly minus tribe. If I were being honest, I think the mostly-plus metric is probably easier to start learn if you were starting from scratch. But I intend to run with team mostly-minus until I die.}
+Some physics tribes\sidenote{Particle physicists use the `West coast' or `mostly minus' notation. It is usually relativists and formal theorists who use the East coast/mostly plus convention. A third convention, the `Pauli convention' uses a metric proportional to the identity but with the timelike component imaginary $x^4 = ix^0$. In that notation, boosts look like complex rotations. See Appendix F of \emph{Diagrammatica}\footnotemark by Veltman for a discussion.}\footnotetext{\cite{Veltman:1994wz}} use a different convention, $\eta_{\mu\nu} = \text{diag}(-1,1,1,1)$. The choice of whether the spatial or temporal pieces pick up the minus sign is a convention---while the intermediate steps of any calculation differ by these annoying signs, any physical result is independent of the convention.\sidenote{I am hopelessly entrenched in the mostly minus tribe. If I were being honest, I think the mostly-plus metric is probably easier to start learn if you were starting from scratch. But I intend to run with team mostly-minus until I die.}
 
 
 The metric has an inverse, $g^{\mu\nu}$ or $\eta^{\mu\nu}$ in special relativity. It has two upper indices and satisfies
@@ -1097,17 +1097,7 @@ The Kronecker-$\delta$ represents the components of the unit matrix, $\mathbbm{1
 
 \subsection{Example: What does someone else measure?}
 \label{sec:relativity:alien}
-% using inner products
-% contrast to boosting
 
-% Momentum is also a four-vector in relativity The components of the momentum four vector are in \eqref{eq:momentum:4vec}, which we write succinctly as
-% \begin{align}
-%     p^\mu = 
-%     \begin{pmatrix}
-%         E \\ \vec{p}
-%     \end{pmatrix} \ .
-% \end{align}
-% If we measure the four-momentum of a particle in our laboratory, then we know that the energy of the particle is $p^0 = E$. That's by definition of what the first component of the four-momentum is---we did not actually do any work to do that. 
 
 In special relativity there is an object called the four-velocity.\sidenote{This subsection borrows from my Physics 17 (2023) notes.} In our rest frame, our four velocity is
 \begin{align}
@@ -1124,18 +1114,19 @@ We notice that we can write the energy of a particle in a way that uses the inne
 \end{align}
 Of course, all this does is pick out the $p^0$ component, as we knew it had to. However, unlike writing $p^0$, the inner product $p\cdot v$ has no indices. It is a pure number and so it does not transform under Lorentz transformations. 
 
-At this point you wonder if we are simply reciting random facts that we have developed. Consider the following scenario illustrated in Fig.~\ref{fig:alien}.
-% 
-\begin{figure}[tb]
+\begin{marginfigure}%[tb]
     \centering
-    \includegraphics[width=.5\textwidth]{figures/alien.pdf}
-    \caption{You measure the four-momentum of a particle. One of the components is the energy of the particle. What is the energy that an alien moving at some velocity $\beta$ relative to you measures?}
-    \label{fig:alien}
-\end{figure}
-% 
-While you have measured the energy $E$ of a particle, you notice an alien traveling relativistically with velocity $\beta$ relative to you. The alien has sophisticated equipment to measure the particle energy, and you know that the alien measures a different energy $E'$ relative to what you measure. How can you determine what that energy is?
+    \includegraphics[width=\textwidth]{figures/alien.pdf}
+    \captionsetup{font={scriptsize,sf}}
+    \caption{You measure the four-momentum of a particle. What is the energy that an alien moving at some velocity $\beta$ relative to you measures?\label{fig:alien}}
+\end{marginfigure}
 
-One way to do this is to calculate the full Lorentz transformation between your frame and the alien frame. It turns out, however, that we can use the four-velocity as a useful trick. All objects with mass have a four-velocity equal to \eqref{eq:4:velocity:in:rest:Frame} in their rest frame. This means that the alien measures the particle to have energy $v_\text{alien}\cdot p_\text{alien}$, where the subscript `alien' means that these are all calculated in the alien's frame.
+At this point you wonder if we are simply reciting random facts that we have developed. Consider the following scenario illustrated in Fig.~\ref{fig:alien}.
+%
+% 
+While you are measuring the particle energy $p^0 = E$, you notice an alien traveling relativistically with velocity $\beta$ relative to you. The alien has sophisticated equipment to measure the particle energy, and you know that the alien measures a different energy $E'$. How can you determine what the alien measures?
+
+One way to do this is to calculate the full Lorentz transformation between your frame and the alien frame. That is tedious. It turns out that we can use the four-velocity as a useful trick. All objects with mass have a four-velocity equal to \eqref{eq:4:velocity:in:rest:Frame} in their rest frame. This means that the alien measures the particle to have energy $v_\text{alien}\cdot p_\text{alien}$, where the subscript `alien' means that these are all calculated in the alien's frame.
 
 We now remember that $v_\text{alien}\cdot p_\text{alien}$ is a number. It does not matter what frame we calculate it in. Thus it is equivalent to the same dot product measured in our frame:
 \begin{align}
@@ -1148,6 +1139,11 @@ where the right-hand side is the alien four-velocity and the particle four-momen
 \begin{exercise}
 Rephrase everything in this example in terms of the inner product in Minkowski space. Bonus if you use the word `projection.'
 \end{exercise}
+
+
+
+
+
 
 \subsection{The meaning of indices}
 
@@ -1338,6 +1334,105 @@ We can use the first component and our time dilation result to find:
 \end{align}
 We have used the definition that $\gamma = (1-\beta^2)^{-1}$. 
 From this we indeed confirm $\ell = \ell'/\gamma$ and that length is \emph{contracted}. 
+
+\section{More examples}
+
+
+
+\subsection{Example: the electromagnetic field strength}
+% motivate this from the unification of magnetism and electricity
+% transformation laws
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=\textwidth]{figures/EMcurrent.pdf}
+    \caption{\textsc{Left}: an electron moves near a current. The current has no net electric charge. In the absence of magnetism, we expect the electron to move in a straight line. \textsc{Right}: if we boost into the electron frame, the particles in the current moving in the opposite direction are length-contracted. This means that the charge density increases. The stationary electron now feels a net electric force. This implies that something is missing in the picture on the left.}
+    \label{fig:current}
+\end{figure}
+
+Another place where special relativity rears its head is in electrodynamics. Electricity and magnetism are two manifestations of the same electromagnetic phenomenon. This is illustrated in Fig.~\ref{fig:current}. If you did not know about magnetism, you would find a paradox when you consider a charged particle moving along a current. In one frame, the current is an equal number of positive and negative charges moving in opposite directions.\footnote{I suppose more realistically the negative charges move while the positive charges stay put---that does not change the conclusion.} If you boost to the external charged particle's rest frame, length contraction forces one species of the current particles to increase their charge density relative to the other species. This creates a net electric field that acts on the stationary external particle. Without magnetism, the first frame is missing this additional force. 
+
+The electric and magnetic fields are unified in the \emph{electromagnetic field strength}, which is a two-index tensor:
+\begin{align}
+    F^{\mu\nu}
+    &=
+    \begin{pmatrix}
+        0&-E^x&-E^y&-E^z\\
+        E^x&0&-B^z&B^y\\
+        E^y&B^z&0&-B_x\\
+        E^z&-B^y&B^x&0
+    \end{pmatrix} %\ .
+    &
+    F_{\mu\nu}
+    &=
+    \begin{pmatrix}
+        0&E^x&E^y&E^z\\
+        -E^x&0&-B^z&B^y\\
+        -E^y&B^z&0&-B_x\\
+        -E^z&-B^y&B^x&0
+    \end{pmatrix} \ .
+\end{align}
+We see that electricity and magnetism are unified in that their components mix into one another under a Lorentz transformation. 
+\begin{exercise}
+Confirm that $F_{\mu\nu} =g_{\mu \alpha}g_{\nu\beta} F^{\alpha\beta}$ with the (3+1)-dimensional Minkowski metric $g_{\mu\nu}$. 
+\end{exercise}
+\begin{exercise}
+Find the components of $F'^{\mu\nu}$ under a boost along the $z$-direction. 
+\end{exercise}
+
+
+\subsection{Example: simultaneity}
+\label{eq:simultaneity}
+
+One of the key ideas in special relativity is that we sacrifice our notion of simultaneity for objects that are not observed at the same spacetime point. We may reuse our diagram in Fig.~\ref{fig:re:dilation}. Consider two different points on the $x'$ axis. These are simultaneous with respect to the primed observer: they both occur at $t'=9$. However, these two points  obviously do \emph{not} have the same $t$ coordinate to the unprimed observer. This observation helps clear up several apparent paradoxes that may show up in relativity. More importantly, it completely upends our notion of causality.
+
+One of the unwritten-but-understood laws of physics is that the cause precedes the effect. I have to drop my mug before I hear the sound of the ceramic shattering. This notion is imperiled if in some other reference frame someone else would have heard the shattering before they observe the mug being dropped. One deduction of this is that the laws of physics should be \emph{local} in spacetime. A consequence of this observation is that the laws of physics should be written with derivatives.
+
+
+\subsection{Example: discrete isometries}
+
+Isometries are symmetries of the metric.
+% 
+The Minkowski metric has a parity isometry that acts as a discrete symmetry. In matrix form the action of parity is a Lorentz transformation
+\begin{align}
+    P = \begin{pmatrix}
+        1 & & &\\
+         & -1& &\\
+         & & -1 &\\
+         & & & -1
+    \end{pmatrix}\ .
+\end{align}
+This symmetry is \emph{discrete} in contrast to continuous symmetries. Rotations are a continuous symmetry because you can rotate by any real number amount, $\theta$. They parameterize an infinite number of Lorentz transformations. Discrete symmetries, on the other hand, represent a countable number of Lorentz transformation. In fact, because $P^2 = \mathbbm{1}$, there is only one such Lorentz transformation. 
+
+There is a second discrete transformation called \textbf{time reversal}:
+\begin{align}
+    T = 
+    \begin{pmatrix}
+        -1 & & &\\
+        & 1 & &\\
+        &  & 1 &\\
+        &  & & 1
+    \end{pmatrix} \ .
+\end{align}
+This one sounds rather dramatic, doesn't it?\sidenote{One of my mentors in graduate school once told the story that he was preparing a lecture on particle physics at the pub. When his friends asked him what the topic of the lecture would be, he said ``time reversal.'' The bar crowd suddenly grew silent until the bartender quietly asked: ``... we can do that?''} It should be clear that $T$ indeed reverses the direction of time. This, however, does not mean that time reversal is something we can do.\sidenote{Time reversal is a major part of \emph{The Legend of Zelda: Tears of the Kingdom}. Before this, there was the ground-breaking independent computer game \emph{Braid} that pioneered this mechanic. The latter has an additional connection to physics in that the story is largely understood to be a parable about the development of atomic weapons.} Our understanding of causality breaks if we allow time reversal. However, mathematically time reversal is a clear isometry of the Minkowski metric. 
+
+In fact, there is something `deep' to say that the classical laws of physics are time reversal invariant. If you run a video backwards, everything that happens obeys the laws of physics. The sign of the gravitational force may swap, but the dynamics of such an ``anti-gravity'' force law follows Newtonian mechanics. Entropy may decrease rather than increase, but there is no sense in which the microscopic transition from one configuration to the next would violate any laws of microphysics.\sidenote{This is to say that the ``arrow of time'' from statistical mechanics is not a statement about microscopic interactions nor is it a statement about what is not \emph{possible}, only about what is increasingly \emph{improbable}.} Though, to be fair, we also do not know how to take a right-handed person and do a parity transformation on them to turn them left-handed. 
+
+
+In order to restrict to sensible isometries, we say that valid observers in special relativity are those that are related by isometries that are \emph{connected to the identity}. This means that one may write the isometry with respect to a continuous parameter and that for some value of that parameter, the isometry is simply the identity matrix. In this way, we restrict our physical isometries to those that maintain the direction of time. 
+
+There is one more discrete symmetry that is often mentioned along with parity and time reversal: charge inversion. Unlike the other two, charge inversion is \emph{not} a spacetime symmetry since it acts only on particles (fields). Charge inversion takes every particle and flips their charges. For now you may think about flipping the \emph{electric} charge of the particle---but this actually holds for all of the types of charges that we examine in this course.\sidenote{Charges are conserved quantities. Remember that conserved quantities come from symmetries of the action. Unlike the spacetime symmetries of this chapter, those charges are related to \emph{internal} symmetries.} There are two combinations of these discrete symmetries that are notable:
+\begin{itemize}
+    \item The combination $CP$ (charge--parity) is the transformation that takes a particle to its anti-particle.
+    \item The combination $CPT \equiv \mathbbm{1}$. That is: if we perform all three discrete symmetries, we return to the same state.\sidenote{I leave this here with no proof. I know such proofs exist, but they are largely in the domain of a construction called axiomatic quantum field theory, which I know nothing about. You can learn more about this in\footnotemark}\footnotetext{\cite{Blum:2022eol}}
+\end{itemize}
+Because these are all parities---in the sense that $C^2 = P^2 = T^2 = \mathbbm{1}$---we see an relation between the antimatter transformation $CP$ and the idea of moving backward in time. You may want to remember then when our Feynman diagram notation makes it \emph{look like} antiparticles are particles moving backward in time.\sidenote{To be clear, this is \emph{not} what is happening.}
+
+% exp
+
+% CPT
+
+
 
 
 
