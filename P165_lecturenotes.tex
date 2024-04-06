@@ -696,7 +696,7 @@ We can understand the $E \sim \ell^{-1}$ relation from ordinary optical microsco
 
 
 
-\chapter{Relativity, Quantum Mechanics}
+\chapter{Rapid Review of Relativity}
 
 We begin our study of particle physics with a lightning review of selected topics in special relativity and quantum mechanics.
 
@@ -743,7 +743,7 @@ Suppose you have a process where two particles come in, and two particles come o
 \end{exercise}
 
 
-\section{Special Relativity}
+\section{Time Dilation and Length Contraction}
 
 \begin{flipcomment}
 This section is a very brief review of the main points. For a more systematic derivation, please see my Physics 17 lecture notes. 
@@ -947,7 +947,7 @@ In \eqref{eq:matrix:on:vector:eg} the index $k$ is contracted. We may rewrite th
 
 
 
-\subsection{Lorentz Transformations}
+\section{Lorentz Transformations}\label{sec:Lorentz:transformations}
 
 How do you relate vector quantities between different reference frames? A particle may have some four momentum\sidenote{We write $p$ to mean the abstract four-vector without specifying its components. We skip the `physics notation' of writing $p^\mu$ for clarity.} $p$. The \emph{components} of $p$ depend on the reference frame of the observer. We measure the components to be $p^\mu = (p^0, p^1, p^2, p^3)$. Another observer in another reference frame measures components $p'^\mu=(p'^0, p'^1, p'^2, p'^3)$. These components are related by a \textbf{Lorentz transformation}\index{Lorentz transformation} \eqref{eq:Lorentz:2D:prime:to:unprimed}:
 \begin{align}
@@ -988,19 +988,77 @@ Compare this to a rotation matrix,
 \begin{align}
     R(\theta) &=
     \begin{pmatrix}
-        \cos \theta & \sin\theta \\
-        -\sin \theta & \cos\theta
+        \phantom{+}\cos \theta & -\sin\theta \\
+        \phantom{+}\sin \theta & \phantom{+}\cos\theta
     \end{pmatrix} \ .
+    \label{eq:eg:rotations}
 \end{align}
 Observe the key relations:
 \begin{align}
     \cosh^2 \eta - \sinh^2 \eta &= 1\\
     \cos^2 \theta + \sin^2 \theta &=1 \ .
 \end{align}
-Here we appreciate the critical minus sign that is the difference between space and time.
+Here we appreciate the critical minus sign that is the difference between space and time.\sidenotemark
+\end{example}
+\sidenotetext{The connection between Lorentz transformations and rotations is further explicit in the so called Pauli-metric formalism where the time-component of a four-vector is \emph{imaginary}. In that formalism the metric is proportional to the identity and both Lorentz transformations and rotations take the form \eqref{eq:eg:rotations}.}
+
+What about the transformation of lower index objects, like $p_\mu$? We can motivate based on what we know physically. But first, it is useful to review the case of simple rotations:
+% 
+\begin{example}[Transformation of row vectors]\label{eg:row:vector:transform}
+Consider a Euclidean three-vector $\vec{v} = (v^x, v^y, v^z)^\trans$ and a Euclidean row vector, $\row{w} = (w_x, w_y, w_z)$. You know that the contraction these two objects is a number that is \emph{invariant}.
+\begin{align}
+    \row{w}\vec{v} = w_xv^x + w_y v^y + w_z v^z .
+\end{align}
+In fact, if $\row{w} = \vec{w}^\trans$, then $\row{w}\vec{v}$ is simply the inner product $|\vec{w}||\vec{v}|\cos\theta$. At any rate, the contraction $w_i v^i$ carries no indices and is a pure scalar quantity. That means it does not transform under rotations. However, we know that $\vec{v}$ \emph{does transform under rotations},
+\begin{align}
+    \vec{v}&\to R(\theta)\vec{v} 
+    \ ,
+\end{align}
+with $R(\theta)$ given in \eqref{eq:eg:rotations}.
+That means $\row{w}$ should also transform in a way to compensate the $\vec{v}$ transformation and keep $\row{w}\vec{v}=w_iv^i$ constant. Call this transformation $S(\theta)$. By the rules of matrix multiplication, $S(\theta)$ must act from the right:
+\begin{align}
+    \row{w} \to \row{w}S(\theta) \ \,
+\end{align}
+but from the index perspective the order does not matter:
+\begin{align}
+    w_i \to w_i S(\theta)\aij{i}{j} =  S(\theta)\aij{i}{j} w_i \ .
+    \label{eq:order:of:terms:in:summation}
+\end{align}
+This is because each term in the sums on the right-hand sides of \eqref{eq:order:of:terms:in:summation} are just multiplication of two numbers. \emph{Make sure you understand this.}
+
+The statement that $\row{w}\vec{v}$ is constant under rotations is
+\begin{align}
+    \row{w}\vec{v} \to \row{w}S(\theta)R(\theta)\vec{v}
+    = 
+    R(\theta)\aij{i}{\ell} S(\theta)\aij{k}{i} w_k v^\ell
+\end{align}
+so that we requre:
+\begin{align}
+      R(\theta)\aij{i}{\ell} S(\theta)\aij{k}{i}
+      =
+      S(\theta)\aij{k}{i}R(\theta)\aij{i}{\ell}
+      =
+      \delta\aij{k}{l} \ ,
+      \label{eq:SR:RS:inverses}
+\end{align}
+or in other words, as matrices, $S(\theta)R(\theta) = 1$. Note that while it turns out to also true that $R(\theta)S(\theta) = 1$, \eqref{eq:SR:RS:inverses} is \emph{only} telling us that $S(\theta)R(\theta) = 1$ because when we write this index contraction was a matrix multiplication, the order matters: we have to make sure contracted indices are consecutive.
+
+We thus conclude that
+\begin{align}
+    S(\theta) = R(\theta)^{-1} = R(-\theta) = R(\theta)^\trans \ .
+\end{align}
+So we demonstrate something very important: row vectors like $\row{w}$ `rotate oppositely' from column vectors like $\vec{v}$.
 \end{example}
 
-\subsection{Example: Muon Decay}
+The lesson from the above example is that lower indexed objects transform with the \emph{inverse transformation} as upper indexed objects. Thus if $p^\mu \to \Lambda\aij{\mu}{\nu}p^\nu$, we must have
+\begin{align}
+    p_\mu \to (\Lambda^{-1})\aij{\nu}{\mu} p^\nu\ .
+\end{align}
+Check to make sure that you agree with the position of the indices. It is $(\Lambda^{-1})\aij{\nu}{\mu}$, not $(\Lambda^{-1})_{\mu}^{\phantom{\mu}\nu}$. Refer back to Example~\ref{eg:row:vector:transform} if that is not clear.
+
+
+
+\section{Example: Muon Decay}
 
 Cosmic rays can produce muons when they hit the upper atmosphere about 10 kilometers above the surface of the Earth.\sidenote{This sub-section is copied from my Physics 17 (2023) notes and is adapted from an example in Griffiths.} These muons are highly relativistic, with a velocity of $\beta = 0.9999$. See Fig.~\ref{fig:muons}. We know from laboratory experiments that the lifetime of a muon \emph{at rest} is 2 microseconds. Based on the simple estimate $d=c\tau \approx 600$~meters, we would not expect any muons to reach the surface of the Earth. However, not only do large cosmic ray telescopes have dedicated muon detectors, but you can make your own citizen science muon detector\sidenote{\url{https://muonpi.org}}. What gives?
 \begin{marginfigure}%[tb]
@@ -1059,9 +1117,9 @@ Note that now we have a measurement in the Earth frame (a vertical line denoting
 Using the Lorentz transformation laws, show that the distance from the muon to the surface of the Earth at the moment of the muon's creation is $L'=L/\gamma$ where $L=10$~km is the distance in the Earth frame. 
 \end{exercise}
 
-\subsection{The metric tensor}
+\section{The metric tensor}
 
-The \textbf{inner product} (or dot product) is a machine that takes two vectors and outputs a number. It is manifested by a tensor called the metric,\sidenote{Technically the metric is a tensor \emph{density}, which means it transforms with additional powers of the Jacobian. I refer you to your favorite general relativity textbook.} which has two lower indices:
+The \textbf{inner product} (or dot product) is a machine that takes two vectors and outputs a number. It is manifested by a tensor called the metric, which has two lower indices:
 \begin{align}
     \langle p,q\rangle = p\cdot q = g_{\mu\nu}p^\mu q^\mu \ .
 \end{align}
@@ -1095,7 +1153,7 @@ We do not bother writing $(g^{-1})^{\mu\nu}$ because the height of the indices i
 The Kronecker-$\delta$ represents the components of the unit matrix, $\mathbbm{1}\aij{\mu}{\nu} = \delta^\mu_\nu$.
 
 
-\subsection{Example: What does someone else measure?}
+\section{Example: What does someone else measure?}
 \label{sec:relativity:alien}
 
 
@@ -1145,12 +1203,72 @@ Rephrase everything in this example in terms of the inner product in Minkowski s
 
 
 
-\subsection{The meaning of indices}
+\section{Tensors: the meaning of indices}
 
 
-\subsection{Tensors}
+The lightning-quick review of special relativity here is an example of tensor analysis in physics.\sidenote{Where can you learn more? I recommend my Physics 17 lecture notes. Want a more advanced version? Check out my Physics 231 lecture notes.} Tensors show up \emph{all over the place} in physics. Even in your lower division physics courses: did you ever wonder why it is called the moment of inertia \emph{tensor} and not the moment of inertia \emph{matrix}? Yes, there is a difference.\footnote{See e.g.\,\url{https://hepweb.ucsd.edu/ph110b/110b_notes/node24.html}}\sidenote{I am frustrated that few textbooks take a moment to explain the significance this difference.} For our purposes, we can think of a \textbf{tensor}\index{tensor} as an object that has an ordered number of indices. The indices each have a height, either upper or lower. 
+
+The order of the indices matters; if you want it takes precedence over the height of the index: 
+\begin{align}
+    T^{ij\phantom{k}\ell}_{\phantom{ij}k} \neq
+    T^{\phantom{k}ij\ell}_{k} \ .
+\end{align}
+If you have a metric, this is more clear since you can lower (or raise) all the indices, so that 
+\begin{align}
+    T^{ij\phantom{k}\ell}_{\phantom{ij}k} &= T^{ijm\ell}g_{mk}
+    \\
+    T^{\phantom{k}ij\ell}_{k}&=T^{mij\ell} g_{mk}
+\end{align}
+and you can see that $T^{mij\ell} \neq T^{ijm\ell}$.
+
+There are some equivalent ways of thinking about tensors. The most formally correct way is to think about them as \emph{multilinear maps} between vector spaces (or tensor products\sidenote{Given a vector space $V$, a tensor product $V\otimes V$ is two copies of the vector space.} thereof). Perhaps more practically, a tensor is an object that encodes information that transforms according to the height of the indices. Generalizing our rules from Section~\ref{sec:Lorentz:transformations}:
+% 
+\begin{newrule}[Tensor transformation]\label{rule:tensor:transform}
+If $T$ is a tensor with upper indices $i_1, \cdots, i_N$ and lower indices $j_1, \cdots, j_M$, then under a symmetry transformation $R(\theta)$, $T$ transforms as
+\begin{align}
+    T^{\cdots}_{\cdots} \to 
+    R(\theta)^{i_1}_{\phantom{i_1} k_1} 
+    \cdots 
+    R(\theta)^{i_N}_{\phantom{i_N} k_N}
+    (R(\theta)^{-1})^{\ell_1}_{\phantom{\ell_1}j_1} 
+    \cdots 
+    (R(\theta)^{-1})^{\ell_M}_{\phantom{\ell_M}j_M} T^{\cdots}_{\cdots} \ ,
+\end{align}
+where we have written $\cdots$ on the left hand side to mean `some arrangement of upper $i$ and lower $j$ indices,' while on the right the $\cdots$ mean `some arrangement of upper $k$ and lower $\ell$ indices.'
+
+In other words:
+\begin{itemize}
+    \item For each upper index, multiply by a factor of $R(\theta)$ and contract with the lower index of $R(\theta)$.
+    \item For each lower index, multiply by a factor of $R(\theta)^{-1}$ and contract with the upper index of $R(\theta)^{-1}$. Note that this is contraction with the \emph{first} index of $R(\theta)^{-1}$. 
+\end{itemize}
+\end{newrule}
+To apply the rule for Lorentz transformations, simply replace $R$ with $\Lambda$ and convert the indices into $\mu$s and $\nu$s. 
+
+We ultimately care about quantities that are \emph{invariant}\index{invariant} under Lorentz transformations. These are objects that everyone agrees upon, no matter what their reference frame. If you were to build a theory of nature, you would want the physical laws from that theory to be invariant with respect to reference frame---so the objects you would build that theory out of are naturally invariants. 
 
 
+
+
+
+\subsection{Isometry}
+
+How does one know that rotations are important symmetries in Euclidean space? This certainly comes from our own experience with physics---the laws of physics are rotationally invariant. In fact, we learn very quickly in our physics training to use rotational invariance to simplify problems. What about in special relativity? Historically, the Michelson--Morley non-observation\sidenote{Perhaps the most significant null result in science.} of aether---that is, the observation that the speed of light is constant---led us to realize that requirement that physics cannot depend on reference frame leads to a different class of symmetries. What characterizes these symmetries?
+
+From a top-down perspective, rotations and their generalizations\sidenote{Such as Lorentz transformations in special relativity.} are \emph{isometries}. An \textbf{isometry} is a symmetry of \emph{the form of the metric}. Withour conventions, one of the laws of special relativity is that $\eta_{\mu\nu} = \text{diag}(+,-,-,-)$; this means that the metric takes this form in \emph{any} reference frame. This is 
+
+
+... in light of Rule~\ref{rule:tensor:transform}
+
+Now that we know how tensors transform and given that the metric $g_{\mu\nu}$ is a tensor, an isometry is a transformation $R$ such that
+\begin{align}
+    R\aij{\alpha}{\mu} R\aij{\beta}{\nu} g_{\alpha\beta} = g_{\mu\nu} \ .
+\end{align}
+All such symmetries preserve the inner product. This means that the scalar formed from $\row{w}\vec{v}$ is invariant under the transformation $R$.
+
+
+\begin{exercise}[Isometries]
+ddd
+\end{exercise}
 
 \begin{subappendices}
 
@@ -1335,11 +1453,13 @@ We can use the first component and our time dilation result to find:
 We have used the definition that $\gamma = (1-\beta^2)^{-1}$. 
 From this we indeed confirm $\ell = \ell'/\gamma$ and that length is \emph{contracted}. 
 
-\section{More examples}
 
 
 
-\subsection{Example: the electromagnetic field strength}
+\section{More examples in relativity}
+
+\subsection{%Example: 
+The electromagnetic field strength}
 % motivate this from the unification of magnetism and electricity
 % transformation laws
 
@@ -1350,7 +1470,7 @@ From this we indeed confirm $\ell = \ell'/\gamma$ and that length is \emph{contr
     \label{fig:current}
 \end{figure}
 
-Another place where special relativity rears its head is in electrodynamics. Electricity and magnetism are two manifestations of the same electromagnetic phenomenon. This is illustrated in Fig.~\ref{fig:current}. If you did not know about magnetism, you would find a paradox when you consider a charged particle moving along a current. In one frame, the current is an equal number of positive and negative charges moving in opposite directions.\footnote{I suppose more realistically the negative charges move while the positive charges stay put---that does not change the conclusion.} If you boost to the external charged particle's rest frame, length contraction forces one species of the current particles to increase their charge density relative to the other species. This creates a net electric field that acts on the stationary external particle. Without magnetism, the first frame is missing this additional force. 
+Another place where special relativity rears its head is in electrodynamics. Electricity and magnetism are two manifestations of the same electromagnetic phenomenon.\sidenote{Unification of apparently unrelated forces is a big theme of this course. Electromagnetism is the example that you already know.} This is illustrated in Fig.~\ref{fig:current}. If you did not know about magnetism, you would find a paradox when you consider a charged particle moving along a current. In one frame, the current is an equal number of positive and negative charges moving in opposite directions.\sidenote{I suppose more realistically the negative charges move while the positive charges stay put---that does not change the conclusion.} If you boost to the external charged particle's rest frame, length contraction forces one species of the current particles to increase their charge density relative to the other species. This creates a net electric field that acts on the stationary external particle. Without magnetism, the first frame is missing this additional force. 
 
 The electric and magnetic fields are unified in the \emph{electromagnetic field strength}, which is a two-index tensor:
 \begin{align}
@@ -1381,7 +1501,8 @@ Find the components of $F'^{\mu\nu}$ under a boost along the $z$-direction.
 \end{exercise}
 
 
-\subsection{Example: simultaneity}
+\subsection{%Example: 
+Simultaneity}
 \label{eq:simultaneity}
 
 One of the key ideas in special relativity is that we sacrifice our notion of simultaneity for objects that are not observed at the same spacetime point. We may reuse our diagram in Fig.~\ref{fig:re:dilation}. Consider two different points on the $x'$ axis. These are simultaneous with respect to the primed observer: they both occur at $t'=9$. However, these two points  obviously do \emph{not} have the same $t$ coordinate to the unprimed observer. This observation helps clear up several apparent paradoxes that may show up in relativity. More importantly, it completely upends our notion of causality.
@@ -1389,7 +1510,8 @@ One of the key ideas in special relativity is that we sacrifice our notion of si
 One of the unwritten-but-understood laws of physics is that the cause precedes the effect. I have to drop my mug before I hear the sound of the ceramic shattering. This notion is imperiled if in some other reference frame someone else would have heard the shattering before they observe the mug being dropped. One deduction of this is that the laws of physics should be \emph{local} in spacetime. A consequence of this observation is that the laws of physics should be written with derivatives.
 
 
-\subsection{Example: discrete isometries}
+\subsection{%Example: 
+Discrete isometries}
 
 Isometries are symmetries of the metric.
 % 
@@ -1428,11 +1550,157 @@ There is one more discrete symmetry that is often mentioned along with parity an
 \end{itemize}
 Because these are all parities---in the sense that $C^2 = P^2 = T^2 = \mathbbm{1}$---we see an relation between the antimatter transformation $CP$ and the idea of moving backward in time. You may want to remember then when our Feynman diagram notation makes it \emph{look like} antiparticles are particles moving backward in time.\sidenote{To be clear, this is \emph{not} what is happening.}
 
-% exp
 
-% CPT
+\section{Bird's eye view of tensors}
+
+The reason why we make a big deal about tensors and the `indexology' view of particle physics is that this perspective is particularly helpful in physics. Table~\ref{table:vectors:conventions}, borrowed from my Physics 17 lecture notes, gives a hint of this. Column and row vectors have a few equivalent names:
+\begin{itemize}
+    \item Upper index: [column] vector, contravariant vector, ket,
+    \item Lower index: row/dual/covariant vector, covector, bra, one-form \ .
+\end{itemize}
+These are all fancy names for the \emph{same} idea. A row vector\sidenote{Here we stick to the simplest-sounding name.} $\row{w}$ is a \emph{linear function}\index{linear} on vectors to numbers. This means that given two vectors $\vec{v}$ and $\vec{u}$ and two numbers $\alpha$ and $\beta$:
+\begin{align}
+    \row{w}\left(\alpha\vec{v}+\beta\vec{u}\right)
+    &=
+    \alpha\row{w}(\vec{v}) + \beta\row{w}(\vec{u}) \ .
+\end{align}
+\begin{example}
+To make it clear that this really is a simple statement, let us try it out for a two-dimensional real vector space in matrix notation:
+\begin{align}
+    \begin{pmatrix}
+        w_1 & w_2
+    \end{pmatrix}
+    \left(
+    \alpha
+    \begin{pmatrix}
+        v^1\\ v^2
+    \end{pmatrix}
+    + 
+    \beta
+    \begin{pmatrix}
+        u^1 \\ u^2
+    \end{pmatrix}
+    \right)
+    =
+    \alpha(w_1v^1 + w_2v^2)
+    + \beta(w_1u^1 + w_2u^2) \ .
+\end{align}
+\end{example}
+\begin{example}
+Here is an even sillier example in a \emph{one}-dimensional real vector space, $\mathbbm{R}$. In this case, vectors are just numbers $v^1 = x$. Row vectors are linear functions, $f$ characterized by one component, $a$. They satisfy:
+\begin{align}
+    f(\alpha x + \beta y) = \alpha x + \beta y \ .
+\end{align}
+Even though $\alpha$, $\beta$, $x$, and $y$ are practically all numbers, we should recognize that $x$ and $y$ are `vectors' while $\alpha$ and $\beta$ are `numbers' in the sense of rescaling. 
+\end{example}
+\begin{exercise}
+By our definition of linear, show that the general equation for a line in the Cartesian plane, $f(x)=ax+b$ is \emph{not} linear.
+\end{exercise}
+
+Of course, you can equivalently think about $\vec{v}$ acting on $\row{w}$,
+\begin{align}
+    \vec{v}(\row{w}) \defeq v^iw_i = w_iv^i = \row{w}(\vec{v}) \ .
+\end{align}
+Here we see why it helps to think about indices rather than matrices as arrays of numbers that have some multiplication rule. Given a column and a row vector, there is one obvious way to form a number. If you treat one of the objects as a `function' and the other object as an `argument,' then the function is linear in the argument. In this sense, we say that the column and row vectors are \emph{dual} to one another. They encode the same structure relative to each other.\sidenote{This notion of duality is completely independent of physical dualities or parity symmetries of physical systems. However, it is true that if a particle has \emph{internal} symmetries that are described by, say, upper indices, then its antiparticle has these indices lowered.}
+
+The bras and kets of quantum mechanics are also simply column and row vectors. This is obvious for simple finite-dimensional systems, like the spin states of an electron. After all, did we not write spinors as columns of two numbers?\sidenote{They were kind of weird because they obviously were not vectors in Euclidean two dimensional space---but they \emph{are} vectors in a different space. See Appendix~\ref{sec:Poincare:Algebra} for a discussion---note: that appendix is significantly more advanced than most of this course.} There are also systems with countably-infinite dimensions, like the hydrogen atom. There we wrote our states as eigenvectors of energy and angular momentum, $\ket{E,\ell,m}$, where these \emph{quantum numbers} take discrete-but-unbounded values. You will recall that these states also have bras  $\bra{E', \ell', m'}$ whose wavefunctions are related by a complex conjuate to the associated ket. There are also uncountably infinite quantum systems\sidenote{You may object that plane waves are not normalizable states.} like plane waves where a `quantum'-number like the wave momentum can take on any value, $e^{i\vec{p}\cdot\vec{x}}$ where the `infiniteness' of the vector space means that it does not make sense to use a discrete index for the components---instead, the components are part of a continuum. As a taste for how these all come together, present Table~\ref{table:vectors:conventions} reproduced from my Physics 17 course. 
 
 
+\begin{table*}
+    \renewcommand{\arraystretch}{1.3} % spacing between rows
+    % \centering
+    \begin{tabular}{ @{} llll @{} } \toprule % @{} removes space
+        Vector Space & $\RR$ & $\CC$ & $\infty$-dimensional
+        \\ \hline
+        Vector/ket 
+            & $\vec{v} = \ket{v}$ 
+            & $\vec{v} = \ket{v}$
+            & $f$
+            \\
+        Basis vector
+            & $\bas{e}_i = \ket{i}$ 
+            & $\bas{e}_i = \ket{i}$ 
+            & $\hat{e}_i(x)$
+            \\
+            & 
+            & 
+            & $\hat{e}_p(x)$
+            \\
+        Components
+            & $v^i \in \RR$
+            & $v^i \in \CC$
+            & $f^i, \tilde{f}(p) \in \CC$
+            \\
+        % Components
+            & $\vec{v} = v^i\bas{e}_i = v^i\ket{i}$
+            & $\vec{v} = v^i\bas{e}_i = v^i\ket{i}$
+            & $f(x) = f^i\, \hat{e}_i(x) $
+            \\
+            & 
+            & 
+            & $f(x) = \int \dbar p\,\tilde f(p) e_p(x)$
+        \\
+        Row vector/bra
+            & $\row{w} = w_i\rbas{e}^i = w_i\bra{i}$
+            & $\row{w} = w_i\rbas{e}^i = w_i\bra{i}$
+            & distribution, e.g.~$\delta(x)$
+        \\
+        Matrix
+            & $A = A\aij{i}{j}\ket{i}\bra{j}$
+            & $A = A\aij{i}{j}\ket{i}\bra{j}$
+            & operator, e.g.~$\frac{d^2}{dx^2}$
+        \\
+        Inner Product
+            & $\la v, w \ra = g_{ij}v^iw^j$
+            & $\la v, w \ra$
+            & $\la f, g \ra = \int dx\, f^*(x)g(x)$        
+            \\
+        % Inner Product
+            & $\la v, w \ra = \la w,v\ra$
+            & $\la v, w \ra = \la w,v\ra^*$
+            & $\la f, g \ra = \la g,f\ra^*$
+        \\
+        Adjoint
+            & Transpose
+            & Hermitian Conjugate
+            & Integration by parts
+        \\
+        % Adjoint
+            & $(A^T)\aij{i}{j} = g_{jk}A\aij{k}{\ell}g^{\ell i}$
+            & $(A^\dag)\aij{i}{j}= [(A^T)\aij{i}{j}]^*$
+            & e.g.~$\left(\frac{d}{dx}\right)^\dag = -\left(\frac{d}{dx}\right)$
+        \\
+        Self-adjoint
+            & Symmetric
+            & Hermitian
+            & Sturm--Liouville
+        \\
+        % Self-adjoint
+            & $A^T = A$
+            & $A^\dag = A$
+            & $\mathcal O^\dag = \mathcal O$
+        \\
+        % Self-adjoint
+            & $\RR$ Eigenvalues
+            & $\RR$ Eigenvalues
+            & $\RR$ Eigenvalues
+        \\
+        % Self-adjoint
+            & $\perp$ Eigenvectors
+            & $\perp$ Eigenvectors
+            & $\perp$ Eigenvectors
+        \\
+        Isometry, e.g.
+            & Rotations, Boosts
+            & Unitary Matrices
+            & Change of variable
+        \\ \bottomrule
+    \end{tabular}
+    \caption{
+        Terms and notation in real, complex, and infinite-dimensional vector spaces. From my Physics 17 notes.
+        \label{table:vectors:conventions}
+  }
+\end{table*}
 
 
 
