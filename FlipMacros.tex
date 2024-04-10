@@ -61,10 +61,14 @@
 \newcommand{\dbar}{d\mkern-6mu\mathchar'26\hspace{-.1em}}    
 
 %% Best practice: Roman differential
-\newcommand{\D}[1]{\ensuremath{\operatorname{d}\!{#1}}}
-\newcommand{\DD}[2]{\ensuremath{\operatorname{d}^{#1}\!{#2}}}
-\newcommand{\Dbar}[1]{\operatorname{d}\mkern-10mu\mathchar'26\mkern-2mu{#1}} 
+% \newcommand{\D}[1]{\ensuremath{\operatorname{d}\!{#1}}}
+% \newcommand{\DD}[2]{\ensuremath{\operatorname{d}^{#1}\!{#2}}}
+\newcommand{\D}[2][]{\ensuremath{\operatorname{d}\mkern-3mu^{#1}\mkern-1mu{#2}}\,}
+% \newcommand{\Dbar}[1]{\operatorname{d}\mkern-10mu\mathchar'26\mkern-2mu{#1}} 
+\newcommand{\Dbar}[2][]{\operatorname{d}\mkern-10mu\mathchar'26\mkern-1mu^{#1}\mkern-1mu{#2}\,} 
 
+
+% \newcommand{\Fbar}[2][]
 
 %% TYPOGRAPHY: Best Practices
 %% --------------------------
@@ -104,6 +108,26 @@
 \usepackage{pifont}
   \newcommand{\cmark}{\ding{51}}%
   \newcommand{\xmark}{\ding{55}}%
+
+
+%% SO(N), etc. 
+%% ------------
+\newcommand{\SO}[1]{\ifmmode
+  \textnormal{\acro{SO(}}#1\textnormal{\acro{)}}
+  \else \acro{SO($#1$)} \fi}
+
+\newcommand{\SU}[1]{\ifmmode
+  \textnormal{\acro{SU(}}#1\textnormal{\acro{)}}
+  \else \acro{SU($#1$)} \fi}
+
+\newcommand{\Sp}[1]{\ifmmode
+  \textnormal{\acro{Sp(}}#1\textnormal{\acro{)}}
+  \else \acro{Sp($#1$)} \fi}
+
+
+
+
+% \def\A{\ifmmode \mathcal{A} \else $\mathcal{A}$ \fi}
 
 
 %% FIGURES INLINE WITH EQUATIONS (e.g. Feynman diagrams)

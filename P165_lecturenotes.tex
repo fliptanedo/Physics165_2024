@@ -9,6 +9,7 @@
 \input{FlipMacros}              %% Flip's standard macros
 \input{FlipMacros_Comments}     %% Flip's macros for comments
 \input{FlipMacros_Teaching}     %% Flip's macros for course notes
+% 
 \input{Flip_listings}           %% Styling for code blocks
 \input{FlipAdditionalHeader}    %% Modify this for each project
 \input{FlipPreambleEnd}         %% packages that have to be at the end
@@ -1250,25 +1251,141 @@ We ultimately care about quantities that are \emph{invariant}\index{invariant} u
 
 
 
-\subsection{Isometry}
+\section{Isometry}
 
 How does one know that rotations are important symmetries in Euclidean space? This certainly comes from our own experience with physics---the laws of physics are rotationally invariant. In fact, we learn very quickly in our physics training to use rotational invariance to simplify problems. What about in special relativity? Historically, the Michelson--Morley non-observation\sidenote{Perhaps the most significant null result in science.} of aether---that is, the observation that the speed of light is constant---led us to realize that requirement that physics cannot depend on reference frame leads to a different class of symmetries. What characterizes these symmetries?
 
-From a top-down perspective, rotations and their generalizations\sidenote{Such as Lorentz transformations in special relativity.} are \emph{isometries}. An \textbf{isometry} is a symmetry of \emph{the form of the metric}. Withour conventions, one of the laws of special relativity is that $\eta_{\mu\nu} = \text{diag}(+,-,-,-)$; this means that the metric takes this form in \emph{any} reference frame. This is 
+From a top-down perspective, rotations and their generalizations\sidenote{Such as Lorentz transformations in special relativity.} are \emph{isometries}. An \textbf{isometry} is a symmetry of \emph{the form of the metric}. Specifically, it is a transformation---enacted by a matrix acting on vectors, for example---for which the \emph{components} of the metric do not change. With our conventions, special relativity requires that the components of the metric are $\eta_{\mu\nu} = \text{diag}(+,-,-,-)$; this means that the metric takes this form in \emph{any} reference frame. 
 
-
-... in light of Rule~\ref{rule:tensor:transform}
-
-Now that we know how tensors transform and given that the metric $g_{\mu\nu}$ is a tensor, an isometry is a transformation $R$ such that
+Ah! But we know from Rule~\ref{rule:tensor:transform} that the metric is an object with two lower indices. That means that it has a prescribed transformation rule. If $v^\mu \ to R\aij{\mu}{\alpha}v^\alpha$ for some transformation $R$, then the metric transforms as
+\begin{align}
+  g_{\mu\nu} \to   R\aij{\alpha}{\mu} R\aij{\beta}{\nu} g_{\alpha\beta} \stackrel{?}{=} g_{\mu\nu} \ .
+\end{align}
+For $R$ to be an isometry, the last expression (marked `?') must be true:
 \begin{align}
     R\aij{\alpha}{\mu} R\aij{\beta}{\nu} g_{\alpha\beta} = g_{\mu\nu} \ .
+    \label{eq:defining:isometry}
 \end{align}
-All such symmetries preserve the inner product. This means that the scalar formed from $\row{w}\vec{v}$ is invariant under the transformation $R$.
+We call the isometries of spacetime Lorentz transformations\index{Lorentz transformation} and typically write $R=\Lambda$. The isometries of Euclidean space are the rotations, which we usually keep writing as $R$. In this course we also meet the complex versions of rotations,\sidenote{This should familiar from quantum mechanics. Symmetries are described by a mathematical class called a group. Rotations in $N$ dimensions are the group $\textnormal{SO}(N)$ for ``special orthogonal'' $N\times N$ matrices. Special means unit determinant and orthogonal means $R^\trans R = \one$. The complex version is the group $\textnormal{SU}(N)$, for special \emph{unitary} matrices. Unitary means $U^\dag U = 1$.} which we write $R=U$.
 
-
-\begin{exercise}[Isometries]
-ddd
+\begin{exercise}[Definition of Lorentz Tranform]
+\label{ex:lorentz:definition:indices}
+The relation \eqref{eq:defining:isometry} in special relativity is
+\begin{align}
+    \Lambda\aij{\alpha}{\mu} \Lambda\aij{\beta}{\nu} \eta_{\alpha\beta} = \eta_{\mu\nu} \ .
+\end{align}
+This is of course just a change of symbols. When this is introduced in some textbooks, they often write it in matrix form rather than index form:
+\begin{align}
+    \Lambda^\trans \eta \Lambda = \eta \ .
+\end{align}
+Show that these two forms are indeed equivalent. \textsc{Hint}: the matrix formalism suppresses indices because it assumes that consecutive indices are contracted. 
 \end{exercise}
+% 
+\begin{example}
+In Exercise~\ref{ex:lorentz:definition:indices}, you were faced with something that is rarely explained: if a matrix has indices $M\aij{i}{j}$, what is the index structure of the transpose, $M^\trans$? More generally, given a linear transformation $M$, what is the index structure of the \emph{adjoint}, $M^\dag$? 
+
+Exercise~\ref{ex:lorentz:definition:indices} gives you a hint for this. The correct identification is
+\begin{align}
+    {M^\dag}\aij{i}{j} = M\aij{j}{i} \ ,
+\end{align}
+but this does not seem to make sense because the heights of the indices do not match. In fact, what we really mean is
+\begin{align}
+    {M^\dag}\aij{i}{j} = g_{\ell j} g^{ki} A\aij{\ell}{k} \ .
+    \label{eq:def:adjoint}
+\end{align}
+The way to see this is to go from the root definition of the adjoint with respect to the inner product. Recall that the inner product is a (bi-)linear function that takes two vectors and returns a number. It is defined with respect to the metric as
+\begin{align}
+    \la \vec{v}, \vec{w} \ra = g_{ij}v^iw^j \ .
+\end{align}
+Then the adjoint $M^\dag$ is defined relative to $M$ to be the matrix that satisfies
+\begin{align}
+    \la \vec{v}, M^\dag \vec{w} \ra = 
+    \la M \vec{v}, \vec{w} \ra
+\end{align}
+for every choice of $\vec{v}$ and $\vec{w}$. Writing out this expression with explicit indices gives
+\begin{align}
+    g_{ab} v^a {M^\dag}\aij{b}{c} w^c
+    &= 
+    g_{de} M\aij{d}{f}v^f w^e 
+    \ .
+\end{align}
+Observe that all indices are contracted---they are all dummy indices and can be relabeled for convenience. Let us do this for the right-hand side so that the indices on $\vec{v}$ and $\vec{w}$ match those on the left-hand side:
+\begin{align}
+    % g_{ab} \cancel{v^a} {M^\dag}\aij{b}{c} \cancel{w^c}
+    % &= 
+    % g_{dc} M\aij{d}{a} \cancel{v^a} \cancel{w^c}
+    g_{ab} {v^a} {M^\dag}\aij{b}{c} {w^c}
+    &= 
+    g_{dc} M\aij{d}{a} {v^a} {w^c}
+    \ .
+\end{align}
+Usually one avoids repeating the use of indices since this can lead to ambiguities about which indices are contracting; here there is no such issue because each side of the equal sign is evaluated independently. \emph{However}, we make a clever observation: the equality holds for \emph{any} vectors $\vec{v}$ and $\vec{w}$. This means we can choose basis vectors where only the $a^\textnormal{th}$ component of $\vec{v}$ and the $c^\textnormal{th}$ component of $\vec{w}$ are non-zero---for any specific choice of $a = \hat{a}$ and $c = \hat c$. In that case, the sum over these dummy variables collapses to those specific choices of hatted index:
+\begin{align}
+    g_{\hat ab} {v^{\hat a}} {M^\dag}\aij{b}{\hat c} {w^{\hat c}}
+    &= 
+    g_{d\hat c} M\aij{d}{\hat a} {v^{\hat a}} {w^{\hat c}}
+    &&
+    \text{no sum over hatted indices}
+    \\
+    g_{\hat ab} \cancel{v^{\hat a}} {M^\dag}\aij{b}{\hat c} \cancel{w^{\hat c}}
+    &= 
+    g_{d\hat c} M\aij{d}{\hat a} \cancel{v^{\hat a}} \cancel{w^{\hat c}}
+    &&
+    \text{no sum over hatted indices}
+    \\
+    g_{\hat ab} {M^\dag}\aij{b}{\hat c} 
+    &= 
+    g_{d\hat c} M\aij{d}{\hat a} 
+    &&
+    \ .
+\end{align}
+Because there was no sum over hatted indices, we can cancel out the common factor of $v^{\hat a}w^{\hat c}$ on both sides.  The last line gives \eqref{eq:def:adjoint} upon contracting with the inverse metric $g^{\hat a e}$ on both sides and then re-naming the indices appropriately.\footnotemark
+\end{example}\footnotetext{See also \url{https://threadreaderapp.com/thread/1702863061047263428}}
+% 
+
+\begin{example}
+Let us also clarify the phrase \emph{the components of the metric are unchanged} as related to isometries. This is different from saying \emph{the inner product is preserved}. For any transformation---not necessarily an isomsetry---$\vec{v}\to A\vec{v}$, the inner product is preserved \emph{if you also allow the metric to transform}:
+\begin{align}
+    \la \vec{v}, \vec{w}\ra
+    = 
+    g_{ij}v^i w^j
+    &\to 
+    {A\inv}\aij{k}{i}\, {A\inv}\aij{\ell}{j}
+    g_{ij}
+    \,
+    A\aij{i}{m} v^m \, A\aij{j}{n}v^j
+    \\
+    &= ({A\inv} A)\aij{k}{m} ({A\inv} A)\aij{\ell}{n} g_{k\ell} v^m w^n
+    \\
+    &= g_{k\ell} v^k w^\ell 
+    =\la \vec{v},\vec{w} \ra
+    \ .
+\end{align}
+The point though, is that we do \emph{not} let the metric transform. A transformation where the metric transforms cannot be interpreted as a chance of reference frame since all reference frames are supposed to see the same components of the metric. 
+
+This is obvious when considering transformations like $A = \textnormal{diag}(3,3)$. This stretches the length of vectors by a factor of 3. This is only meaningful as a physical transformation if we do not simultaneously transform the metric.
+\end{example}
+
+
+\begin{example}
+It is clear that rotations (Lorentz transformations) are a leave the metric unchanged. What about translations? We know that translation invariance is a symmetry of spacetime---the homogeneity of space leads to momentum conservation. Why do we not have a matrix $R$ for translations?
+
+This is related to the point in Section~\ref{sec:index:upper} that there is no such thing as a `position vector' and the definition of \emph{linear} in \eqref{eq:def:linear:oneform}. There is simply no such thing as translation in a vector space. In a vector space, the origin means something: it is the null (zero) vector. Translations do not make sense because they say that a different element is now the null vector. This makes no sense because the null vector is the unique element for which $\vec{0}+\vec{v} = \vec{v} + \vec{0} = \vec{v}$ for any $\vec{v}$. 
+
+Of course, translations \emph{are} a key part of understanding physics. Vector spaces are just the wrong structure to describe them. The vector spaces that we deal with for spacetime are \textbf{tangent planes} to spacetime. A particle's velocity $\vec{v}$ is a vector of a tangent plane at a point $p$ on spacetime. We say that
+\begin{align}
+    v\in \textnormal{T}_p{M} \ ,
+\end{align}
+which means the tangent plane at point $p$ on the spacetime (manifold) $M$. At a different point, $p'$, the particle's velocity is part of a different tangent plane, $\textnormal{T}_{p'}M$. Imagine the spaces of tangent vectors at some point on the equator versus at the north pole. Both of these are two dimensional vector spaces embedded in tree-dimensional ambient space. But these two dimensional planes are quite different. You cannot place a generic vector from one space onto the other space. \flip{Insert picture}
+
+All this is to say that the mathematical structure for including spacetime translations is different from the structure of a vector spaces. In fact, it is the collection of each vector space over each point in the spacetime. This collection is called $\textnormal{T}M$, the \textbf{tangent bundle}\index{tangent bundle} over the spacetime $M$. 
+
+By way of analogy: the metric is implicitly present in Euclidean space, but it is so trivial that we do not even define it when we first learn about vectors. In the same way, the tangent bundle is a structure that is implicitly present in special relativity but is so trivial---every tangent space looks like every other tangent space---that we never bring it up. However, in general relativity, the tangent bundle comes to life. In the example of the tangent spaces at the equator versus the north pole: because the underlying space has \emph{curvature}, the ways in which tangent spaces are related to one another is no longer trivial. The curvature of spacetime---gravity---is mathematically understood to be a change in the relationships of tangent spaces. Because tangent spaces are where velocities live, this picture gives you an idea of how velocities may change (accelerate) in the presence of gravity.
+
+To push this further: you also appreciate that there are other forces in nature---say, electromagnetism---that can accelerate test particles. Can these also be understood as some kind of tangent bundle? Yes! This is the mathematical structure of \emph{gauge theory} and is the framework for what we call the fundamental forces. In this way, curvature in `internal spaces' (not spacetime) is the origin of the fundamental forces in particle physics. The mathematical structure is precisely the same as that of gravity. In general, both gravity and the fundamental forces of particle physics are gauge theories; all of these forces are understood as tangent bundles over spacetime. 
+
+For a good starting point for all of this, I recommend the lecture notes by Collinucci and Wijns: \cite{Collinucci:2006hx}.
+\end{example}
 
 \begin{subappendices}
 
@@ -1563,6 +1680,7 @@ These are all fancy names for the \emph{same} idea. A row vector\sidenote{Here w
     \row{w}\left(\alpha\vec{v}+\beta\vec{u}\right)
     &=
     \alpha\row{w}(\vec{v}) + \beta\row{w}(\vec{u}) \ .
+    \label{eq:def:linear:oneform}
 \end{align}
 \begin{example}
 To make it clear that this really is a simple statement, let us try it out for a two-dimensional real vector space in matrix notation:
@@ -1709,6 +1827,285 @@ The bras and kets of quantum mechanics are also simply column and row vectors. T
 
 
 
+\chapter{Quantum Mechanics}
+
+\section{Sum Over Histories}
+
+\flip{To be filled in. Please see the example in class of the $N$-slit experiment and the proposal that each path contributes $\e^{iS}$.}
+
+\begin{newrule}[Sum over histories]
+Given some observed initial state $\ket{\text{in}}$ and some observed final state $\ket{\text{out}}$, the amplitude to go from $\ket{\text{in}}$ to $\ket{\text{out}}$ is
+\begin{align}
+    \mathcal M(\text{in}\to\text{out})= 
+    \sum_\textnormal{path} \e^{iS_\textnormal{path}} \ ,
+\end{align}
+where the sum is over all `paths' (histories) that permit the initial state to evolve into the final state. $S_\textnormal{path}$ is the action for a given path---the same action that you are used to from classical mechanics, the time integral over the Lagrangian, $S= \int \D{t}\, L$.
+\end{newrule}
+
+\section{Path Integral}
+Suppose a quantum state has initial and final positions\sidenote{We deliberate use the notation $q$ for position instead of $x$. This is to aid our transition to quantum \emph{field theory}. Old textbooks sometimes refer to \emph{second quantization}; it is precisely to distinguish the role of $q$, a field displacement, and $x$ a continuous field index indicating spacetime position.}
+\begin{align}
+    \ket{\textnormal{in}} &= \ket{q_0}
+    &
+    \ket{\textnormal{out}} &= \ket{q_T} \ .
+\end{align}
+These are labeled so that we observe $\ket{q_0}$ at time $t=0$ and we observe $\ket{q_T}$ at time $t=T$. The amplitude to go from $\ket{q_0} \to \ket{q_T}$ over the time interval $T$ is
+\begin{align}
+    \bra{q_T} \hat U(T) \ket{q_0} &= \bra{q_T} \e^{-iT\hat H} \ket{q_0} \ .
+\end{align}
+Here $\hat U(t)$ is the operator that evolves states over time $t$. As you know from quantum mechanics, the Hamiltonian $\hat H$, is the operator that enacts infinitesimal evolution in time. This means that we enact finite time translations by exponentiating the Hamiltonian.\sidenote{Please make sure you are familiar with this idea: Hermitian operators \emph{generate} infinitesimal changes to a system. The exponential of these Hermitian operators are unitary operators that enact finite transformations. The idea shows up over and over again in this class.}
+
+There are two tricks to deploy at this step:
+\begin{enumerate}
+    \item Break the finite time evolution operator into a product of $(N+1)$ time evolutions:
+    \begin{align}
+        \hat U(T) = \hat U(\Delta t)\hat U(\Delta t)\cdots \hat U(\Delta t) \ .
+    \end{align}
+    It is \emph{obvious} that $\hat U(t)\hat U(s) = \hat U(t+s)$.
+    \item Insert the identity as a sum over a complete set of intermediate states:
+    \begin{align}
+        \one &= \int \D{q_i}\, \ket{q_i}\!\bra{q_i} \ .
+    \end{align}
+    We insert a copy of the identity in-between each of the $U(\Delta t)$s. Thus the label $i$ runs from $1$ to $N$.
+\end{enumerate}
+\begin{exercise}
+Confirm that $\hat U(t)\hat U(s) = \hat U(t+s)$. \textsc{Hint}: this is trivial, but convince yourself that it is trivial.
+\end{exercise}
+
+Applying these two tricks to our amplitude\sidenote{$\D[N]{\vec{q}} \defeq \D{q_1}\cdots\D{q_N}$} 
+\begin{align}
+    \bra{q_T} \hat U(T) \ket{q_0} 
+    &= \int \D[N]{\vec{q}} \,
+    \bra{q_T} \hat U(\Delta T) \ket{q_N}
+    \bra{q_N}\hat U(\Delta T) \ket{q_{N-1}}\cdots 
+    \\
+    &=\int \D[N]{\vec{q}} \,
+    \prod_i^{N+1} K_i \ , \label{eq:path:integral:time:evolution:product:of:Ks}
+\end{align}
+where the factor $K_i$ is a complex number:
+\begin{align}
+    K_i &\defeq \bra{q_{i}} \hat U(\Delta T) \ket{q_{i-1}} \ ,
+\end{align}
+where we define $\bra{q_{N+1}} = \bra{q_T}$. We have reduced the amplitude to go from our initial state to our final state to a product of $K_i$. The form of $K_i$ is simply that of the amplitude to go from $\ket{q_{i-1}}$ to $\ket{q_{i}}$ over a small time $\Delta t$. The integral over intermediate states $\D[N]{\vec{q}}$ tells us that we are summing over all possible configurations of those unobserved intermediate states. 
+
+In order to evaluate $K_i$, let us remind ourselves of the form of the Hamiltonian in $U(\Delta T) = \exp(i\Delta T\hat H)$,
+\begin{align}
+    \hat H = \frac{\hat P^2}{2m} + V(\hat Q) \ ,
+\end{align}
+where we use the non-relativistic kinetic term $\frac{1}{2}m\dot q^2 = p^2/2m$ and an arbitrary potential $V(q)$ that only depends on the $q$ displacements, but not the momenta $p$. Because $\hat H$ is an operator, we write $\hat P$ for the momentum operator and $\hat Q$ for the position\sidenote{This `position' is not necessarily spatial position. In general it is a displacement of a field value.} operator. All Hamiltonians in ordinary field theory have this type of separation: there is a \emph{kinetic term} that depends on momentum and a \emph{potential term} that depends on displacements. When we pass to relativistic theories, the kinetic term converts into a form that includes spatial derivatives in a way that it is Lorentz invariant. 
+
+Once again there is another silly trick. 
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item Insert the momentum-space representation of the identity,
+    \begin{align}
+        \one &= \int \Dbar{p}\, \ket{p}\!\bra{p} 
+        &
+        \Dbar{p}\defeq \frac{\D{p}}{2\pi} \ .
+    \end{align}
+    Observe that this has a relative factor of $2\pi$ compared to the resolution of the `position space' identity. This is the famous---and seemingly inscrutable---factor that shows up in the Fourier transform, see Appendix~\ref{app:gauss:dirac:fourier}.\sidenote{If you spend time thinking about this, you may wonder why we do not split the $2\pi$ evenly between positions and momenta. This would certainly be symmetric, but this choice ends up being fairly convenient in physics. It means, for example, that the conjugate variable for time is essentially the angular momentum, $E=\omega$.}\footnote{See e.g.\ \url{https://physics.stackexchange.com/a/141737/166736}} 
+\end{enumerate}
+Because $\hat H$ contains a term that evaluates easily in momentum space and a term that evaluates easily in position space, we insert the complete set of momentum states into $K_i$ to allow the $\hat P$-dependent terms to hit a $\bra{p}$ while the $Q$-dependent terms hit a $\ket{q_i}$:
+\begin{align}
+    K_i &=
+    \int \Dbar{p} \la {q_{i}} | p \ra \bra{p} \e^{-i\Delta t\frac{ \hat P^2}{2m}} \e^{-i\Delta tV(\hat Q)} \ket{q_{i-1}}
+    \label{eq:path:integral:Ki:operator}
+    \\ &=
+    \int \Dbar{p} \, \e^{-i\Delta t\frac{ p^2}{2m}} \e^{-i\Delta tV(q_{i-1})}\,  \la {q_{i}} | p \ra \la p | q_{i-1} \ra  \ .
+    \label{eq:path:integral:Ki:eigen}
+\end{align}
+The factors on the right are simply the Fourier components between the position and momentum eigenstates:
+\begin{align}
+    \la {q_{i}} | p \ra &= \e^{-ipq_i}
+    &
+    \la p | q_{i-1} \ra &= \e^{+ipq_{i-1}}
+    \ .
+\end{align}
+Plugging this into $K_i$ gives
+\begin{align}
+    K_i &=
+    \e^{-i\Delta tV(q_{i-1})} \int \Dbar{p} \, \e^{-i\Delta t\frac{ p^2}{2m} - i p(q_i - q_{i-1}) } \ .
+\end{align}
+The integral is simply a Gaussian with a source term. If you do not worry\sidenote{Will not worry. On the other hand, you may want to worry about whether the assumptions we made to solve these Gaussian integrals is still valid when there are complex coefficients. This scratches the surface of why some mathematicians are skeptical about whether anything we do in quantum field theory is well posed.} about the factors of $i$, then this integral is precisely in the form of \eqref{eq:Gaussian:with:source}, which stated:
+\begin{align}
+    G_{a,J} \equiv \int \D{x}\; e^{-\frac{a}{2}x^2 + Jx} = \sqrt{\frac{2\pi}{a}}  e^{\frac{J^2}{2a}} \ .
+    \tag{\ref{eq:Gaussian:with:source}}
+\end{align}
+We identify
+\begin{align}
+    a &= \frac{i\Delta t}{m}
+    &
+    J&= -i(q_i - q_{i-1}) \ .
+\end{align}
+Plugging in this result gives
+\begin{align}
+    K_i &=
+    \e^{-i\Delta tV(q_{i-1})} 
+    \frac{1}{2\pi}
+    \sqrt{\frac{2\pi m}{i \Delta t}}
+    \e^{\frac{-(q_i-q_{i-1})^2}{2i\Delta t/m}}
+    \\
+    &=
+    \sqrt{\frac{m}{i 2\pi \Delta t}}
+    \e^{\frac{i}{2}m\frac{(q_i-q_{i-1})^2}{\Delta t^2}\Delta t}
+    \e^{-iV(q_{i-1})\Delta t} 
+    \\
+    &= \mathcal N \e^{i\Delta t\, L[q_i]}
+    \label{eq:path:integral:infinitesmimal:kernel}
+     \ .
+\end{align}
+In the last line we have identified $(q_i-q_{i-1})/\Delta t = \dot q_i$ and observed that the argument of the combined exponential is simply $i\Delta t$ times the \emph{Lagrangian} at point $i$. The ugly square root is some complex constant factor that \emph{does not matter}. We simply write it as a normalization $\mathcal N$. 
+
+Now we insert this into the amplitude to go from our initial state to our final state, \eqref{eq:path:integral:time:evolution:product:of:Ks}:
+\begin{align}
+    \bra{q_T} \hat U(T) \ket{q_0} 
+    &= \mathcal N^{N+1} \int \D[N]{\vec{q}} \,
+    \e^{i \sum_i \Delta t\, L[q_i]} \ .
+\end{align}
+Recalling that $i$ encodes `time slices,' we recognize that the argument of the exponential is simply an \emph{integral} of the Lagrangian,
+\begin{align}
+    i \sum_i \Delta t\, L[q_i] \to i\int \D{t}\, L[q(t)] \equiv iS[q(t)] \ ,
+\end{align}
+where we have recovered the action. In the continuum limit, it is conventional to replace the notation $\D[N]{\vec{q}}$ with $\mathcal{D}q(t)$ so that our final expression for the $\Delta t \to 0$ limit is
+\begin{align}
+    \bra{q_T} \hat U(T) \ket{q_0} 
+    &= \mathcal N' \int \mathcal{D}q(t)\;
+    \e^{i S[q(t)]} \ .
+    \label{eq:path:integral:formalism}
+\end{align}
+Here $\mathcal N'$ is a re-packaging of the powers of $\mathcal N$. The integration over all trajectories $\mathcal {D}q(t)$ is called a \textbf{path integral}\index{path integral}.
+
+\begin{exercise}
+Why was it necessary for us to split $U(T)$ into several small steps? \textsc{Hint}: did we make any assumptions to go from \eqref{eq:path:integral:Ki:operator} to \eqref{eq:path:integral:Ki:eigen}? 
+\end{exercise}
+
+
+\section{Recovering Lagrange}
+
+\flip{To be filled in. Discussion of phasor diagrams, steepest descent, and why the classical path dominates. Motivates the principle of least action as the $\hbar \to 0$ limit.}
+
+
+
+\section{Recovering Schr\"odinger}
+
+This section is optional and is outside the primary scope of the class. However, I encourage you to at least skim it to see an alternative explanation of where the Schr\"odinger equations comes from. It should convince you that the sum over histories (path integral) construction gives you the same dynamics as before. 
+
+We show that the Schr\"odinger equation appears as the single-particle, non-relativistic limit over the path integral formalism.\sidenote{This section draws from the excellent pedagogical article by David Derbes in the \emph{American Journal of Physics} (one of my favorite publications) in 1996. This artcile was selected as one of the Fermat's Library journal club articles.\footnotemark}\footnotetext{\cite{10.1119/1.18114}; \url{https://fermatslibrary.com/s/feynmans-derivation-of-the-schrodinger-equation}} The power of the path integral formalism is that it generalizes beyond non-relativistic quantum mechanics. Like with all new theoretical formalisms, it behooves one to confirm that the new formalism is mathematically equivalent to the established formalism in the appropriate limit.
+
+Suppose we interpret $q(t)$ as the position of a non-relativistic particle at time $t$. Then in this basis, we can think of the amplitude $\la q_t | \hat U(t) | q_0 \ra$ as the wavefunction $\psi(q, t)$ for the particle to be in position $q$ at time $t$ given some initial state $\ket{q_0}$ at $t=0$. We can rewrite \eqref{eq:path:integral:time:evolution:product:of:Ks} as follows:
+\begin{align}
+    \psi(q,t) &= \la q_t | \hat U(t) | q_0 \ra 
+    \\&= \int \D{q_N} \, K_{\!N} \int \D[N-1]{\vec{q}} \,
+    \prod_i^{N} K_i 
+    \\
+    &= \int \D{q'} \, K_{\!N}\, \psi(q',t-\Delta t) \ .
+\end{align}
+We have relabeled $q_N \to q'$. It is the last displacement variable that we integrate over. In fact, for convenience,\sidenote{You do not have to do this step.} let us shift all of our time coordinates by $\Delta t$: 
+\begin{align}
+    \psi(q,t+\Delta t) 
+    &= \int \D{q'} \, K_{\!N}\, \psi(q',t) \ .
+\end{align}
+This equation says that to go from the $(N-1)^\textnormal{th}$ step to the $N^\textnormal{th}$ step, you integrate the wavefunction at last position over all possible intermediate steps, weighted by the \emph{kernel},\sidenote{Kernels are just fancy names for distributions, which are in turn fancy names for functions that are integrated over.} $K_N$. We can now use the form of the kernel, \eqref{eq:path:integral:infinitesmimal:kernel}:
+\begin{align}
+    K_{\!N} &= \mathcal N \e^{i\Delta t\, L[q_i]}
+    &
+    \mathcal N = \sqrt{\frac{m}{2\pi i \Delta t}} \ .
+    \label{eq:path:integral:normalization}
+\end{align}
+Let us now be careful with the scaling with the small time slice $\Delta t$:
+\begin{align}
+    i\Delta t L[q_i] = \frac{im}{2}\frac{(q_i-q_{i-1})^2}{\Delta t} - i\Delta t V(\bar q) \ .
+\end{align}
+Note that the kinetic term goes like $\Delta t^{-1}$, which is \emph{large}. The potential term scales linearly with $\Delta t$, so it is small. We write $V(\bar q)$ to mean the average value of $V$ in the interval $(q_{i-1}, q_i)$. For our purposes, $\bar q = q$ assuming a sufficiently smooth potential. This means we can Taylor expand the potential term, but not the kinetic term:
+\begin{align}
+    \psi(q,t+\Delta t) &= \mathcal N\int \D{q'}\; 
+    \e^{\frac{im}{2}\frac{(q-q')^2}{\Delta t}} 
+    \left[1 - i\Delta t \, V(\bar q)\right]\,
+    \psi(q',t) \ .
+\end{align}
+We drop higher order terms in $\Delta t$.
+Now we assume that $q= q' + \xi$ and make the plausible case that $\xi$ is small.\sidenote{To be clear, we integrate over even large values of $\xi$. The sin that I am sweeping under the rug is the idea that the rapidly varying oscillation in the $\e^{\textnormal{kinetic}}$ term will cause integrants with large values of $\xi$ to cancel. This is the steepest descent method in the method of phasors.} This means we can also replace $\bar q \to q$ to leading order.
+We can then expand $\psi(q',t)$, where we shall suppress the $t$ argument so that spatial derivatives are clear:
+\begin{align}
+    \psi(q') = \psi(q) -\xi \psi'(q) + \frac{1}{2}\xi^2 \psi''(q) + \cdots \ .
+\end{align}
+To be clear: we now write $\psi'(q,t)$ to mean $\frac{\D{}}{\D{q}}\psi(q,t)$.
+Plugging this in:
+\begin{wide}
+\begin{align}
+    \psi(q,t+\Delta t) &= 
+    \mathcal N\int \D{\xi}\; 
+    \e^{\frac{im}{2}\frac{\xi^2}{\Delta t}} 
+    \left[1 - i\Delta t \, V(q)\right]\,
+    % \\
+    % &\phantom{=
+    % \mathcal N\int \D{\xi}\; 
+    % }\times 
+    \left[\psi(q,t) -\xi \psi'(q,t) + \frac{1}{2}\xi^2 \psi''(q,t)\right] 
+    \\
+    % &= 
+    % \mathcal N\int \D{\xi}\; 
+    % \e^{\frac{im}{2}\frac{\xi^2}{\Delta t}} 
+    % \left[1 - i\Delta t \, V(\bar q)\right] \psi(q,t)
+    % \\
+    % &\phantom{=}+
+    % \mathcal N\int \D{\xi}\; 
+    % \e^{\frac{im}{2}\frac{\xi^2}{\Delta t}} 
+    % \frac{1}{2}\xi^2 \psi''(q,t) \ .
+    &= 
+    \mathcal N\int \D{\xi}\; 
+    \e^{\frac{im}{2}\frac{\xi^2}{\Delta t}} 
+    \left[\psi(q,t) - i\Delta t \, V(q)\,\psi(q,t)
+    + \frac{1}{2}\xi^2 \psi''(q,t)
+    \right]
+    \ .
+ % \ . \nonumber
+ \label{eq:psi:path:integral:schrodinger:intermediate}
+\end{align}
+\end{wide}
+In the last line we removed the term linear in $\xi$ because it cancels against the rest of the integral, which is even in $\xi$. We also remove terms of order $\mathcal O(\Delta t\,\xi^2)$ since these are small. Observe that the $\xi$-independent terms in the bracket are simple Gaussian integrals:
+\begin{align}
+    \int \D{\xi}\; 
+    \e^{\frac{im}{2}\frac{\xi^2}{\Delta t}} 
+    = 
+    \sqrt{\frac{2\pi i\Delta t}{m}} = \mathcal{N}^{-1} \ .
+    \label{eq:path:integral:Gaussian:trick:1}
+\end{align}
+Observe that this factor exactly cancels the annoying normalization in \eqref{eq:path:integral:normalization}---but only for the $\xi$-independent terms in the bracket. The remaining term is a moment of the Gaussian integral. There happens to be a convenient trick for this by taking a derivative of \eqref{eq:Gaussian:with:source}:
+\begin{align}
+    G_{a,J} \equiv \int \D{x}\; e^{-\frac{a}{2}x^2 + Jx} = \sqrt{\frac{2\pi}{a}}  e^{\frac{J^2}{2a}} 
+    \tag{\ref{eq:Gaussian:with:source}} \ ,
+\end{align}
+where we see that
+\begin{align}
+    -2\frac{\D{G_{a,0}}}{\D{a}} &= \int \D{x}\; x^2 e^{-\frac{a}{2}x^2} 
+    = \frac{1}{a}\sqrt{\frac{2\pi}{a}} \ .
+    \label{eq:Gaussian:trick:diff:quad}
+\end{align}
+\begin{exercise}
+While the method above reconstructs even moments of the Gaussian integral, one can reconstruct all moments by taking derivatives with respect to the source, $J$. Show that you can reconstruct the second moment of the Gaussian integral, \eqref{eq:Gaussian:trick:diff:quad}, by taking two derivatives with respect to $J$. 
+\end{exercise}
+This gives us 
+\begin{align}
+    \int \D{\xi}\; \xi^2
+    \e^{\frac{im}{2}\frac{\xi^2}{\Delta t}} 
+    = 
+    \frac{1}{-im/\Delta t}
+    \sqrt{\frac{2\pi i\Delta t}{m}} 
+    =\frac{i\Delta t}{m} \mathcal{N}^{-1} \ .
+    \label{eq:path:integral:Gaussian:trick:2}
+\end{align}
+
+We can insert \eqref{eq:path:integral:Gaussian:trick:1} and \eqref{eq:path:integral:Gaussian:trick:2} into the expression for $\psi(q,t+\Delta t)$, \eqref{eq:psi:path:integral:schrodinger:intermediate}. The ugly factor of $\mathcal N$ conveniently cancels. We are left with:
+\begin{align}
+    \psi(q,t+\Delta t) &= \psi(q,t) - i \Delta t V(q)\, \psi(q,t) + \frac{i\Delta t}{2m} \psi''(q,t)
+\end{align}
+We can rearrange terms and recognize the time derivative:
+\begin{align}
+    \frac{\D{\psi(q,t)}}{\D{t}}
+    &= i\left[\frac{1}{2m}\left(\frac{\textnormal{d}}{\D{q}}\right)^2 - V(q)\right]\psi(q,t) \ ,
+\end{align}
+which we recognize as the Schr\"odinger equation. You can debate whether or not this counts as a `derivation' of the Schr\"odinger equation since we implicitly assumed the Schr\"odinger equation when writing the time evolution operator. However, if you instead took as a starting point the observation that each path is weighted by $\e^{iS[q(t)]}$, then one would recover the Schr\"odinger equation as a consequence. 
 
 
 
@@ -1717,6 +2114,9 @@ The bras and kets of quantum mechanics are also simply column and row vectors. T
 
 
 
+\begin{exercise}
+Derive the same results by taking a time derivative of the continuous expression \eqref{eq:path:integral:formalism}. The steps are analogous, but this will test if you understand what the continuous expression means.
+\end{exercise}
 
 \chapter{Closing Thoughts}
 
@@ -1748,7 +2148,206 @@ all the people who taught him quantum field theory and particle physics over the
 
 % It may be nice to incorporate something like \texttt{classicthesis}\footnote{\url{https://www.ctan.org/tex-archive/macros/latex/contrib/classicthesis/}}
 
+\chapter{Gauss, Dirac, Fourier}
+\label{app:gauss:dirac:fourier}
+
+We review some key mathematical tools: Gaussian integrals, the Dirac $\delta$-function, and Fourier transform conventions. 
+
+\section{Gaussian Integrals }
+\subsection{One dimension}
+The most basic Gaussian integral is 
+\begin{align}
+    G \equiv \int_{-\infty}^\infty \D{x}\; \e^{-\frac{1}{2}x^2} = \sqrt{2\pi} \ .
+\end{align}
+In what follows I will always assume that the integration limits are $(-\infty, \infty)$ unless otherwise explicitly stated. There is a trick: evaluate $G^2$ in polar coordinates:
+\begin{align}
+    G^2 = \int dx\,dy\;  \e^{-\frac{x^2+y^2}{2}}
+    = \int_0^\infty r\,\D{r}\D{\theta}\;  \e^{-\frac{1}{2}r^2} \ .
+\end{align}
+You can then use a substitution $w = r^2/2$ and the fact that $\int_0^\infty \D{w}\; e^{-w} = 1$. 
+
+\subsection{Rescaling}
+
+A trivial extension is to rescale the quadratic term in the exponential.
+\begin{align}
+    G_a \equiv \int \D{x}\; \e^{-\frac{a}{2}x^2} = \sqrt{\frac{2\pi}{a}} \ .
+\end{align}
+There are two ways of seeing this:
+\begin{enumerate}
+    \item One can perform a change of variables by defining $y\equiv \sqrt{a} x$, which case $\D{x} = 1/\sqrt{a}\, \D{y}$. Fromt his one finds $G_a = G/\sqrt{a}$.
+    \item A slicker way of doing this is by dimensional analysis. One recognizes that by assigning arbitrary dimensions to  $[x] = 1$, the dimension of the coefficient is $[a]=-1/2$ in order for the argument of the exponential to be dimensionless. Then we see that $[G_a] = 1$ and so the right-hand side must scale like $a^{-1/2}$. The any additional coefficient must 1 because $G_{a=1}=G$.
+\end{enumerate}
+
+\subsection{Adding a source}
+For reasons that are clear in a physical context, we can shift the argument of the exponential by adding a linear term
+\begin{align}
+    G_{a,J} \equiv \int \D{x}\; e^{-\frac{a}{2}x^2 + Jx} = \sqrt{\frac{2\pi}{a}}  e^{\frac{J^2}{2a}} \ .
+    \label{eq:Gaussian:with:source}
+\end{align}
+The the constant $J$ is called a \textbf{source}. The trick we use is completing the square:
+\begin{align}
+    (a+b)^2 = a^2 + 2ab + b^2 \Rightarrow a^2 + 2ab = (a+b)^2 - b^2 \ .
+\end{align}
+Then by shifting your integration variable, this reduces to the result for $G_a$ times an overall prefactor.
+
+
+\subsection{Higher dimensions}
+Let's ramp it up! Suppose you have $N$ variables, $q^1$, $q^2$, $\cdots$, $q^N$. These are not powers, they are upper indices. We have changed variables from $x$ to $q$ for reasons that will be clear when we pass to field theory.
+Show that
+\begin{align} 
+    \mathbf{G}_A
+    \equiv \int \D{q}^1\cdots \D{q}^N\; e^{-\frac{1}{2} q^i A_{ij} q^j} 
+    = \sqrt{\frac{(2\pi)^N}{\det A}} \ .
+    \label{eq:GA:Gaussian}
+\end{align}
+We can think of each of the $N$ integration variables as being components of an $N$ component vector $\vec{q}$ so that the integration is actually over $N$-dimensional real space, $\mathbb{R}^N$. The argument of the exponential is
+\begin{align}
+    q^i A_{ij} q^j = \vec{q}^\textnormal{T} A \vec{q} \ ,
+\end{align}
+where $A$ is an $N\times N$ matrix with components $A_{ij}$.\sidenote{If you are concerned about index heights, \emph{good}! For now just use the summation convention. Alternatively, you may remember that `real matrices' have an index structure $A^i_{\phantom{i}j}$ and `row vectors' have an index structure $\vec{q}^\textnormal{T} = q_i$ so that we can write $\vec{q}^\textnormal{T} A \vec{q} = q_i A^i_{\phantom{i}j} q^j $. In our Euclidean space we have a trivial metric, so the upper/lower indices are just a formality.} Assume that $A$ is a symmetric matrix, $A_{ij} = A_{ji}$ that is \emph{non-degenerate} (nonzero eigenvalues).
+
+\begin{exercise}
+Prove \eqref{eq:GA:Gaussian}.
+It may help to remember that you can diagonalize a symmetric matrix with a rotation, $R$. Because $R^\textnormal{T} R = I$, the identity, we may ``multiply by one'' to show:
+\begin{align}
+    \vec{q}^\textnormal{T} A \vec{q} \to 
+    \vec{q}^\textnormal{T} R^\textnormal{T} R A R^\textnormal{T} R \vec{q}
+    =
+    (R \vec{q})^\textnormal{T} \left(R A R^\textnormal{T}\right) R \vec{q}
+    =
+    (R \vec{q})^\textnormal{T} \hat A R \vec{q}
+\end{align}
+where we define the \emph{diagonal} matrix
+\begin{align}
+    \hat A \equiv R A R^\textnormal{T} \ .
+\end{align}
+Remember that $\hat A = \textnormal{diag}(\lambda_1, \cdots, \lambda_N)$: the diagonalized matrix contains the eigenvalues along the diagonal. Remember that the determinant of such a matrix is really easy. Finally, remember that rotating coordinate systems does not change your integration measure:
+\begin{align}
+    \D[N]{\vec{q}} \equiv \D{q^1}\cdots \D{q^N} = \D[n]{\vec{s}}
+\end{align}
+where $\vec{s}\equiv R\vec{q}$. This should be enough for the evaluation of $\mathbf{G}_A$ to reduce to $N$ products of $G_a$.
+\end{exercise}
+
+
+\section{\texorpdfstring{Integral representation of $\delta(x)$}{Integral representation of delta}}
+
+As a starting point, we start with the Fourier representation of the Dirac $\delta$-function.\sidenote{The $\delta$-function is not formally a function, it is a \emph{distribution}. This means it only makes sense when it is being integrated over.}\index{Dirac delta function} Recall that the $\delta$-function is defined by
+\begin{align}
+    \int_{-\infty}^\infty \D{x}\, \delta(x)\,f(x) &= 
+    \lim_{\varepsilon \to 0}\int_{-\varepsilon}^\varepsilon \D{x}\, \delta(x)\,f(x) = f(0)
+    \\
+    \delta(x) &= 0 \text{ if $x\neq 0$} \ .
+\end{align}
+$\delta(0)$ is not defined---and you had better make sure you never see it show up in the prediction of any physical quantity. In this way, $\delta$ ``cancels'' an integral and picks out a value of the integrand,
+\begin{align}
+    \int_{-\infty}^\infty \D{x} \, \delta(x-x_0)\, f(x) &= f(x_0) \ .
+\end{align}
+
+There is a useful integral representation of the $\delta$-function:
+\begin{align}
+    \delta(x) = \int_{\infty}^\infty \D{\xi}\,  e^{2\pi i x\xi} \ .
+    \label{eq:delta:func:integral:rep}
+\end{align}
+\flip{To fill in. I was going to derive this expression.}
+
+
+
+
+\section{A general Fourier transform}
+
+There are two choices one can make when defining a Fourier transform convention\sidenote{This appendix draws from an excellent discussion on Physics Stack Exchange.\footnotemark}\footnotetext{\url{https://physics.stackexchange.com/a/308248}}; we parameterize these choices by real numbers $a$ and $b$. The Fourier transform $\tilde f(\omega)$ of a function $f(t)$ is
+\begin{align}
+  \tilde f(\omega)
+  &= 
+  \sqrt{\frac{|b|}{(2\pi)^{1-a}}}
+  \int_{-\infty}^\infty \D{t}\, e^{ib\omega t} f(t) \ .
+\end{align}
+We see that $a$ tells us about the $(2\pi)$ factors and $b$ tells us about the argument of the basis function $e^{ib\omega t}$. With this basis, the inverse Fourier transform is 
+\begin{align}
+  f(t)&=
+  \sqrt{\frac{|b|}{(2\pi)^{1+a}}}
+  \int_{-\infty}^\infty \D{\omega}\, e^{-ib\omega t} f(\omega) \ .
+\end{align}
+
+One may check that the inverse Fourier transform of a Fourier transform gives the original function:
+\begin{align}
+  \tilde{\tilde f} &=
+  \frac{|b|}{2\pi}
+  \int_{-\infty}^\infty \D{\omega}\, e^{-ib\omega t}
+  \int_{-\infty}^{\infty}
+  ds\, e^{ib\omega s} f(s)
+  \\
+  &= 
+  \frac{|b|}{2\pi}
+  \int ds\, f(z) \int \D{\omega} \, e^{ib\omega(s-t)}
+  \\
+  &= \int \D{s}\, \delta(s-t) f(s) \ ,
+\end{align}
+where we have used $\int \D{\xi} \exp(2\pi i x\xi) = \delta(x)$. 
+
+
+
+\section{Our Conventions}
+
+The convention that we will choose for the \emph{time}--\emph{frequency} [inverse] Fourier transform is
+\begin{align}
+  f(t) &= \int_{-\infty}^{\infty} \Dbar\omega e^{-i\omega t} \tilde f(\omega)
+  &
+  \Dbar\omega &\equiv\frac{d\omega}{2\pi} \ .
+\end{align}
+This corresponds to $a=b=1$. The corresponding transform for the frequency-domain function is
+\begin{align}
+  \tilde f(\omega) &= 
+  % \frac{1}{2\pi}
+  \int_{-\infty}^\infty \D{t}\, e^{i\omega t} f(t) \ .
+  \label{eq:inverse:fourier:convention}
+\end{align}
+
+\section{Higher Dimensions}
+
+All of this generalizes to higher dimensions: you simply Fourier transform each dimension. In fact, one is free to use a different Fourier transform convention for each direction. We can use this freedom to pick a convention that `automatically' fits our conventions for spacetime. In particular, given a four-vector $x=(t,\vec{x})$ and its conjugate four-momentum $p=(\omega, \vec{k})$, one may choose to Fourier transform as follows: 
+\begin{align}
+  f(x) &= \int \Dbar\omega \Dbar[3]{\vec{k}} e^{-i(\omega t-\vec{k}\cdot\vec{x})} \tilde f(p)
+  \ .
+\end{align}
+% $\operatorname{d}\mkern-10mu\mathchar'26\mkern-1mu^{}\mkern-1mu x$ 
+% $\operatorname{d}\mkern-10mu\mathchar'26\mkern-2mu x$
+% $\Dbar[4]{p}$ $\Dbar{p}$
+
+% $\DD[3]{p}$ $\D{p}$ $\DD{p}$
+ 
+
+With this convention, the basis function is simply
+\begin{align}
+  e^{-i(\omega t-\vec{k}\cdot\vec{x})} 
+  = e^{-ip\cdot x} \ , 
+\end{align}
+where $p\cdot x$ is the usual Minkowski dot product, $p_\mu x^\mu$. This makes it clear that the basis function is Lorentz invariant. The Fourier transform would still respect the spacetime symmetries even if we had not chosen a convenient notation---it just wouldn't be as simple to see.
+
+
+
+\begin{example}
+\textbf{Statistical Mechanics.} One motivation for our Fourier convention is statistical mechanics. One formulation of classical statistical mechanics is to assume that phase space is discrete: a particle has momentum $\vec{p}$ whose components take integer multiples of some unit momentum, $h$. Assuming that the particle has $g$ internal degrees of freedom (e.g.~$g=2$ for a particle that can be spin-up or spin-down), then the density of states is $g/h^{3}$. Quite remarkably in the history of physics, the value of $h$ can be identified with Planck's constant in quantum mechanics. In natural units we take $\hbar = h/(2\pi)\equiv 1$, so the phase space density is $g/(2\pi)^3$. For a particle with a phase space distribution function $f(\vec{x},\vec{p})$, this means that the number density of particles is
+\begin{align}
+  n = g\int \dbar^3p \, f(p) \ .
+\end{align}
+We see that it is convenient to take a convention where every $dp$ comes with a $(2\pi)^{-1}$.
+\end{example}
+
+\begin{exercise}\textbf{Lorentz-Invariant Phase Space.}
+% See also https://physics.stackexchange.com/questions/141724/why-is-there-1-2-pi-in-int-fracdp2-pip-rangle-langle-p (
+% Josh's response)
+In relativistic systems, the energy and the momenta are related by $E^2 = \vec{p}^2 + m^2$. We are, of course, using natural units where $c=1$. The phase space integral over $\dbar^3p$ is thus also an integral over the energy. In order to enforce the relativistic relation, the full phase space density is usually written as $\dbar^4p\, (2\pi)\delta(E^2-p^2-m^2)$. Show that integrating over the $\delta$-function gives
+\begin{align}
+  \int \dbar^4p\, \delta(E^2-p^2-m^2) &= 
+  \int \frac{\dbar^3\vec{p}}{2E(p)}
+  &
+  E(p) \equiv \sqrt{p^2 + m^2} \ .
+\end{align}
+\end{exercise}
+
 \chapter{Notation and Conventions}
+
 
 \section{Spacetime Conventions}
 \label{app:spacetime:conventions}
